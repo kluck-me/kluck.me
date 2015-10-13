@@ -1,0 +1,90 @@
+doctype
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title kluck.me
+    link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Leckerli+One')
+    link(rel='stylesheet', href='styles.css')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+    script(src='scripts.js')
+  body
+    .wrapper
+      header
+        h1
+          a(href='http://kluck.me/') kluck.me
+        ul
+          li
+            a(href='#profile') Profile
+          li
+            a(href='#releases') Releases
+          li
+            a(href='#elsewhere') Elsewhere
+          li
+            a(href='#folks') Folks
+          li
+            a(href='#about') About
+
+      section#profile
+        h2 Profile
+        dl
+          dt Name
+          dd Kluck (クラック)
+          dt Mail
+          dd me at kluck dot me
+          dt Twitter
+          dd
+            a(href='http://twitter.com/kluck_me') @kluck_me
+            = ', '
+            a(href='http://twitter.com/kluck__') @kluck__
+            = ' (Private)'
+          dt Skype
+          dd kluck.me
+          dt Living at
+          dd Tokyo, JAPAN
+
+      section#releases
+        h2 Releases
+        ul
+          li
+            a(href='http://extlib.net/') 超絶書庫
+          li
+            a(href='http://cih.kluck.me/') 旅をする僕
+          li
+            a(href='/mummy-clock/') マミー時計
+          li
+            a(href='/lonely-talk-2013/') 一人で新都社運営座談会
+
+      section#elsewhere
+        h2 Elsewhere
+        ul
+          li
+            a(href='http://kluck.blog.jp/') 滅ぶ世界のポエムな日
+          li
+            a(href='http://d.hatena.ne.jp/kluck/') 白米と小説とプログラムのブログ
+          li
+            a(href='/kluck-chan/') クラックちゃん
+
+      section#folks
+        h2 Folks
+        ul
+          li
+            a(href='http://clock-up.jp/') clock-up.jp
+          li
+            a(href='http://www.eonet.ne.jp/~versatile/ku-so/') 空疎雪渓
+
+      section#about
+        h2 Whatyawando?
+        p
+          | kluck.me is a trash stash that specializes in programming. All the content on this website is free when offered. If you have any problems with the contents please
+          = ' '
+          a(href='http://twitter.com/kluck_me') twitter
+          = ' '
+          | for contact.
+
+      footer
+        p
+          script.
+            document.write('&copy; 2013-' + (new Date).getFullYear())
+          = ' '
+          a(href='http://kluck.me/') Kluck
