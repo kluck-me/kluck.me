@@ -3,18 +3,18 @@
 ## Develop
 
 ```bash
-$ npm run gulp serve
+$ npm run serve
 $ open http://localhost:8000/
 ```
 
 ## Deploy
 
 ```bash
-$ npm run gulp deploy
+$ npm run deploy
 ```
 
 ## Clear
 
 ```bash
-$ npm run gulp clear-remote-directory
+$ npm run clear-remote-directory
 ```

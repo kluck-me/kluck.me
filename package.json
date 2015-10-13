@@ -3,19 +3,28 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "gulp": "gulp"
+    "serve": "rm -rf .tmp && gulp serve",
+    "deploy": "rm -rf .tmp dist && gulp deploy",
+    "clear-remote-directory": "gulp clear-remote-directory"
   },
   "devDependencies": {
     "coffee-script": "^1.10.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.2",
     "gulp-coffee": "^2.3.1",
+    "gulp-csso": "^1.0.0",
+    "gulp-filter": "^3.0.1",
+    "gulp-if": "^2.0.0",
+    "gulp-imagemin": "^2.3.0",
     "gulp-jade": "^1.1.0",
     "gulp-load-plugins": "^0.10.0",
+    "gulp-minify-html": "^1.0.4",
     "gulp-plumber": "^1.0.1",
     "gulp-stylus": "^2.1.0",
+    "gulp-uglify": "^1.4.2",
     "gulp-util": "^3.0.6",
     "gulp-webserver": "^0.9.1",
+    "imagemin-pngquant": "^4.2.0",
     "vinyl-ftp": "^0.4.5"
   }
 }

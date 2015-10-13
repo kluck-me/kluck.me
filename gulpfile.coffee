@@ -1,5 +1,10 @@
 gulp = require 'gulp'
-$ = require('gulp-load-plugins')(pattern: ['gulp-*', '*'], rename: { 'vinyl-ftp': 'ftp' })
+$ = require('gulp-load-plugins')(
+  pattern: ['gulp-*', '*']
+  rename:
+    'vinyl-ftp': 'ftp'
+    'imagemin-pngquant': 'pngquant'
+)
 config = require './.config'
 config.ftp.log = $.util.log
 
@@ -50,7 +55,33 @@ gulp.task 'serve', ['watch'], ->
     ))
   return
 
-gulp.task 'deploy', ->
+gulp.task 'build:dist', ['build'], ->
+  gulp.src('.tmp/**/*.{html,js,css,json,png,jpg,gif}')
+    .pipe(htmlFilter = $.filter('**/*.html', restore: true))
+    .pipe($.minifyHtml(
+      empty: true
+      cdata: true
+      spare: true
+      quotes: true
+      loose: true
+    ))
+    .pipe(htmlFilter.restore)
+    .pipe(cssFilter = $.filter('**/*.css', restore: true))
+    .pipe($.csso())
+    .pipe(cssFilter.restore)
+    .pipe(jsFilter = $.filter('**/*.js', restore: true))
+    .pipe($.uglify(preserveComments: 'license'))
+    .pipe(jsFilter.restore)
+    .pipe(imgFilter = $.filter('**/*.{png,jpg,gif}', restore: true))
+    .pipe($.imagemin(
+      progressive: true,
+      svgoPlugins: [removeViewBox: false],
+      use: [$.pngquant()]
+    ))
+    .pipe(imgFilter.restore)
+    .pipe(gulp.dest('dist'))
+
+gulp.task 'deploy', ['build:dist'], ->
   conn = $.ftp.create(config.ftp)
   gulp.src('dist/**', buffer: false, dot: true)
     .pipe(conn.newerOrDifferentSize(config.ftp.remotePath))
