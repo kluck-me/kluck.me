@@ -1,5 +1,12 @@
 # [kluck.me](http://kluck.me/)
 
+## Develop
+
+```bash
+$ npm run gulp serve
+$ open http://localhost:8000/
+```
+
 ## Deploy
 
 ```bash
