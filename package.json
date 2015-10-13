@@ -2,6 +2,9 @@
   "name": "kluck.me",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "gulp": "gulp"
+  },
   "devDependencies": {
     "coffee-script": "^1.10.0",
     "gulp": "^3.9.0",
