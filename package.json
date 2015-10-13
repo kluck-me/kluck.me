@@ -1,5 +1,11 @@
 {
   "name": "kluck.me",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "coffee-script": "^1.10.0",
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.6",
+    "vinyl-ftp": "^0.4.5"
+  }
 }
