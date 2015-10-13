@@ -1,0 +1,9 @@
+{
+  "ftp": {
+    "host": "example.com",
+    "port": 21,
+    "user": "anonymous",
+    "pass": "@anonymous",
+    "remotePath": "/"
+  }
+}
