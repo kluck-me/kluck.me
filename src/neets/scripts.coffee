@@ -49,7 +49,7 @@ update = ->
 
 $(window).load ->
   tid = null
-  $div = $('div')
+  $div = $('div.f')
   $(window).resize ->
     clearTimeout(tid)
     tid = setTimeout ->
