@@ -78,3 +78,7 @@ gulp.task 'build:dist', ['build'], ->
     ))
     .pipe(imgFilter.restore)
     .pipe(gulp.dest('dist'))
+
+gulp.task 'deploy', ['build:dist'], ->
+  gulp.src('dist/**', dot: true)
+    .pipe($.ghPages(branch: 'master'))
