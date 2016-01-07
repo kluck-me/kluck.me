@@ -5,6 +5,10 @@ $ = require('gulp-load-plugins')(
     'imagemin-pngquant': 'pngquant'
 )
 
+gulp.task 'copy:config-files', ->
+  gulp.src('src/{CNAME,.nojekyll}')
+    .pipe(gulp.dest('.tmp'))
+
 gulp.task 'copy:files', ->
   gulp.src('src/**/*.{html,js,css,json,png,jpg,gif}')
     .pipe(gulp.dest('.tmp'))
@@ -32,6 +36,7 @@ gulp.task 'build:stylus', ->
     .pipe(gulp.dest('.tmp'))
 
 gulp.task 'build', [
+  'copy:config-files'
   'copy:files'
   'build:jade'
   'build:coffee'
@@ -53,7 +58,7 @@ gulp.task 'serve', ['watch'], ->
   return
 
 gulp.task 'build:dist', ['build'], ->
-  gulp.src('.tmp/**/*.{html,js,css,json,png,jpg,gif}')
+  gulp.src('.tmp/{.*,**/*}')
     .pipe(htmlFilter = $.filter('**/*.html', restore: true))
     .pipe($.htmlmin(
       removeComments: true
