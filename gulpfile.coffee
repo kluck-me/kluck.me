@@ -58,12 +58,13 @@ gulp.task 'serve', ['watch'], ->
 gulp.task 'build:dist', ['build'], ->
   gulp.src('.tmp/**/*.{html,js,css,json,png,jpg,gif}')
     .pipe(htmlFilter = $.filter('**/*.html', restore: true))
-    .pipe($.minifyHtml(
-      empty: true
-      cdata: true
-      spare: true
-      quotes: true
-      loose: true
+    .pipe($.htmlmin(
+      removeComments: true
+      collapseWhitespace: true
+      collapseBooleanAttributes: true
+      useShortDoctype: true
+      removeScriptTypeAttributes: true
+      removeStyleLinkTypeAttributes: true
     ))
     .pipe(htmlFilter.restore)
     .pipe(cssFilter = $.filter('**/*.css', restore: true))
