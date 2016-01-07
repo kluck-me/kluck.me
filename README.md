@@ -1,4 +1,4 @@
-# [kluck.me](http://kluck.me/)
+# [kluck.me](//kluck.me/)
 
 ## Develop
 
