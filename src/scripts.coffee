@@ -6,7 +6,7 @@ do ($, document) ->
   anime_ajax_by_tags = (tags) ->
     for tag in tags
       $.getJSON(
-        'http://api.tumblr.com/v2/tagged?callback=?',
+        'https://api.tumblr.com/v2/tagged?callback=?',
         tag: tag
         api_key: '3jJQBJhS6MidfygWrYPVUqzop3dkdk3kYUc5RUoSxSLL7OUonx'
       )
