@@ -2,11 +2,8 @@ gulp = require 'gulp'
 $ = require('gulp-load-plugins')(
   pattern: ['gulp-*', '*']
   rename:
-    'vinyl-ftp': 'ftp'
     'imagemin-pngquant': 'pngquant'
 )
-config = require './.config'
-config.ftp.log = $.util.log
 
 gulp.task 'copy:files', ->
   gulp.src('src/**/*.{html,js,css,json,png,jpg,gif}')
@@ -81,13 +78,3 @@ gulp.task 'build:dist', ['build'], ->
     ))
     .pipe(imgFilter.restore)
     .pipe(gulp.dest('dist'))
-
-gulp.task 'deploy', ['build:dist'], ->
-  conn = $.ftp.create(config.ftp)
-  gulp.src('dist/**', buffer: false, dot: true)
-    .pipe(conn.newerOrDifferentSize(config.ftp.remotePath))
-    .pipe(conn.dest(config.ftp.remotePath))
-
-gulp.task 'clear-remote-directory', (cb) ->
-  $.ftp.create(config.ftp).rmdir(config.ftp.remotePath, cb)
-  return

@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "rm -rf .tmp && gulp serve",
-    "deploy": "rm -rf .tmp dist && gulp deploy",
-    "clear-remote-directory": "gulp clear-remote-directory"
+    "deploy": "rm -rf .tmp dist && gulp deploy"
   },
   "devDependencies": {
     "coffee-script": "^1.10.0",
@@ -24,7 +23,6 @@
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
     "gulp-webserver": "^0.9.1",
-    "imagemin-pngquant": "^4.2.0",
-    "vinyl-ftp": "^0.4.5"
+    "imagemin-pngquant": "^4.2.0"
   }
 }
