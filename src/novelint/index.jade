@@ -1,0 +1,44 @@
+doctype
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Novelint
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='styles.css')
+    script(src='//code.jquery.com/jquery-1.12.1.min.js')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script(src='scripts.js')
+  body
+    .container
+      h1 Novelint
+      form#checker
+        .form-group
+          textarea.form-control(name='text')
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', name='indent', checked)
+            | インデント
+          label.checkbox-inline
+            input(type='checkbox', name='mark-before-close-quote', checked)
+            | 閉じ括弧前の句読点
+          label.checkbox-inline
+            input(type='checkbox', name='space-after-mark', checked)
+            | 感嘆符・疑問符直後に空白
+          label.checkbox-inline
+            input(type='checkbox', name='double-mark', checked)
+            | 二つ組で使う約物
+          label.checkbox-inline
+            input(type='checkbox', name='halfwidth-char', checked)
+            | 半角アルファベット・数字・記号
+          label.checkbox-inline
+            input(type='checkbox', name='fullwidth-char')
+            | 全角アルファベット・数字
+        button.btn.btn-default(type='submit') 検証する
+      h2.hide 0 件見つかりました
+      p#result.text
+      .error-nav.hide
+        .btn-group
+          button.btn.btn-default#prev-error 前
+          button.btn.btn-default#next-error 次
