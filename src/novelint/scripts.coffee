@@ -52,12 +52,11 @@ novelint = new Novelint
 novelint.addMatch 'indent', 'danger', /^[^　「『（]/mg, (m) ->
   m.input.slice(m.index, m.index + 1) != '\n'
 novelint.addMatch 'mark-before-close-quote', 'danger', /([、。])[）』」]/mg
-novelint.addMatch 'space-after-mark', 'danger', /([！？])[^！？）』」]/mg
-novelint.addMatch 'double-mark', 'danger', /(([\u2014\u2026])\1+)/mg, (m) ->
+novelint.addMatch 'space-after-mark', 'danger', /([！？])[^　！？）』」]/mg
+novelint.addMatch 'double-mark', 'danger', /(\u2014+|\u2026+)/mg, (m) ->
   m[1].length != 2
 novelint.addMatch 'halfwidth-char', 'warning', /([ -~]+)/mg
-novelint.addMatch 'fullwidth-char', 'warning', /([０-９Ａ-Ｚａ-ｚ]+)/mg, (m) ->
-  m[1].length != 2
+novelint.addMatch 'fullwidth-char', 'warning', /([０-９Ａ-Ｚａ-ｚ]+)/mg
 
 $ ($) ->
   currentErrorIndex = -1
@@ -95,7 +94,7 @@ $ ($) ->
       $err.eq(index).tooltip('show')
     , 10
     $('html,body').animate(
-      scrollTop: $err.eq(index).offset().top - $(window).height() / 2
+      scrollTop: $err.eq(index).offset().top - window.innerHeight / 2
     )
     return
   return

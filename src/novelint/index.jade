@@ -1,4 +1,4 @@
-doctype
+Adoctype
 html
   head
     meta(charset='UTF-8')
@@ -15,11 +15,11 @@ html
       h1 Novelint
       form#checker
         .form-group
-          textarea.form-control(name='text')
+          textarea.form-control(name='text', placeholder='検証したいテキストを入力してください')
         .form-group
           label.checkbox-inline
             input(type='checkbox', name='indent', checked)
-            | インデント
+            | 字下げ
           label.checkbox-inline
             input(type='checkbox', name='mark-before-close-quote', checked)
             | 閉じ括弧前の句読点
