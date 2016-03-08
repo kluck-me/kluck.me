@@ -4,7 +4,15 @@ class Novelint
   @match: (type, reg, fn) ->
     (text) ->
       r = []
-      r.push([type, m.index, m.index + (if m[1] then m[1].length else 0)]) while m = reg.exec(text) when !fn || fn(m)
+      while m = reg.exec(text) when !fn || fn(m)
+        index = m.index
+        length = 0
+        if m[2]
+          index += m[1].length
+          length = m[2].length
+        else if m[1]
+          length = m[1].length
+        r.push([type, index, index + length])
       r
 
   constructor: ->
@@ -13,17 +21,19 @@ class Novelint
     @count = 0
 
   add: (name, checker) ->
-    @checkers[name] = checker
+    (@checkers[name] ||= []).push(checker)
     return
 
   addMatch: (name, type, reg, fn) ->
-    @checkers[name] = Novelint.match(type, reg, fn)
+    @add(name, Novelint.match(type, reg, fn))
     return
 
   check: (text, options) ->
     @text = text.replace(/\r\n?/g, '\n')
     t = []
-    t = t.concat(@checkers[name].call(this, @text)) for name of @checkers when options[name]
+    for name of @checkers when options[name]
+      for checker in @checkers[name]
+        t = t.concat(checker.call(this, @text))
     r = []
     r.push([v[0], v[1], v[1]], ['end', v[1], v[2]]) for v in t
     r.sort (a, b) ->
@@ -57,6 +67,8 @@ novelint.addMatch 'double-mark', 'danger', /(\u2014+|\u2026+)/mg, (m) ->
   m[1].length != 2
 novelint.addMatch 'halfwidth-char', 'warning', /([ -~]+)/mg
 novelint.addMatch 'fullwidth-char', 'warning', /([０-９Ａ-Ｚａ-ｚ]+)/mg
+novelint.addMatch 'extra-space', 'warning', /(　+)$/mg
+novelint.addMatch 'extra-space', 'warning', /([^\n！？])(　+)/mg
 
 $ ($) ->
   currentErrorIndex = -1
@@ -97,4 +109,6 @@ $ ($) ->
       scrollTop: $err.eq(index).offset().top - window.innerHeight / 2
     )
     return
+
+  $('#checker').find('[name="text"]').val('　あ　い。う？　え？　\n　お！').end().submit() if location.hostname == 'localhost'
   return
