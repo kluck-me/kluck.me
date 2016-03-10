@@ -65,6 +65,7 @@ novelint.addMatch 'mark-before-close-quote', 'danger', /([、。])[）』」]/mg
 novelint.addMatch 'space-after-mark', 'danger', /([！？])[^　！？）』」]/mg
 novelint.addMatch 'double-mark', 'danger', /(\u2014+|\u2026+)/mg, (m) ->
   m[1].length != 2
+novelint.addMatch 'single-mark', 'danger', /([、。]{2,})/mg
 novelint.addMatch 'halfwidth-char', 'warning', /([ -~]+)/mg
 novelint.addMatch 'fullwidth-char', 'warning', /([０-９Ａ-Ｚａ-ｚ]+)/mg
 novelint.addMatch 'extra-space', 'warning', /(　+)$/mg
