@@ -62,7 +62,7 @@ novelint = new Novelint
 novelint.addMatch 'indent', 'danger', /^[^　「『（]/mg, (m) ->
   m.input.slice(m.index, m.index + 1) != '\n'
 novelint.addMatch 'mark-before-close-quote', 'danger', /([、。])[）』」]/mg
-novelint.addMatch 'space-after-mark', 'danger', /([！？])[^　！？）』」]/mg
+novelint.addMatch 'space-after-mark', 'danger', /([！？])[^　！？）』」\n]/mg
 novelint.addMatch 'double-mark', 'danger', /(\u2014+|\u2026+)/mg, (m) ->
   m[1].length != 2
 novelint.addMatch 'single-mark', 'danger', /([、。]{2,})/mg
