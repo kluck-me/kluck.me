@@ -102,10 +102,8 @@ $ ($) ->
     false
 
   showError = ($err, index) ->
-    $err.tooltip('hide')
-    setTimeout ->
-      $err.eq(index).tooltip('show')
-    , 10
+    $err.not(":eq(#{index})").tooltip('hide')
+    $err.eq(index).tooltip('show')
     $('html,body').animate(
       scrollTop: $err.eq(index).offset().top - window.innerHeight / 2
     )
