@@ -54,22 +54,60 @@ class Novelint
       if r[0] == 'end'
         t.push('</span>')
       else
-        t.push("<span class=\"bg-#{r[0]}\" data-toggle=\"tooltip\" title=\"エラー\">&shy;")
+        pair = r[0].split(':')
+        t.push("<span class=\"bg-#{pair[0]}\" data-toggle=\"tooltip\" title=\"#{pair[1]||'エラー'}\">&shy;")
     t.push(@text.slice(i)) unless i == @text.length
     t.join('')
 
 novelint = new Novelint
-novelint.addMatch 'indent', 'danger', /^[^　「『（]/mg, (m) ->
-  m.input.slice(m.index, m.index + 1) != '\n'
-novelint.addMatch 'mark-before-close-quote', 'danger', /([、。])[）』」]/mg
-novelint.addMatch 'space-after-mark', 'danger', /([！？])[^　！？）』」\n]/mg
-novelint.addMatch 'double-mark', 'danger', /(\u2014+|\u2026+)/mg, (m) ->
-  m[1].length != 2
-novelint.addMatch 'single-mark', 'danger', /([、。]{2,})/mg
-novelint.addMatch 'halfwidth-char', 'warning', /([ -~]+)/mg
-novelint.addMatch 'fullwidth-char', 'warning', /([０-９Ａ-Ｚａ-ｚ]+)/mg
-novelint.addMatch 'extra-space', 'warning', /(　+)$/mg
-novelint.addMatch 'extra-space', 'warning', /([^\n！？])(　+)/mg
+novelint.addMatch(
+  'indent'
+  'danger:間違った字下げです。'
+  /^[^　「『（]/mg
+  (m) -> m.input.slice(m.index, m.index + 1) != '\n'
+)
+novelint.addMatch(
+  'mark-before-close-quote'
+  'danger:閉じ括弧前に句読点は不要です。'
+  /([、。])[）』」]/mg
+)
+novelint.addMatch(
+  'space-after-mark'
+  'danger:感嘆符・疑問符の後にはスペースが必要です。'
+  /([！？])[^　！？）』」\n]/mg
+)
+novelint.addMatch(
+  'double-mark'
+  'danger:二つ一組で使う必要があります。'
+  /(\u2014+|\u2026+)/mg
+  (m) ->
+    m[1].length != 2
+)
+novelint.addMatch(
+  'single-mark'
+  'danger:単体で使う必要があります。'
+  /([、。]{2,})/mg
+)
+novelint.addMatch(
+  'halfwidth-char'
+  'warning:半角文字です。'
+  /([ -~]+)/mg
+)
+novelint.addMatch(
+  'fullwidth-char'
+  'warning:全角文字です。'
+  /([０-９Ａ-Ｚａ-ｚ]+)/mg
+)
+novelint.addMatch(
+  'extra-space'
+  'warning:末尾の不要なスペースです。'
+  /(　+)$/mg
+)
+novelint.addMatch(
+  'extra-space'
+  'warning:不要なスペースです。'
+  /([^\n！？])(　+)/mg
+)
 
 $ ($) ->
   currentErrorIndex = -1
