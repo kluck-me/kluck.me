@@ -63,18 +63,18 @@ novelint = new Novelint
 novelint.addMatch(
   'indent'
   'danger:間違った字下げです。'
-  /^[^　「『（]/mg
+  /^[^　（｟「『［〚｛〔〘〈《【〖«‘“]/mg
   (m) -> m.input.slice(m.index, m.index + 1) != '\n'
 )
 novelint.addMatch(
   'mark-before-close-quote'
   'danger:閉じ括弧前に句読点は不要です。'
-  /([、。])[）』」]/mg
+  /([、。])[）｠」』］〛｝〕〙〉》】〗»’”]/mg
 )
 novelint.addMatch(
   'space-after-mark'
   'danger:感嘆符・疑問符の後にはスペースが必要です。'
-  /([！？])[^　！？）』」\n]/mg
+  /([！？])[^　！？）｠」』］〛｝〕〙〉》】〗»’”\n]/mg
 )
 novelint.addMatch(
   'double-mark'
