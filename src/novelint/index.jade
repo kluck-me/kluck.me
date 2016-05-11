@@ -1,4 +1,4 @@
-Adoctype
+doctype
 html
   head
     meta(charset='UTF-8')
@@ -7,8 +7,13 @@ html
     link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
     link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='styles.css')
+    style.
+      span[data-toggle="tooltip"] { cursor: pointer; }
     script(src='//code.jquery.com/jquery-1.12.1.min.js')
     script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script.
+      var pp=console.log.bind(console);
+    script(src='novelint.js')
     script(src='scripts.js')
   body
     .container
@@ -36,13 +41,18 @@ html
             input(type='checkbox', name='single-mark', checked)
             | 単独で使う約物
           label.checkbox-inline
+            input(type='checkbox', name='last-char', checked)
+            | 末尾に使える文字
+          label.checkbox-inline
             input(type='checkbox', name='halfwidth-char', checked)
             | 半角アルファベット・数字・記号
           label.checkbox-inline
             input(type='checkbox', name='fullwidth-char')
             | 全角アルファベット・数字
         button.btn.btn-default(type='submit') 検証する
-      h2.hide 0 件見つかりました
+      h2.hide
+        span 0
+        | 件見つかりました
       p#result.text
       .error-nav.hide
         .btn-group
