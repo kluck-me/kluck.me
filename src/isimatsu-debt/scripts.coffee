@@ -1,10 +1,9 @@
-do ->
+update = (today) ->
   debt_day = new Date(2016, 4, 1)
   ddy = debt_day.getFullYear()
   ddm = debt_day.getMonth()
   ddd = debt_day.getDate()
   day = new Date(2000, 0, 2) - new Date(2000, 0, 1)
-  today = new Date
   if debt_day > today
     $('body').hide()
     return
@@ -35,3 +34,5 @@ do ->
     return
   )
   return
+
+update(new Date)
