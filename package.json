@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "rm -rf .tmp && gulp serve",
+    "build": "rm -rf .tmp dist && gulp build:dist",
     "deploy": "rm -rf .tmp dist && gulp deploy"
   },
   "devDependencies": {
