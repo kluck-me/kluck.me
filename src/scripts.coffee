@@ -20,10 +20,10 @@ do ($, document) ->
   anime_show = (target) ->
     $('#anime' + (target ^ 1))
       .css(
-        display: ''
+        opacity: ''
         'background-image': "url(\"#{anime_urls[Math.random() * anime_urls.length | 0]}\")"
       )
-    $('#anime' + target).css(display: 'block')
+    $('#anime' + target).css(opacity: '1')
     return
 
   $.when(anime_ajax_by_tags(['gif', 'gifs', 'anime', 'anime-gif'])...).done ->
