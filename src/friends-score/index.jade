@@ -1,0 +1,28 @@
+doctype
+html(lang='ja')
+  head
+    meta(charset='UTF-8')
+    title フレンズすこあ
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+  body
+    .container
+      .row
+        .col-sm-12
+          h1 フレンズすこあ
+          p.text-muted けものはいても　のけものはいない　ただしスコアが低い、テメーはダメだ
+          form
+            .form-group
+              label(for='screen-name')
+                i.fa.fa-twitter
+                | Twitter
+              input#screen-name.form-control(type='text')
+            p#score.h3
+              i.fa.fa-star-o
+              i.fa.fa-star-o
+              i.fa.fa-star-o
+              i.fa.fa-star-o
+              i.fa.fa-star-o
+
+    script(src='//code.jquery.com/jquery-3.1.1.min.js')
+    script(src='scripts.js')
