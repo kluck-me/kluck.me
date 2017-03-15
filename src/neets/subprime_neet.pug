@@ -1,21 +1,23 @@
-doctype
-html(lang='ja')
-  head
-    meta(charset='UTF-8')
-    title 無職数のカウントダウン
-    style.
-      #c, #r { display: none; }
-      big big big { font-weight: bold; }
-    link(rel='stylesheet', href='i-want-to.css')
-  body
-    #c.f
-      | 無職数まで
-      br
-      big あと<span id="t"></span>
-    #r
-      .l
-      .t <span>祝</span><span>無</span><span>職</span><span>！</span>
-    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js')
-    script.
-      var limit = new Date(2015, 9, 30, 18, 0);
-    script(src='scripts.js')
+extends .layout
+
+append meta
+  title 無職数のカウントダウン
+
+block styles
+  style.
+    #c, #r { display: none; }
+    big big big { font-weight: bold; }
+  link(rel='stylesheet', href='i-want-to.css')
+
+prepend countdown-contents
+  | 無職数まで
+  br
+
+block result
+  #r
+    .l
+    .t <span>祝</span><span>無</span><span>職</span><span>！</span>
+
+prepend scripts
+  script.
+    var deadline = new Date(2015, 9, 30, 18, 0);

@@ -1,0 +1,22 @@
+doctype
+html(lang='ja')
+  head
+    block meta
+      meta(charset='UTF-8')
+    block styles
+      style.
+        #c, #r { display: none; }
+        #r, big big big { font-weight: bold; }
+  body
+    block countdown
+      #c.f
+        block countdown-contents
+          big あと<span id="t"></span>
+    block result
+      #r.f
+        block result-contents
+    block scripts
+      script(src='//code.jquery.com/jquery-3.1.1.min.js')
+      script(src='/common/countdown.js')
+      script(src='/common/autofit.js')
+      script(src='scripts.js')

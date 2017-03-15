@@ -1,19 +1,15 @@
-doctype
-html(lang='ja')
-  head
-    meta(charset='UTF-8')
-    title 宴会原資獲得のカウントダウン
-    style.
-      #c, #r { display: none; }
-      #r, big big big { font-weight: bold; }
-  body
-    #c.f
-      | <del>退職金</del><ins>宴会原資</ins>180万円獲得まで
-      br
-      big あと<span id="t"></span>
-    #r.f
-      | 宴会やるので<a href="https://twitter.com/kluck_me">連絡ください</a>！
-    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js')
-    script.
-      var limit = new Date(2017, 3, 1);
-    script(src='scripts.js')
+extends .layout
+
+append meta
+  title 宴会原資獲得のカウントダウン
+
+prepend countdown-contents
+  | <del>退職金</del><ins>宴会原資</ins>180万円獲得まで
+  br
+
+prepend result-contents
+  | 宴会やるので<a href="https://twitter.com/kluck_me">連絡ください</a>！
+
+prepend scripts
+  script.
+    var deadline = new Date(2017, 3, 1);
