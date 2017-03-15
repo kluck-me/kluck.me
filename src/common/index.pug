@@ -6,23 +6,5 @@ append meta
 append contents
   h1 Common HTML Example
   p This file is common html example.
-  p#countdown
-  p#autofit
-    | Typography
-    br
-    | is the art
-    br
-    | and technique of
-    br
-    | arranging type
 
-append scripts
-  script.
-    window.pp=console.log.bind(console);
-  script(src='countdown.js')
-  script(src='autofit.js')
-  script.
-    $('#countdown').html(countdown('{%y年}{%d日}{%h時間}{%m分}{%s秒}', 289342751));
-    $(window).resize(function(){
-      $('#autofit').each(function(){autofit(this)});
-    }).resize();
+block scripts

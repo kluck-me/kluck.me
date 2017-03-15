@@ -1,0 +1,23 @@
+extends ../common/.layout
+
+append meta
+  title autofit
+
+append contents
+  p#autofit
+    | Typography
+    br
+    | is the art
+    br
+    | and technique of
+    br
+    | arranging type
+
+append scripts
+  script.
+    window.pp=console.log.bind(console);
+  script(src='/common/autofit.js')
+  script.
+    $(window).resize(function(){
+      $('#autofit').each(function(){autofit(this)});
+    }).resize();
