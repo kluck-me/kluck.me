@@ -10,7 +10,7 @@ hashed_scoring_users = do ->
   h
 
 update_score = (score) ->
-  $('#score i').each ->
+  $('#friends-score i').each ->
     star_class = if score >= 1
       score -= 1
       ''
@@ -35,7 +35,7 @@ crc32 = do ->
     (crc ^ (-1)) >>> 0
 
 $('#screen-name').on 'input', ->
-  name = $.trim($(this).val())
+  name = $.trim($(this).val()).replace(/^@/, '')
   hash = "00000000#{crc32(name).toString(16)}".slice(-8)
   update_score(hashed_scoring_users[hash] || 0)
   return

@@ -1,24 +1,21 @@
-doctype
-html(lang='ja')
-  head
-    meta(charset='UTF-8')
-    title 台湾在住の借金メーター
-    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
-  body
-    .container
-      .row
-        .col-sm-12
-          h1
-            | 台湾在住の借金メーター
-          p.text-muted 二〇一六年五月一日　僕は覚えている　いしまつさんに二千円貸したことを…　本を買いすぎて電車代がないとか言っていたことを……
-          p.text-danger 二〇一七年一月八日　いしまつさんは無事返済しました！　以下は単なるシミュレーションです。
-          p
-            big
-              | 二〇一六年五月一日に二千円借金すると現時点で返済額は
-              big#jpy
-              small#twd
-              | です。
-          p （金利は利息制限法に基づきます）
+extends ../common/.layout
 
-    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js')
-    script(src='scripts.js')
+append meta
+  title 台湾在住の借金メーター
+
+append contents
+  h1 台湾在住の借金メーター
+  p.text-muted 二〇一六年五月一日　僕は覚えている　いしまつさんに2000円貸したことを…　本を買いすぎて電車代がないとか言っていたことを……
+  p.text-danger 二〇一七年一月八日　いしまつさんは無事返済しました！　以下は単なるシミュレーションです。
+  p
+    big
+      | 二〇一六年五月一日に
+      big 2000円
+      | 借金すると現時点で返済額は
+      big#jpy
+      small#twd
+      | です。
+  p （金利は利息制限法に基づきます）
+
+append scripts
+  script(src='scripts.js')
