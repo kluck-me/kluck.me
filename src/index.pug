@@ -1,99 +1,101 @@
-doctype
-html
-  head
-    meta(charset='UTF-8')
-    title kluck.me
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Molle:400i')
-    link(rel='stylesheet', href='styles.css')
-    script(src='//code.jquery.com/jquery-3.1.1.min.js')
-    script(src='scripts.js')
-  body
-    .wrapper
-      header
-        h1
-          a(href='https://kluck.me/') kluck.me
-        ul
-          li
-            a(href='#profile') Profile
-          li
-            a(href='#releases') Releases
-          li
-            a(href='#elsewhere') Elsewhere
-          li
-            a(href='#folks') Folks
-          li
-            a(href='#about') About
+extends common/.layout
 
-      section#profile
-        h2 Profile
-        dl
-          dt Name
-          dd Kluck (クラック)
-          dt Mail
-          dd kluck dot meme at gmail dot com
-          dt Twitter
-          dd
-            a(href='https://twitter.com/kluck_en') @kluck_en
-            = ' '
-            a(href='https://twitter.com/kluck_me') @kluck_me
-            | (ja)
-          //- dt Skype
-          //- dd kluck.me
-          dt GitHub
-          dd
-            a(href='https://github.com/kluck-me') kluck-me
-          dt Living at
-          dd Tokyo, JAPAN
+append meta
+  title kluck.me
 
-      section#releases
-        h2 Releases
-        ul
-          li
-            a(href='http://extlib.net/') 超絶書庫
-          li
-            a(href='http://neetsha.in/18379') 鋼城の悪魔たち
-          //- li
-          //-   a(href='https://yy.kluck.me/cih-kl-uck/') 旅をする僕
-          li
-            a(href='/lonely-talk-2013/') 一人で新都社運営座談会
-          li
-            a(href='/1to0/') 1が並んで0となる
-          li
-            a(href='/kluck-chan/') クラックちゃん
+append styles
+  link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Molle:400i')
+  link(rel='stylesheet', href='styles.css')
 
-      section#elsewhere
-        h2 Elsewhere
-        ul
-          li
-            a(href='http://kluck.blog.jp/') 滅ぶ世界のポエムな日
-          li
-            a(href='http://d.hatena.ne.jp/kluck/') 白米と小説とプログラムのブログ
-          li
-            a(href='/wish/') ほしい物リスト
+append scripts
+  script(src='scripts.js')
 
-      section#folks
-        h2 Folks
-        ul
-          li
-            a(href='https://globalelite.black/') グローバルエリート
-          li
-            a(href='http://clock-up.jp/') clock-up.jp
-          li
-            a(href='http://www.eonet.ne.jp/~versatile/ku-so/') 空疎雪渓
+append body
+  .wrapper
+    header
+      h1
+        a(href='https://kluck.me/') kluck.me
+      ul
+        li
+          a(href='#profile') Profile
+        li
+          a(href='#releases') Releases
+        li
+          a(href='#elsewhere') Elsewhere
+        li
+          a(href='#folks') Folks
+        li
+          a(href='#about') About
 
-      section#about
-        h2 Whatyawando?
-        p
-          | kluck.me is a trash stash that specializes in programming. All the content on this website is free when offered. If you have any problems with the contents please
+    section#profile
+      h2 Profile
+      dl
+        dt Name
+        dd Kluck (クラック)
+        dt Mail
+        dd kluck dot meme at gmail dot com
+        dt Twitter
+        dd
+          a(href='https://twitter.com/kluck_en') @kluck_en
           = ' '
-          a(href='https://twitter.com/kluck_me') twitter
-          = ' '
-          | for contact.
+          a(href='https://twitter.com/kluck_me') @kluck_me
+          | (ja)
+        //- dt Skype
+        //- dd kluck.me
+        dt GitHub
+        dd
+          a(href='https://github.com/kluck-me') kluck-me
+        dt Living at
+        dd Tokyo, JAPAN
 
-      footer
-        p
-          script.
-            document.write('&copy; 2013-' + (new Date).getFullYear())
-          = ' '
-          a(href='https://kluck.me/') Kluck
+    section#releases
+      h2 Releases
+      ul
+        li
+          a(href='http://extlib.net/') 超絶書庫
+        li
+          a(href='http://neetsha.in/18379') 鋼城の悪魔たち
+        //- li
+        //-   a(href='https://yy.kluck.me/cih-kl-uck/') 旅をする僕
+        li
+          a(href='/lonely-talk-2013/') 一人で新都社運営座談会
+        li
+          a(href='/1to0/') 1が並んで0となる
+        li
+          a(href='/kluck-chan/') クラックちゃん
+
+    section#elsewhere
+      h2 Elsewhere
+      ul
+        li
+          a(href='http://kluck.blog.jp/') 滅ぶ世界のポエムな日
+        li
+          a(href='http://d.hatena.ne.jp/kluck/') 白米と小説とプログラムのブログ
+        li
+          a(href='/wish/') ほしい物リスト
+
+    section#folks
+      h2 Folks
+      ul
+        li
+          a(href='https://globalelite.black/') グローバルエリート
+        li
+          a(href='http://clock-up.jp/') clock-up.jp
+        li
+          a(href='http://www.eonet.ne.jp/~versatile/ku-so/') 空疎雪渓
+
+    section#about
+      h2 Whatyawando?
+      p
+        | kluck.me is a trash stash that specializes in programming. All the content on this website is free when offered. If you have any problems with the contents please
+        = ' '
+        a(href='https://twitter.com/kluck_me') twitter
+        = ' '
+        | for contact.
+
+    footer
+      p
+        script.
+          document.write('&copy; 2013-' + (new Date).getFullYear())
+        = ' '
+        a(href='https://kluck.me/') Kluck
