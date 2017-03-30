@@ -1,58 +1,59 @@
-doctype
-html(lang='ja')
-  head
-    meta(charset='UTF-8')
-    title percentage test
-  body
-    p
-      input#input(value='1,4,1,1')
-    dl
-      dt values
-      dd#values
-      dt twitter emulation
-      dd#twper
-      dt proposed algorithm
-      dd#myper
-    script.
-      function $(id) { return document.getElementById(id); }
-      function sum(a) { return a.reduce(function(x, y) { return x + y; }); }
-      function outper(a) { return a.map(function (p) { return p + '%'; }).join(', '); }
-      function twper(values) {
-        var total = sum(values);
-        var twper = values.map(function (v) { return Math.round(v / total * 100); });
-        for (var i = twper.length - 1; i >= 0; --i) {
-          if (twper[i] > 0) {
-            twper[i] += (100 - sum(twper));
-            break;
-          }
+extends ../common/.layout
+
+append meta
+  title percentage
+
+append contents
+  p
+    input#input(value='1,4,1,1')
+  dl
+    dt values
+    dd#values
+    dt twitter emulation
+    dd#twper
+    dt proposed algorithm
+    dd#myper
+
+append scripts
+  script.
+    window.pp=console.log.bind(console);
+  script.
+    function sum(a) { return a.reduce(function(x, y) { return x + y; }); }
+    function outper(a) { return a.map(function (p) { return p + '%'; }).join(', '); }
+    function twper(values) {
+      var total = sum(values);
+      var twper = values.map(function (v) { return Math.round(v / total * 100); });
+      for (var i = twper.length - 1; i >= 0; --i) {
+        if (twper[i] > 0) {
+          twper[i] += (100 - sum(twper));
+          break;
         }
-        return twper;
       }
-      function myper(values) {
-        var obj = {};
-        values.forEach(function (v) { obj[v] = ++obj[v] || 1; });
-        var arr = [];
-        for (var k in obj) if (obj[k]) arr.push([ k, obj[k] ]);
-        arr.sort(function (a, b) { return b[1] - a[1]; });
-        var total = sum(values);
-        var sum_per = 0;
-        var res = {};
-        arr.forEach(function (a) {
-          var v = a[0];
-          var p = Math.round(v / total * 100);
-          res[v] = p;
-          sum_per += p * a[1];
-        });
-        res[arr[arr.length - 1][0]] += (100 - sum_per);
-        return values.map(function (v) {
-          return res[v] || 0;
-        });
-      }
-      function update() {
-        var values = $('input').value.split(',').map(function (v) { return parseInt(v, 10) || 0; });
-        $('values').textContent = values.join(', ');
-        $('twper').textContent = outper(twper(values));
-        $('myper').textContent = outper(myper(values));
-      };
-      $('input').addEventListener('input', update, false);
-      update();
+      return twper;
+    }
+    function myper(values) {
+      var obj = {};
+      values.forEach(function (v) { obj[v] = ++obj[v] || 1; });
+      var arr = [];
+      for (var k in obj) if (obj[k]) arr.push([ k, obj[k] ]);
+      arr.sort(function (a, b) { return b[1] - a[1]; });
+      var total = sum(values);
+      var sum_per = 0;
+      var res = {};
+      arr.forEach(function (a) {
+        var v = a[0];
+        var p = Math.round(v / total * 100);
+        res[v] = p;
+        sum_per += p * a[1];
+      });
+      res[arr[arr.length - 1][0]] += (100 - sum_per);
+      return values.map(function (v) {
+        return res[v] || 0;
+      });
+    }
+    $('#input').on('input', function () {
+      var values = $(this).val().split(',').map(function (v) { return parseInt(v, 10) || 0; });
+      $('#values').text(values.join(', '));
+      $('#twper').text(outper(twper(values)));
+      $('#myper').text(outper(myper(values)));
+    }).trigger('input');
