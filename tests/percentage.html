@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><title>percentage test</title></head><body><p><input id="input" value="1,4,1,1"></p><dl><dt>values</dt><dd id="values"></dd><dt>twitter emulation</dt><dd id="twper"></dd><dt>proposed algorithm</dt><dd id="myper"></dd></dl><script>function $(id) { return document.getElementById(id); }
-      function sum(a) { return a.reduce(function(x, y) { return x + y; }); }
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><title>percentage</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></head><body><div class="container"><div class="row"><div class="col-sm-12"><p><input id="input" value="1,4,1,1"></p><dl><dt>values</dt><dd id="values"></dd><dt>twitter emulation</dt><dd id="twper"></dd><dt>proposed algorithm</dt><dd id="myper"></dd></dl></div></div></div><script src="//code.jquery.com/jquery-3.1.1.min.js"></script><script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script>window.pp=console.log.bind(console);</script><script>function sum(a) { return a.reduce(function(x, y) { return x + y; }); }
       function outper(a) { return a.map(function (p) { return p + '%'; }).join(', '); }
       function twper(values) {
         var total = sum(values);
@@ -32,11 +31,9 @@
           return res[v] || 0;
         });
       }
-      function update() {
-        var values = $('input').value.split(',').map(function (v) { return parseInt(v, 10) || 0; });
-        $('values').textContent = values.join(', ');
-        $('twper').textContent = outper(twper(values));
-        $('myper').textContent = outper(myper(values));
-      };
-      $('input').addEventListener('input', update, false);
-      update();</script></body></html>
+      $('#input').on('input', function () {
+        var values = $(this).val().split(',').map(function (v) { return parseInt(v, 10) || 0; });
+        $('#values').text(values.join(', '));
+        $('#twper').text(outper(twper(values)));
+        $('#myper').text(outper(myper(values)));
+      }).trigger('input');</script></body></html>
