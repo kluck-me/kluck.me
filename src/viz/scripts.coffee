@@ -4,6 +4,7 @@ instance = null
 
 $('#btnRun').click ->
   instance?.exit()
+  console.log $textarea.val()
   instance = new Processing($canvas[0], $textarea.val())
   $('#btnPlayText').hide()
   $('#btnPauseText').show()
@@ -24,4 +25,8 @@ $('#btnPlay').click ->
 if location.search
   $.get location.search.replace(/^\?/, ''), (source) ->
     $textarea.val(source)
+    setTimeout ->
+      $('#btnRun').click()
+      return
+    , 500
     return
