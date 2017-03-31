@@ -10,7 +10,7 @@ gulp.task 'copy:config-files', ->
     .pipe(gulp.dest('.tmp'))
 
 gulp.task 'copy:files', ->
-  gulp.src('src/**/*.{html,js,css,json,png,jpg,gif}')
+  gulp.src('src/**/*.{html,js,css,json,pde,png,jpg,gif}')
     .pipe(gulp.dest('.tmp'))
 
 gulp.task 'build:pug', ->
@@ -44,7 +44,7 @@ gulp.task 'build', [
 ]
 
 gulp.task 'watch', ['build'], ->
-  gulp.watch 'src/**/*.{html,js,css,json}', ['copy:files']
+  gulp.watch 'src/**/*.{html,js,css,json,pde}', ['copy:files']
   gulp.watch 'src/**/*.{pug,jade}', ['build:pug']
   gulp.watch 'src/**/*.coffee', ['build:coffee']
   gulp.watch 'src/**/*.styl', ['build:stylus']
