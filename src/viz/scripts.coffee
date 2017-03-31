@@ -23,7 +23,9 @@ $('#btnPlay').click ->
   false
 
 if location.search
-  $.get location.search.replace(/^\?/, ''), (source) ->
+  name = location.search.replace(/^\?/, '')
+  $.get "#{name}.pde", (source) ->
+    document.title += " : #{name}"
     $textarea.val(source)
     setTimeout ->
       $('#btnRun').click()
