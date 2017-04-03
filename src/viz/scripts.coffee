@@ -4,7 +4,6 @@ instance = null
 
 $('#btnRun').click ->
   instance?.exit()
-  console.log $textarea.val()
   instance = new Processing($canvas[0], $textarea.val())
   $('#btnPlayText').hide()
   $('#btnPauseText').show()
