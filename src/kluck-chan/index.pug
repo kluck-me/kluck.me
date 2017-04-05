@@ -1,56 +1,59 @@
-doctype
-html(lang='ja')
-  head
-    meta(charset='UTF-8')
-    title クラックちゃん
-    link(rel='stylesheet', href='styles.css')
-  body
-    ul
-      li
-        a(href='https://twitter.com/kluck_me/status/475469610276626432', target='_blank')
-          img(src='kluck_me_1.png')
-      //- li
-        a(href='https://twitter.com/SubPrime_Neet/status/471667111132020737', target='_blank')
-          img(src='SubPrime_Neet_1.jpg')
-      //- li
-        a(href='https://twitter.com/SubPrime_Neet/status/473861267094925313', target='_blank')
-          img(src='SubPrime_Neet_2.jpg')
-      li
-        a(href='https://twitter.com/kluck_me/status/475469730267295744', target='_blank')
-          img(src='kluck_me_2.png')
-      li
-        a(href='https://twitter.com/negalomania/status/475302569871306753', target='_blank')
-          img(src='negalomania_1.png')
-      //- li
-        a(href='https://twitter.com/SubPrime_Neet/status/475643716820938752', target='_blank')
-          img(src='SubPrime_Neet_3.jpg')
-      //- li
-        a(href='https://twitter.com/SubPrime_Neet/status/475679439276105729', target='_blank')
-          img(src='SubPrime_Neet_4.png')
-      li
-        a(href='https://twitter.com/kurotokunai/status/485979071805788161', target='_blank')
-          img(src='kurotokunai_1.jpg')
-      li
-        a(href='https://twitter.com/kluck_me/status/528946032881565696', target='_blank')
-          img(src='kluck_me_3.png')
-      li
-        a(href='https://twitter.com/fufufusmile/status/557248419526234112', target='_blank')
-          img(src='fufufusmile_1.png')
-      li
-        a(href='https://twitter.com/SubPrime_Neet/status/564440189934637057', target='_blank')
-          img(src='SubPrime_Neet_5.png')
-      li
-        a(href='https://twitter.com/iwakinoko/status/676939790118486016', target='_blank')
-          img(src='iwakinoko_1.png')
-      li
-        a(href='https://twitter.com/iwakinoko/status/676939790118486016', target='_blank')
-          img(src='iwakinoko_2.png')
-      li
-        a(href='http://neetsha.in/19174', target='_blank')
-          img(src='katokikan.png')
-      //- li
-        a(href='', target='_blank')
-          img(src='')
-    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js')
-    script(src='haikei-gunyagunya2.js')
-    script(src='scripts.js')
+extends ../common/.layout
+
+append meta
+  title クラックちゃん
+
+append styles
+  link(rel='stylesheet', href='styles.css')
+
+append scripts
+  script(src='haikei-gunyagunya2.js')
+  script(src='scripts.js')
+
+append body
+  ul
+    li
+      a(href='https://twitter.com/kluck_me/status/475469610276626432', target='_blank')
+        img(src='kluck_me_1.png')
+    //- li
+      a(href='https://twitter.com/SubPrime_Neet/status/471667111132020737', target='_blank')
+        img(src='SubPrime_Neet_1.jpg')
+    //- li
+      a(href='https://twitter.com/SubPrime_Neet/status/473861267094925313', target='_blank')
+        img(src='SubPrime_Neet_2.jpg')
+    li
+      a(href='https://twitter.com/kluck_me/status/475469730267295744', target='_blank')
+        img(src='kluck_me_2.png')
+    li
+      a(href='https://twitter.com/negalomania/status/475302569871306753', target='_blank')
+        img(src='negalomania_1.png')
+    //- li
+      a(href='https://twitter.com/SubPrime_Neet/status/475643716820938752', target='_blank')
+        img(src='SubPrime_Neet_3.jpg')
+    //- li
+      a(href='https://twitter.com/SubPrime_Neet/status/475679439276105729', target='_blank')
+        img(src='SubPrime_Neet_4.png')
+    li
+      a(href='https://twitter.com/kurotokunai/status/485979071805788161', target='_blank')
+        img(src='kurotokunai_1.jpg')
+    li
+      a(href='https://twitter.com/kluck_me/status/528946032881565696', target='_blank')
+        img(src='kluck_me_3.png')
+    li
+      a(href='https://twitter.com/fufufusmile/status/557248419526234112', target='_blank')
+        img(src='fufufusmile_1.png')
+    li
+      a(href='https://twitter.com/SubPrime_Neet/status/564440189934637057', target='_blank')
+        img(src='SubPrime_Neet_5.png')
+    li
+      a(href='https://twitter.com/iwakinoko/status/676939790118486016', target='_blank')
+        img(src='iwakinoko_1.png')
+    li
+      a(href='https://twitter.com/iwakinoko/status/676939790118486016', target='_blank')
+        img(src='iwakinoko_2.png')
+    li
+      a(href='http://neetsha.in/19174', target='_blank')
+        img(src='katokikan.png')
+    //- li
+      a(href='', target='_blank')
+        img(src='')
