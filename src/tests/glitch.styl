@@ -1,0 +1,42 @@
+random(a, b)
+  return math(math(0, 'random') * (b - a + 1) + a, 'floor')
+
+body
+  background-color black
+
+size = 100
+
+[data-glitch-text]
+  color white
+  font-size (size * 1px)
+  position relative
+
+  &::before
+  &::after
+    content attr(data-glitch-text)
+    color white
+    background black
+    overflow hidden
+    clip rect(0 9999px 0 0)
+    position absolute
+    top 0
+
+  &::before
+    left -2px
+    text-shadow 2px 0 green
+    animation glitch-before-animation 3s infinite linear alternate-reverse
+
+  &::after
+    left 2px
+    text-shadow -2px 0 red
+    animation glitch-after-animation 2s infinite linear alternate-reverse
+
+@keyframes glitch-before-animation
+  for i in 0..20
+    {5% * i}
+      clip rect((random(0, size) * 1px) 9999px (random(0, size) * 1px) 0)
+
+@keyframes glitch-after-animation
+  for i in 0..20
+    {5% * i}
+      clip rect((random(0, size) * 1px) 9999px (random(0, size) * 1px) 0)
