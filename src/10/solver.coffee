@@ -59,14 +59,14 @@ class Node
     return "(#{result})" if parentOp == '@'
     result
 
-generateUnary = (x, fn) ->
+generateUnary = (level, x, fn) ->
   fn(x)
   fn(x.minus())
   return
 
-generateBinary = (as, bs, fn) ->
-  generateExpr as, (a) ->
-    generateExpr bs, (b) ->
+generateBinary = (level, as, bs, fn) ->
+  generateExpr level, as, (a) ->
+    generateExpr level, bs, (b) ->
       fn(a.add(b))
       fn(a.sub(b))
       fn(a.mul(b))
@@ -75,22 +75,22 @@ generateBinary = (as, bs, fn) ->
     return
   return
 
-generateExpr = (xs, fn) ->
+generateExpr = (level, xs, fn) ->
   switch xs.length
     when 0
       throw new Error
     when 1
-      generateUnary(xs[0], fn)
+      generateUnary(level, xs[0], fn)
     else
       for i in [1...xs.length] by 1
-        generateBinary xs[0...i], xs[i..xs.length], (x) ->
-          generateUnary(x, fn)
+        generateBinary level, xs[0...i], xs[i..xs.length], (x) ->
+          generateUnary(level, x, fn)
           return
   return
 
 self.addEventListener 'message', (e) ->
   pp time ->
-    generateExpr e.data.numbers.map((n) -> new Node('number', n)), (x) ->
+    generateExpr 0, e.data.numbers.map((n) -> new Node('number', n)), (x) ->
       self.postMessage(type: 'result', value: x.toString()) if e.data.answer == x.value
       return
     return
