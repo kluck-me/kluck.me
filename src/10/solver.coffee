@@ -14,6 +14,10 @@ class Node
     switch @type
       when 'minus'
         @left.clone() # -(-x) -> x
+      when 'add'
+        @left.minus()[@type](@right.minus()) # -(a+b) -> (-a)+(-b)
+      when 'mul', 'div'
+        @left.minus()[@type](@right) # -(a*b) -> (-a)*b
       else
         new Node('minus', -@value, @clone())
   add: (other) -> new Node('add', @value+other.value, @clone(), other.clone())
