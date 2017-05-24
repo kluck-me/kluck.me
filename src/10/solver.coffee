@@ -37,6 +37,7 @@ class Node
         false
   sqrtable: -> @value > 0 && @value != 1 && isFinite(@value) # /1 == 1, Not support: /-1, /inf
   sqrt: -> new Node('sqrt', Math.sqrt(@value), @clone())
+  factable: -> (@value == 0 || @value > 2) && isFinite(@value) && Math.round(@value) == @value # 1! == 1, 2! == 2, Not support: inf!, 1.5!
   fact: ->
     v = 1
     for i in [1..@value] by 1
@@ -83,7 +84,7 @@ class Node
 
 expandUnary = (x, fn) ->
   fn(x.sqrt()) if x.sqrtable()
-  fn(x.fact())
+  fn(x.fact()) if x.factable()
   return
 
 generateUnary = (level, x, fn) ->
