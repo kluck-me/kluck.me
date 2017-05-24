@@ -10,6 +10,10 @@ time = (fn) ->
 class Node
   constructor: (@type, @value, @left, @right) ->
   clone: -> new Node(@type, @value, @left, @right)
+  nuddy: ->
+    node = this
+    node = node.left while node.type != 'number' && !node.right
+    node
   minus: ->
     switch @type
       when 'minus'
@@ -42,7 +46,9 @@ class Node
     method = if other.hasMinus() then 'minus' else 'clone' # a/(-b) -> (-a)/b
     new Node('div', @value/other.value, this[method](), other[method]())
   pow: (other) ->
-    new Node('pow', Math.pow(@value, other.value), @clone(), other.clone())
+    that = this
+    that = that.nuddy() if other.value == 0 # f(a)^0 -> a^0
+    new Node('pow', Math.pow(that.value, other.value), that.clone(), other.clone())
   toString: (parentOp = '') ->
     switch @type
       when 'number'
