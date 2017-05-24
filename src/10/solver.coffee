@@ -53,6 +53,7 @@ class Node
       when 'mul', 'div'
         resultOp = { mul: '*', div: '/' }[@type]
         result = "#{@left.toString(resultOp)}#{resultOp}#{@right.toString(resultOp)}"
+        return "(#{result})" if resultOp == '/' && parentOp == '/'
       else
         new Error("not support: #{@type}")
     return "(#{result})" if parentOp == '@'

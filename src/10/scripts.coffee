@@ -67,5 +67,5 @@ $('form').submit ->
 $input.on('input', updateView)
 
 if location.hostname == 'localhost'
-  $input.val('5,0,5,7').trigger('input')
+  $input.val('9,1,2,8').trigger('input')
   $('form').submit()
