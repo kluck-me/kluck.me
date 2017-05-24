@@ -31,6 +31,7 @@ class Node
         @left.hasMinus() || @right.hasMinus()
       else
         false
+  sqrtable: -> @value > 0 && @value != 1 && isFinite(@value) # /1 == 1, Not support: /-1, /inf
   sqrt: -> new Node('sqrt', Math.sqrt(@value), @clone())
   add: (other) -> new Node('add', @value+other.value, @clone(), other.clone())
   sub: (other) -> new Node('add', @value-other.value, @clone(), other.minus())
@@ -67,7 +68,7 @@ class Node
     result
 
 expandUnary = (x, fn) ->
-  fn(x.sqrt())
+  fn(x.sqrt()) if x.sqrtable()
   return
 
 generateUnary = (level, x, fn) ->
