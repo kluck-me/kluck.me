@@ -88,11 +88,22 @@ generateExpr = (level, xs, fn) ->
           return
   return
 
+finder = (answer, numbers, level, fn) ->
+  found = false
+  generateExpr level, numbers.map((n) -> new Node('number', n)), (x) ->
+    if answer == x.value
+      found = true
+      fn(x)
+    return
+  found
+
 self.addEventListener 'message', (e) ->
   pp time ->
-    generateExpr 0, e.data.numbers.map((n) -> new Node('number', n)), (x) ->
-      self.postMessage(type: 'result', value: x.toString()) if e.data.answer == x.value
+    fn = (x) ->
+      self.postMessage(type: 'result', value: x.toString())
       return
+    for i in [0..3]
+      break if finder(e.data.answer, e.data.numbers, i, fn)
     return
   self.postMessage(type: 'finish')
   return
