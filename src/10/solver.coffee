@@ -19,6 +19,7 @@ class Node
       when 'mul', 'div'
         @left.minus()[@type](@right) # -(a*b) -> (-a)*b
       else
+        return @clone() if @value == 0 # -0 -> 0
         new Node('minus', -@value, @clone())
   hasMinus: ->
     switch @type
