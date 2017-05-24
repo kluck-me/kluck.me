@@ -15,17 +15,24 @@ class Node
   sub: (other) -> new Node('add', @value-other.value, @clone(), other.minus())
   mul: (other) -> new Node('mul', @value*other.value, @clone(), other.clone())
   div: (other) -> new Node('div', @value/other.value, @clone(), other.clone())
-  toString: ->
+  toString: (parentOp = '') ->
     switch @type
       when 'number'
-        @value.toString()
+        return @value.toString()
       when 'minus'
-        "(-#{@left})"
-      when 'add', 'mul', 'div'
-        resultOp = { add: '+', mul: '*', div: '/' }[@type]
-        "(#{@left}#{resultOp}#{@right})"
+        result = "-#{@left.toString('@')}"
+      when 'add'
+        rightResult = @right.toString('+')
+        rightResult = "+#{rightResult}" unless rightResult[0] == '-'
+        result = "#{@left.toString('+')}#{rightResult}"
+        return "(#{result})" unless parentOp == '' || parentOp == '+'
+      when 'mul', 'div'
+        resultOp = { mul: '*', div: '/' }[@type]
+        result = "#{@left.toString(resultOp)}#{resultOp}#{@right.toString(resultOp)}"
       else
         new Error("not support: #{@type}")
+    return "(#{result})" if parentOp == '@'
+    result
 
 generateUnary = (x, fn) ->
   fn(x)
