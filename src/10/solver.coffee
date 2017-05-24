@@ -12,7 +12,7 @@ class Node
   clone: -> new Node(@type, @value, @left, @right)
   minus: -> new Node('minus', -@value, @clone())
   add: (other) -> new Node('add', @value+other.value, @clone(), other.clone())
-  sub: (other) -> new Node('sub', @value-other.value, @clone(), other.clone())
+  sub: (other) -> new Node('add', @value-other.value, @clone(), other.minus())
   mul: (other) -> new Node('mul', @value*other.value, @clone(), other.clone())
   div: (other) -> new Node('div', @value/other.value, @clone(), other.clone())
   toString: ->
@@ -21,8 +21,8 @@ class Node
         @value.toString()
       when 'minus'
         "(-#{@left})"
-      when 'add', 'sub', 'mul', 'div'
-        resultOp = { add: '+', sub: '-', mul: '*', div: '/' }[@type]
+      when 'add', 'mul', 'div'
+        resultOp = { add: '+', mul: '*', div: '/' }[@type]
         "(#{@left}#{resultOp}#{@right})"
       else
         new Error("not support: #{@type}")
