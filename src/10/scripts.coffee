@@ -65,3 +65,7 @@ $('form').submit ->
   return false
 
 $input.on('input', updateView)
+
+if location.hostname == 'localhost'
+  $input.val('1,2,3,4').trigger('input')
+  $('form').submit()
