@@ -20,10 +20,24 @@ class Node
         @left.minus()[@type](@right) # -(a*b) -> (-a)*b
       else
         new Node('minus', -@value, @clone())
+  hasMinus: ->
+    switch @type
+      when 'minus'
+        true
+      when 'add'
+        @left.hasMinus() && @right.hasMinus()
+      when 'mul', 'div'
+        @left.hasMinus() || @right.hasMinus()
+      else
+        false
   add: (other) -> new Node('add', @value+other.value, @clone(), other.clone())
   sub: (other) -> new Node('add', @value-other.value, @clone(), other.minus())
-  mul: (other) -> new Node('mul', @value*other.value, @clone(), other.clone())
-  div: (other) -> new Node('div', @value/other.value, @clone(), other.clone())
+  mul: (other) ->
+    method = if other.hasMinus() then 'minus' else 'clone' # a*(-b) -> (-a)*b
+    new Node('mul', @value*other.value, this[method](), other[method]())
+  div: (other) ->
+    method = if other.hasMinus() then 'minus' else 'clone' # a/(-b) -> (-a)/b
+    new Node('div', @value/other.value, this[method](), other[method]())
   toString: (parentOp = '') ->
     switch @type
       when 'number'
