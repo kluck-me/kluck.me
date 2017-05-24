@@ -70,7 +70,7 @@ generateBinary = (as, bs, fn) ->
       fn(a.add(b))
       fn(a.sub(b))
       fn(a.mul(b))
-      fn(a.div(b))
+      fn(a.div(b)) if a.value != 0 && Math.abs(b.value) != 1 # 0*b == 0/b, a*1 == a/1
       return
     return
   return
