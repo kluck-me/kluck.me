@@ -40,6 +40,8 @@ class Node
   div: (other) ->
     method = if other.hasMinus() then 'minus' else 'clone' # a/(-b) -> (-a)/b
     new Node('div', @value/other.value, this[method](), other[method]())
+  pow: (other) ->
+    new Node('pow', Math.pow(@value, other.value), @clone(), other.clone())
   toString: (parentOp = '') ->
     switch @type
       when 'number'
@@ -57,6 +59,8 @@ class Node
         resultOp = { mul: '*', div: '/' }[@type]
         result = "#{@left.toString(resultOp)}#{resultOp}#{@right.toString(resultOp)}"
         return "(#{result})" if resultOp == '/' && parentOp == '/'
+      when 'pow'
+        result = "#{@left.toString('@')}^#{@right.toString('@')}"
       else
         new Error("not support: #{@type}")
     return "(#{result})" if parentOp == '@'
@@ -81,7 +85,8 @@ generateBinary = (level, as, bs, fn) ->
       fn(a.add(b))
       fn(a.sub(b))
       fn(a.mul(b))
-      fn(a.div(b)) if a.value != 0 && Math.abs(b.value) != 1 # 0*b == 0/b, a*1 == a/1
+      fn(a.div(b)) if a.value != 0 && Math.abs(b.value) != 1 # 0*x == 0/x, x*1 == x/1
+      fn(a.pow(b)) if level > 0
       return
     return
   return
