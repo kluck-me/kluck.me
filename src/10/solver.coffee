@@ -31,6 +31,7 @@ class Node
         @left.hasMinus() || @right.hasMinus()
       else
         false
+  sqrt: -> new Node('sqrt', Math.sqrt(@value), @clone())
   add: (other) -> new Node('add', @value+other.value, @clone(), other.clone())
   sub: (other) -> new Node('add', @value-other.value, @clone(), other.minus())
   mul: (other) ->
@@ -44,7 +45,9 @@ class Node
       when 'number'
         return @value.toString()
       when 'minus'
-        result = "-#{@left.toString('@')}"
+        result = "-#{@left.toString('-')}"
+      when 'sqrt'
+        result = "\u221a#{@left.toString('@')}"
       when 'add'
         rightResult = @right.toString('+')
         rightResult = "+#{rightResult}" unless rightResult[0] == '-'
@@ -59,9 +62,17 @@ class Node
     return "(#{result})" if parentOp == '@'
     result
 
+expandUnary = (x, fn) ->
+  fn(x.sqrt())
+  return
+
 generateUnary = (level, x, fn) ->
   fn(x)
   fn(x.minus())
+  if level > 0
+    expandUnary x, (y) ->
+      generateUnary(level - 1, y, fn)
+      return
   return
 
 generateBinary = (level, as, bs, fn) ->
