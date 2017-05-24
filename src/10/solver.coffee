@@ -10,7 +10,12 @@ time = (fn) ->
 class Node
   constructor: (@type, @value, @left, @right) ->
   clone: -> new Node(@type, @value, @left, @right)
-  minus: -> new Node('minus', -@value, @clone())
+  minus: ->
+    switch @type
+      when 'minus'
+        @left.clone() # -(-x) -> x
+      else
+        new Node('minus', -@value, @clone())
   add: (other) -> new Node('add', @value+other.value, @clone(), other.clone())
   sub: (other) -> new Node('add', @value-other.value, @clone(), other.minus())
   mul: (other) -> new Node('mul', @value*other.value, @clone(), other.clone())
