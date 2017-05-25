@@ -53,6 +53,7 @@ class Node
   calcable: (other) -> isFinite(@value) == isFinite(other.value)
   add: (other) ->
     return @minus().sub(other) if @type == 'minus' && @value == -other.value # -a+a -> a-a
+    return @sub(other.minus()) if other.type == 'minus' # a+(-b) -> a-b
     new Node('add', @value+other.value, @clone(), other.clone())
   sub: (other) ->
     [that, other] = Node.nuddyBoth(this, other) # f(a)-f(a) -> a-a
