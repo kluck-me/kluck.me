@@ -54,6 +54,7 @@ class Node
     new Node('div', @value/other.value, this[method](), other[method]())
   pow: (other) ->
     that = this
+    other = other.nuddy() if Math.abs(that.value) == 1 # 1^f(b) -> 1^b
     that = that.nuddy() if other.value == 0 # f(a)^0 -> a^0
     method = if that.value < 0 && other.value % 2 == 0 then 'minus' else 'clone' # (-a)^(2b) -> a^(2b)
     new Node('pow', Math.pow(that.value, other.value), that[method](), other.clone())
