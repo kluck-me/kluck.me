@@ -50,6 +50,7 @@ class Node
       break unless isFinite(v)
       v *= i
     new Node('fact', v, @clone())
+  calcable: (other) -> isFinite(@value) == isFinite(other.value)
   add: (other) ->
     return @minus().sub(other) if @type == 'minus' && @value == -other.value # -a+a -> a-a
     new Node('add', @value+other.value, @clone(), other.clone())
@@ -116,6 +117,7 @@ generateUnary = (level, x, fn) ->
 generateBinary = (level, as, bs, fn) ->
   generateExpr level, as, (a) ->
     generateExpr level, bs, (b) ->
+      return unless a.calcable(b)
       fn(a.add(b))
       fn(a.sub(b))
       fn(a.mul(b))
