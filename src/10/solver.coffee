@@ -55,6 +55,7 @@ class Node
   div: (other) ->
     method = if other.hasMinus() then 'minus' else 'clone' # a/(-b) -> (-a)/b
     new Node('div', @value/other.value, this[method](), other[method]())
+  powable: (other) -> @value == 0 || Math.abs(Math.pow(@value, other.value)) > 1e-10 # Not support: a^-inf
   pow: (other) ->
     that = this
     other = other.nuddy() if Math.abs(that.value) == 1 # 1^f(b) -> 1^b
@@ -108,7 +109,7 @@ generateBinary = (level, as, bs, fn) ->
       fn(a.sub(b))
       fn(a.mul(b))
       fn(a.div(b)) if a.value != 0 && Math.abs(b.value) != 1 # 0*x == 0/x, x*1 == x/1
-      fn(a.pow(b)) if level > 0 && a.value != 0 && b.value != 1 # 0*x == 0^x, x*1 == x^1
+      fn(a.pow(b)) if level > 0 && a.value != 0 && b.value != 1 && a.powable(b) # 0*x == 0^x, x*1 == x^1
       return
     return
   return
