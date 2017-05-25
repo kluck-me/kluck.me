@@ -44,7 +44,9 @@ class Node
       break unless isFinite(v)
       v *= i
     new Node('fact', v, @clone())
-  add: (other) -> new Node('add', @value+other.value, @clone(), other.clone())
+  add: (other) ->
+    return @minus().sub(other) if @type == 'minus' && @value == -other.value # -a+a -> a-a
+    new Node('add', @value+other.value, @clone(), other.clone())
   sub: (other) -> new Node('add', @value-other.value, @clone(), other.minus())
   mul: (other) ->
     that = this
