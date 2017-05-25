@@ -8,6 +8,12 @@ time = (fn) ->
   Date.now() - t
 
 class Node
+  @nuddyBoth: (a, b) ->
+    while a.value == b.value && a.type == b.type && a.type != 'number' && !a.right
+      a = a.left
+      b = b.left
+    [a, b]
+
   constructor: (@type, @value, @left, @right) ->
   clone: -> new Node(@type, @value, @left, @right)
   nuddy: ->
@@ -47,7 +53,9 @@ class Node
   add: (other) ->
     return @minus().sub(other) if @type == 'minus' && @value == -other.value # -a+a -> a-a
     new Node('add', @value+other.value, @clone(), other.clone())
-  sub: (other) -> new Node('add', @value-other.value, @clone(), other.minus())
+  sub: (other) ->
+    [that, other] = Node.nuddyBoth(this, other) # f(a)-f(a) -> a-a
+    new Node('add', that.value-other.value, that.clone(), other.minus())
   mul: (other) ->
     that = this
     other = other.nuddy() if that.value == 0 # 0*f(b) -> 0*b
@@ -55,8 +63,9 @@ class Node
     method = if other.hasMinus() then 'minus' else 'clone' # a*(-b) -> (-a)*b
     new Node('mul', @value*other.value, that[method](), other[method]())
   div: (other) ->
+    [that, other] = Node.nuddyBoth(this, other) # f(a)/f(a) -> a/a
     method = if other.hasMinus() then 'minus' else 'clone' # a/(-b) -> (-a)/b
-    new Node('div', @value/other.value, this[method](), other[method]())
+    new Node('div', that.value/other.value, that[method](), other[method]())
   powable: (other) -> @value == 0 || Math.abs(Math.pow(@value, other.value)) > 1e-10 # Not support: a^-inf
   pow: (other) ->
     that = this
