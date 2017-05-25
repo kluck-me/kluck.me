@@ -55,7 +55,8 @@ class Node
   pow: (other) ->
     that = this
     that = that.nuddy() if other.value == 0 # f(a)^0 -> a^0
-    new Node('pow', Math.pow(that.value, other.value), that.clone(), other.clone())
+    method = if that.value < 0 && other.value % 2 == 0 then 'minus' else 'clone' # (-a)^(2b) -> a^(2b)
+    new Node('pow', Math.pow(that.value, other.value), that[method](), other.clone())
   toString: (parentOp = '') ->
     switch @type
       when 'number'
