@@ -28,14 +28,23 @@ $input = $('form input[name="numbers"]')
 $button = $('form button')
 
 cache = null
+exprs = null
+calc_exprs_score = (expr) ->
+  score = 0
+  table = { '+': 1, '-': 1, '*': 2, '/': 2, '^': 10, '√': 11, '!': 12 }
+  score += table[c] || 20 for c in expr.replace(/[\d()]+/g, '')
+  score * 100 + expr.length
+
 solver = new Solver
 solver.onMessage (e) ->
   switch e.data.type
     when 'result'
       expr = e.data.value
       unless cache[expr]
-        cache[expr] = true
-        $pre.append(document.createTextNode("#{expr}\n"))
+        cache[expr] = calc_exprs_score(expr)
+        exprs.push(expr)
+        exprs.sort (a, b) -> cache[a] - cache[b]
+        $pre.text(exprs.join("\n"))
     when 'finish'
       solver.stop()
     when 'debug'
@@ -59,6 +68,7 @@ $('form').submit ->
     solver.parseNumbers($input.val())
     if solver.runnable
       cache = {}
+      exprs = []
       $pre.empty()
       solver.run()
   updateView()
