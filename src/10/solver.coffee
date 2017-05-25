@@ -93,7 +93,8 @@ class Node
         return "(#{result})" unless parentOp == '' || parentOp == '+'
       when 'mul', 'div'
         resultOp = { mul: '*', div: '/' }[@type]
-        result = "#{@left.toString(resultOp)}#{resultOp}#{@right.toString(resultOp)}"
+        stringOp = resultOp # if parentOp == '/' then parentOp else resultOp
+        result = "#{@left.toString(stringOp)}#{resultOp}#{@right.toString(stringOp)}"
         return "(#{result})" if resultOp == '/' && parentOp == '/'
       when 'pow'
         result = "#{@left.toString('@')}^#{@right.toString('@')}"
