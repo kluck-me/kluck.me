@@ -47,8 +47,11 @@ class Node
   add: (other) -> new Node('add', @value+other.value, @clone(), other.clone())
   sub: (other) -> new Node('add', @value-other.value, @clone(), other.minus())
   mul: (other) ->
+    that = this
+    other = other.nuddy() if that.value == 0 # 0*f(b) -> 0*b
+    that = that.nuddy() if other.value == 0 # f(a)*0 -> a*0
     method = if other.hasMinus() then 'minus' else 'clone' # a*(-b) -> (-a)*b
-    new Node('mul', @value*other.value, this[method](), other[method]())
+    new Node('mul', @value*other.value, that[method](), other[method]())
   div: (other) ->
     method = if other.hasMinus() then 'minus' else 'clone' # a/(-b) -> (-a)/b
     new Node('div', @value/other.value, this[method](), other[method]())
