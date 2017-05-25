@@ -29,6 +29,7 @@ class Node
       when 'mul', 'div'
         @left.minus()[@type](@right) # -(a*b) -> (-a)*b
       else
+        return @left.minus().pow(@right) if @type == 'pow' && @left.value < 0 && @right.value % 2 == 1 # -((-a)^(2b+1)) -> a^(2b+1)
         return @clone() if @value == 0 # -0 -> 0
         new Node('minus', -@value, @clone())
   hasMinus: ->
