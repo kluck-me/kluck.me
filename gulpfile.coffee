@@ -73,7 +73,7 @@ gulp.task 'build:dist', ['build'], ->
     .pipe($.csso())
     .pipe(cssFilter.restore)
     .pipe(jsFilter = $.filter('.tmp/**/*.js', restore: true))
-    .pipe($.uglify(preserveComments: 'license'))
+    .pipe($.uglify())
     .pipe(jsFilter.restore)
     .pipe(imgFilter = $.filter('.tmp/**/*.{png,jpg,gif}', restore: true))
     .pipe($.imagemin(
