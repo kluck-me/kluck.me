@@ -18,18 +18,19 @@ do ($, document) ->
     return
 
   anime_show = (target) ->
-    $('#anime' + (target ^ 1))
+    $("#anime#{target ^ 1}")
       .css(
         opacity: ''
         'background-image': "url(\"#{anime_urls[Math.random() * anime_urls.length | 0]}\")"
       )
-    $('#anime' + target).css(opacity: '1')
+    $("#anime#{target}").css(opacity: '1')
     return
 
   $.when(anime_ajax_by_tags(['gif', 'gifs', 'anime', 'anime-gif'])...).done ->
     for arg in arguments
-      for response in arg[0].response
-        anime_push(photo.original_size.url) for photo in response.photos if response.photos
+      for response in arg[0].response when response.photos
+        for photo in response.photos
+          anime_push(photo.original_size.url)
 
     $ ->
       $('body').append('<div class="anime" id="anime0">', '<div class="anime" id="anime1">')
