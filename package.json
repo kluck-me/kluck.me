@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "rm -rf .tmp && gulp serve",
     "build": "rm -rf .tmp dist && gulp build:dist",
-    "deploy": "rm -rf .tmp dist && gulp deploy"
+    "deploy": "rm -rf .tmp dist && gulp deploy",
+    "upgrade": "ncu -u"
   },
   "devDependencies": {
     "coffee-script": "^1.12.6",
