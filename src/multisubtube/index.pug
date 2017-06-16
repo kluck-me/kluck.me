@@ -1,0 +1,30 @@
+extends ../common/.bootstrap-layout
+
+append meta
+  title MultiSubTube
+
+append styles
+  link(rel='stylesheet', href='styles.css')
+
+append contents
+  h1 MultiSubTube
+
+  #player-with-subs
+    #player
+    #subs
+
+  form#form-url
+    .form-group
+      label(for='conf-url') URL
+      input.form-control#conf-url(name='url', type='text')
+    button.btn.btn-default(type='submit') Show
+
+  form#form-subs
+    .form-group
+      label(for='conf-subs') Subs (Click with Ctrl)
+      select.form-control#conf-subs(name='subs', size='5', multiple)
+    button.btn.btn-default(type='submit') Show
+
+append scripts
+  script(src='scripts.js')
+  script(src='//www.youtube.com/iframe_api')
