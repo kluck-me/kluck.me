@@ -1,0 +1,64 @@
+extends ../common/.bootstrap-layout
+
+append meta
+  title jatyping
+
+append contents
+  div#jatyping-css-test(style='display:none')
+    p
+      span.jatyping
+        span.jatyping-input 日本語
+      span.jatyping
+        span.jatyping-input.jatyping-typing にゅうりょく
+      span.jatyping-caret
+
+    p
+      span.jatyping
+        span.jatyping-input.jatyping-typing 漢字
+        span.jatyping-input.jatyping-typing.jatyping-convert かな
+        span.jatyping-input.jatyping-typing 変換
+
+  div#jatyping-js-test
+    p#jatyping
+
+append styles
+  link(rel='stylesheet' href='/common/jatyping.css')
+
+append scripts
+  script.
+    window.pp=console.log.bind(console);
+  script(src='/common/jatyping.js')
+  script.
+    // にほｇ 日本語の にゅりょく 入力が出来る typing.hs js です
+    function main() {
+      $('#jatyping').jatyping(
+        [
+          [
+            ['にほｇｎ', 'にほんごの'],
+            [
+              ['にほん', '日本'],
+              ['ご', '後', '五', '御', '語'],
+              ['の']
+            ]
+          ],
+          [
+            ['にゅりょ', 'にゅうりょくができる'],
+            [
+              ['入力が'],
+              ['できる', '出来る']
+            ]
+          ],
+          [
+            'typing.hs', 'typing.js'
+          ],
+          [
+            ['です']
+          ]
+        ],
+        function () {
+          $(this).jatyping(null, main);
+        },
+        1000
+      );
+    }
+    main();
