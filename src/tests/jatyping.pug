@@ -27,6 +27,7 @@ append styles
 append scripts
   script.
     window.pp=console.log.bind(console);
+  script(src='/common/autofit.js')
   script(src='/common/jatyping.js')
   script.
     // にほｇ 日本語の にゅりょく 入力が出来る typing.hs js です
@@ -56,7 +57,7 @@ append scripts
           ]
         ],
         function () {
-          $(this).jatyping(null, main);
+          $(this).jatyping(main);
         },
         1000
       );

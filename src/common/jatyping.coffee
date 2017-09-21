@@ -64,7 +64,7 @@ do ($ = jQuery) ->
     className = options["#{name}ClassName"]
     $("<#{tagName}>").addClass(className)
 
-  runInputAs = (name, inputs, options, $base, fn) ->
+  runInputAs = (name, inputs, options, $base, updated, fn) ->
     $node = $newNode(options, 'input').addClass(options["#{name}ClassName"]).appendTo($base)
     run = (i) ->
       unless inputs[i]
@@ -86,6 +86,7 @@ do ($ = jQuery) ->
 
       update = (k) ->
         $node.text(typings[k])
+        updated && updated()
         if typings[k + 1]
           delay(options.typeSpeed, ->
             update(k + 1)
@@ -103,16 +104,18 @@ do ($ = jQuery) ->
     run(0)
     return
 
-  runConvert = (convsSet, options, $base, fn) ->
+  runConvert = (convsSet, options, $base, updated, fn) ->
     $base.empty()
     $newNode(options, 'input').text(convs[0]).appendTo($base) for convs in convsSet
     $convs = $base.find(">.#{options.inputClassName}")
     $convs.addClass(options.typingClassName)
     $convs.eq(0).addClass(options.convertClassName)
+    updated && updated()
     update = (i, j) ->
       if convsSet[i][j]
         $convs.removeClass(options.convertClassName)
         $convs.eq(i).addClass(options.convertClassName).text(convsSet[i][j])
+        updated && updated()
         delay(options.convertSpeed, ->
           update(i, j + 1)
           return
@@ -133,44 +136,46 @@ do ($ = jQuery) ->
     )()
     return
 
-  runComplete = (options, $base) ->
+  runComplete = (options, $base, updated) ->
     $base
       .find(">.#{options.inputClassName}")
       .removeClass("#{options.typingClassName} #{options.convertClassName}")
+    updated && updated()
     return
 
-  appendInputs = (index, options, $caret, comp) ->
+  appendInputs = (index, options, $caret, updated, comp) ->
     unless options.inputs[index]
       comp && comp()
       return
 
     runComp = ->
-      runComplete(options, $base)
+      runComplete(options, $base, updated)
       delay(options.typeStartSpeed, ->
-        appendInputs(index + 1, options, $caret, comp)
+        appendInputs(index + 1, options, $caret, updated, comp)
         return
       )()
       return
     $base = $newNode(options, 'base').insertBefore($caret)
 
     if Array.isArray(options.inputs[index][0])
-      runInputAs('typing', options.inputs[index][0], options, $base, ->
+      runInputAs('typing', options.inputs[index][0], options, $base, updated, ->
         if options.inputs[index][1]
-          runConvert(options.inputs[index][1], options, $base, delay(options.convertJumpSpeed, runComp))
+          runConvert(options.inputs[index][1], options, $base, updated, delay(options.convertJumpSpeed, runComp))
         else
           runComp()
         return
       )
     else
-      runInputAs('input', options.inputs[index], options, $base, runComp)
+      runInputAs('input', options.inputs[index], options, $base, updated, runComp)
     return
 
-  removeInputsBefore = ($caret, options, comp) ->
+  removeInputsBefore = ($caret, options, updated, comp) ->
     caret = $caret[0]
     removeFromLast = (node, fn) ->
       unless node.nodeType == 3
         removeFromLast(node.lastChild, ->
           node.parentNode.removeChild(node) unless node.lastChild
+          updated && updated()
           fn && fn()
           return
         )
@@ -180,12 +185,14 @@ do ($ = jQuery) ->
         if i >= 0
           delay(options.removeSpeed, ->
             node.nodeValue = node.nodeValue.slice(0, i)
+            updated && updated()
             removeText(i - 1)
             return
           )()
           return
         else
           node.parentNode.removeChild(node)
+          updated && updated()
           fn && fn()
           return
       removeText(node.nodeValue.length - 1)
@@ -228,13 +235,18 @@ do ($ = jQuery) ->
 
     @each ->
       that = this
-      comp = delay(options.completeDelay, options.complete, that)
+      if options.complete
+        comp = delay(options.completeDelay, options.complete, that)
+      if options.update
+        updated = ->
+          options.update.call(that)
+          return
       $caret = $(this).find(">.#{options.caretClassName}")
       $caret = $newNode(options, 'caret').appendTo(this) unless $caret.length
       if options.inputs
-        appendInputs(0, options, $caret, comp)
+        appendInputs(0, options, $caret, updated, comp)
       else
-        removeInputsBefore($caret, options, comp)
+        removeInputsBefore($caret, options, updated, comp)
       return
 
   $.fn.jatyping.assertOptions = (options) ->
