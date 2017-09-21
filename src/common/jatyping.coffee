@@ -50,9 +50,13 @@ do ($ = jQuery) ->
       typings.push(lastTyping)
     typings
 
-  delay = (ms, fn) ->
+  delay = (ms, fn, that) ->
     ->
-      setTimeout(fn, ms || 0) if fn
+      if fn
+        setTimeout(->
+          fn.call(that || this)
+          return
+        , ms || 0)
       return
 
   $newNode = (options, name) ->
@@ -224,10 +228,7 @@ do ($ = jQuery) ->
 
     @each ->
       that = this
-      comp = delay(options.completeDelay, ->
-        options.complete.call(that)
-        return
-      )
+      comp = delay(options.completeDelay, options.complete, that)
       $caret = $(this).find(">.#{options.caretClassName}")
       $caret = $newNode(options, 'caret').appendTo(this) unless $caret.length
       if options.inputs
