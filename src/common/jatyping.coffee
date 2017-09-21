@@ -139,15 +139,15 @@ do ($ = jQuery) ->
       .removeClass("#{options.typingClassName} #{options.convertClassName}")
     return
 
-  appendInputs = (index, options, $caret, fn) ->
+  appendInputs = (index, options, $caret, comp) ->
     unless options.inputs[index]
-      fn && fn()
+      comp && comp()
       return
 
-    comp = ->
+    runComp = ->
       runComplete(options, $base)
       delay(options.typeStartSpeed, ->
-        appendInputs(index + 1, options, $caret, fn)
+        appendInputs(index + 1, options, $caret, comp)
         return
       )()
       return
@@ -156,13 +156,13 @@ do ($ = jQuery) ->
     if Array.isArray(options.inputs[index][0])
       runInputAs('typing', options.inputs[index][0], options, $base, ->
         if options.inputs[index][1]
-          runConvert(options.inputs[index][1], options, $base, delay(options.convertJumpSpeed, comp))
+          runConvert(options.inputs[index][1], options, $base, delay(options.convertJumpSpeed, runComp))
         else
-          comp()
+          runComp()
         return
       )
     else
-      runInputAs('input', options.inputs[index], options, $base, comp)
+      runInputAs('input', options.inputs[index], options, $base, runComp)
     return
 
   removeInputsBefore = ($caret, options, comp) ->
