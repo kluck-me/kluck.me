@@ -1,1 +1,1 @@
-.text{margin-top:10px;white-space:pre-wrap;word-wrap:break-word}.text span{padding:2px}.error-nav{position:fixed;bottom:10px}body{padding-bottom:50px}
+#text{line-height:1.75;white-space:pre-wrap;word-wrap:break-word}#text [data-toggle=tooltip]{border-width:1px;border-style:solid;border-radius:2px;padding:2px;color:inherit;cursor:pointer}#lint-nav{position:fixed;bottom:10px}body{padding-bottom:55px}
