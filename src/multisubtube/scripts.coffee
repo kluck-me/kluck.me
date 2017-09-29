@@ -1,4 +1,6 @@
 window.onYouTubeIframeAPIReady = ->
+  subs = []
+
   binarySearch = (arr, elm, compare) ->
     m = 0
     n = arr.length - 1
@@ -13,9 +15,7 @@ window.onYouTubeIframeAPIReady = ->
         return k
     return -m - 1
 
-  subs = []
-
-  showSubs = ->
+  renderSubs = ->
     if player && player.getCurrentTime
       cur = player.getCurrentTime()
       if cur?
@@ -26,39 +26,14 @@ window.onYouTubeIframeAPIReady = ->
           else
             $("#sub_#{i}").html(subArr[j].text)
           return
-    requestAnimationFrame(showSubs)
+    requestAnimationFrame(renderSubs)
 
-  onPlayerReady = ->
-    $('#form-url').submit ->
-      videoId = /v=([^=&?]+)/.exec(@url.value)?[1]
-      $.get(
-        url: '//video.google.com/timedtext'
-        data:
-          type: 'list'
-          v: videoId
-        dataType: 'xml'
-      ).done((doc) ->
-        $('#conf-subs').empty()
-        $('transcript_list>track', doc).each ->
-          $('<option>')
-            .text('' + $(this).attr('lang_original'))
-            .data(
-              params:
-                name: $(this).attr('name')
-                lang: $(this).attr('lang_code')
-                v: videoId
-            )
-            .val('' + $(this).attr('id'))
-            .appendTo('#conf-subs')
-          return
-        return
-      )
-      player.loadVideoById(videoId)
-      false
+  onPlayerReady = ({ target: player }) ->
+    $('#form-url,#form-subs').find('[disabled]').prop('disabled', false)
 
     $('#form-subs').submit ->
-      $('#subs').empty()
       subs.splice(0, subs.length) # clear
+      $('#subs').empty()
       $('#conf-subs option:selected').each (i) ->
         $('<div>').attr('id', "sub_#{i}").appendTo('#subs')
         texts = subs[i] = []
@@ -68,12 +43,13 @@ window.onYouTubeIframeAPIReady = ->
           dataType: 'xml'
         ).done((doc) ->
           $('transcript>text', doc).each ->
-            start = parseFloat $(this).attr('start')
-            dur = parseFloat $(this).attr('dur')
+            $this = $(this)
+            start = parseFloat($this.attr('start'))
+            dur = parseFloat($this.attr('dur'))
             texts.push(
               start: start
               end: start + dur
-              text: $(this).text()
+              text: $this.text()
             )
             return
           return
@@ -81,7 +57,49 @@ window.onYouTubeIframeAPIReady = ->
         return
       false
 
-    showSubs()
+    $('#form-url').submit ->
+      videoId = /v=([^=&?]+)/.exec(@url.value)?[1]
+      $.get(
+        url: '//video.google.com/timedtext'
+        data:
+          type: 'list'
+          v: videoId
+        dataType: 'xml'
+      ).done((doc) ->
+        val = $('#conf-subs').val()
+        $('#conf-subs').empty()
+        $('transcript_list>track', doc).each ->
+          $this = $(this)
+          $('<option>')
+            .text('' + $this.attr('lang_original'))
+            .data(
+              params:
+                name: $this.attr('name')
+                lang: $this.attr('lang_code')
+                v: videoId
+            )
+            .val('' + $this.attr('lang_code'))
+            .appendTo('#conf-subs')
+          return
+        $('#conf-subs').val(val)
+        $('#form-subs').submit()
+        return
+      )
+      player.loadVideoById(videoId)
+      false
+
+    renderSubs()
+
+    return unless location.hostname == 'localhost'
+
+    $('#conf-url').val('https://www.youtube.com/watch?v=sLv6FfHlxmI')
+    $('#form-url').submit()
+
+    setTimeout ->
+      $('#conf-subs').val(['en', 'ja'])
+      $('#conf-url').val('https://www.youtube.com/watch?v=-sGiE10zNQM')
+      $('#form-url').submit()
+    , 1000
     return
 
   window.player = new YT.Player(
