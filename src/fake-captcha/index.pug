@@ -1,0 +1,55 @@
+extends ../common/.layout
+
+append meta
+  title Fake Captcha
+
+append styles
+  link(rel='stylesheet', href='styles.css')
+
+append scripts
+  script.
+    var pp=console.log.bind(console);
+  script(src='scripts.js')
+
+append body
+  #wrapper
+    h1 Fake Captcha
+
+    p 釣り画像認証が作れるジョークサービスです。
+
+    p(style='margin-top: 100px')
+      b ※印は必須入力項目です。
+
+    table(style='margin-bottom: 100px')
+      tbody
+        tr
+          th
+            | 会員ID
+            b ※
+          td
+            input(autocomplete='off')
+        tr
+          th
+            | パスワード
+            b ※
+          td
+            input(type='password')
+        tr
+          th
+            | 画像認証
+            b ※
+          td
+            | 画像に表示されている
+            span#length
+            | 文字（ランダムに表示されます）を入力してください。
+            br
+            canvas#captcha(width=150, height=50)
+            br
+            | 【
+            a#reload(href='javascript:void(0)') 違う画像を表示
+            | 】
+            br
+            input#text(autocomplete='off')
+        tr
+          td(colspan='2')
+            button ログイン
