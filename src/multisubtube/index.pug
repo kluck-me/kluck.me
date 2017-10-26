@@ -12,21 +12,35 @@ append scripts
   script(src='scripts.js')
   script(src='//www.youtube.com/iframe_api')
 
-append contents
-  h1 MultiSubTube
-
+block body
   #player-with-subs
     #player
+      #ytplayer
     #subs
+      //- div#sub-0 字幕
+      //- div#sub-1 字幕
+      //- div#sub-2 字幕
+  button#open-conf(type='button', data-toggle='modal', data-target='#modal-conf')
+    i.glyphicon.glyphicon-cog
 
-  form#form-url
-    .form-group
-      label(for='conf-url') URL
-      input.form-control#conf-url(name='url', type='text', disabled)
-    button.btn.btn-default(type='submit', disabled) Show
-
-  form#form-subs
-    .form-group
-      label(for='conf-subs') Subs (Click with Ctrl)
-      select.form-control#conf-subs(name='subs', size='5', multiple, disabled)
-    button.btn.btn-default(type='submit', disabled) Show
+  #modal-conf.modal.fade(tabindex='-1')
+    .modal-dialog(role='document')
+      form.modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+          h4.modal-title MultiSubTube Config
+        .modal-body
+          .form-group
+            label(for='conf-url') URL
+            input.form-control#conf-url(name='url', type='text')
+          .form-group
+            label(for='conf-subs') Subs
+            #conf-subs
+              //- .checkbox
+              //-   label
+              //-     input(type='checkbox', name='test', value='ja')
+              //-     | ja
+        .modal-footer
+          button.btn.btn-default(type='button', data-dismiss='modal') Close
+          button.btn.btn-primary Play

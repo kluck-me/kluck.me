@@ -1,6 +1,5 @@
-window.onYouTubeIframeAPIReady = ->
-  subs = []
-
+# video
+class Video
   binarySearch = (arr, elm, compare) ->
     m = 0
     n = arr.length - 1
@@ -14,99 +13,205 @@ window.onYouTubeIframeAPIReady = ->
       else
         return k
     return -m - 1
-
-  renderSubs = ->
-    if player && player.getCurrentTime
-      cur = player.getCurrentTime()
-      if cur?
-        subs.forEach (subArr, i) ->
-          j = binarySearch(subArr, cur, (t, v) -> if t > v.end then 1 else if t < v.start then -1 else 0)
-          if j < 0
-            $("#sub_#{i}").html('&nbsp;')
-          else
-            $("#sub_#{i}").html(subArr[j].text)
-          return
-    requestAnimationFrame(renderSubs)
-
-  onPlayerReady = ({ target: player }) ->
-    $('#form-url,#form-subs').find('[disabled]').prop('disabled', false)
-
-    $('#form-subs').submit ->
-      subs.splice(0, subs.length) # clear
-      $('#subs').empty()
-      $('#conf-subs option:selected').each (i) ->
-        $('<div>').attr('id', "sub_#{i}").appendTo('#subs')
-        texts = subs[i] = []
-        $.get(
-          url: '//video.google.com/timedtext'
-          data: $(this).data('params')
-          dataType: 'xml'
-        ).done((doc) ->
-          $('transcript>text', doc).each ->
-            $this = $(this)
-            start = parseFloat($this.attr('start'))
-            dur = parseFloat($this.attr('dur'))
-            texts.push(
-              start: start
-              end: start + dur
-              text: $this.text()
-            )
-            return
-          return
-        )
+  constructor: ->
+    @id = null
+    @subs = null
+    @langs = null
+    @langCodes = []
+    return
+  update: (id) ->
+    return false if @id == id
+    @id = id
+    @subs = null
+    @langs = null
+    return true
+  setLangCodes: (@langCodes...) ->
+    return
+  hasLangCode: (code) ->
+    return @langCodes.indexOf(code) > -1
+  addLangCode: (code) ->
+    @langCodes = @langCodes.concat([code]).sort() unless @hasLangCode(code)
+    return
+  removeLangCode: (code) ->
+    idx = @langCodes.indexOf(code)
+    @langCodes = @langCodes.concat().splice(idx, 1) if idx > -1
+    return
+  getCurrentHtmls: (cur) ->
+    that = this
+    return @langCodes.map (code) ->
+      if that.subs
+        arr = that.subs[code]
+        if cur? && arr
+          j = binarySearch(arr, cur, (t, v) -> if t > v.end then 1 else if t < v.start then -1 else 0)
+          return arr[j].text if j >= 0
+      return null
+  fetchSubs: ->
+    unless @langs
+      @fetchLangs ->
+        @fetchSubs()
         return
-      false
-
-    $('#form-url').submit ->
-      videoId = /v=([^=&?]+)/.exec(@url.value)?[1]
+      return
+    that = this
+    @subs ||= {}
+    @langCodes.forEach (code) ->
+      lang = that.langs[code]
+      return unless lang
+      return if that.subs[code]
+      texts = that.subs[code] = []
       $.get(
         url: '//video.google.com/timedtext'
-        data:
-          type: 'list'
-          v: videoId
+        data: lang.params
         dataType: 'xml'
       ).done((doc) ->
-        val = $('#conf-subs').val()
-        $('#conf-subs').empty()
-        $('transcript_list>track', doc).each ->
+        $('transcript>text', doc).each ->
           $this = $(this)
-          $('<option>')
-            .text('' + $this.attr('lang_original'))
-            .data(
-              params:
-                name: $this.attr('name')
-                lang: $this.attr('lang_code')
-                v: videoId
-            )
-            .val('' + $this.attr('lang_code'))
-            .appendTo('#conf-subs')
+          start = parseFloat($this.attr('start'))
+          dur = parseFloat($this.attr('dur'))
+          texts.push(
+            start: start
+            end: start + dur
+            text: $this.text()
+          )
           return
-        $('#conf-subs').val(val)
-        $('#form-subs').submit()
         return
       )
-      player.loadVideoById(videoId)
-      false
-
-    renderSubs()
-
-    return unless location.hostname == 'localhost'
-
-    $('#conf-url').val('https://www.youtube.com/watch?v=sLv6FfHlxmI')
-    $('#form-url').submit()
-
-    setTimeout ->
-      $('#conf-subs').val(['en', 'ja'])
-      $('#conf-url').val('https://www.youtube.com/watch?v=-sGiE10zNQM')
-      $('#form-url').submit()
-    , 1000
+      return
+    return
+  fetchLangs: (fn) ->
+    return if @langs
+    return unless @id
+    that = this
+    @langs = {}
+    $.get(
+      url: '//video.google.com/timedtext'
+      data:
+        type: 'list'
+        v: @id
+      dataType: 'xml'
+    ).done (doc) ->
+      $('transcript_list>track', doc).each ->
+        $this = $(this)
+        code = $this.attr('lang_code')
+        that.langs[code] =
+          label:
+            $this.attr('lang_original')
+          params:
+            name: $this.attr('name')
+            lang: code
+            v: that.id
+        return
+      fn.call(that)
+      return
     return
 
+video = new Video
+
+renderSubs = ->
+  $subNodes = $('#subs>div')
+  unless $subNodes.length == video.langCodes.length
+    $subNodes.remove()
+    video.langCodes.forEach (_, i) ->
+      $('<div>').attr('id', "sub-#{i}").appendTo('#subs')
+  video.getCurrentHtmls(player?.getCurrentTime?()).forEach (html, i) ->
+    $("#sub-#{i}").html(html || '&nbsp;')
+    return
+  requestAnimationFrame(renderSubs)
+  return
+
+renderSubs()
+
+# form
+confVideo = null
+
+getConfLangCodes = ->
+  codes = []
+  $('#conf-subs input[name^="lang-"]:checked').each ->
+    codes.push($(this).val())
+    return
+  return codes
+
+setConfVideoUrl = (videoUrl) ->
+  $('#conf-url').val(videoUrl || '').trigger('input')
+  return
+
+setConfLangCodes = (codes...) ->
+  $('#conf-subs input[name^="lang-"]').prop('checked', false).trigger('change')
+  codes.forEach (code) ->
+    $("#conf-subs input[name=\"lang-#{code}\"]").prop('checked', true).trigger('change')
+    return
+  return
+
+$('#conf-url').on 'input', ->
+  videoId = /v=([^=&?]+)/.exec($(this).val())?[1]
+  confVideo.update(videoId)
+  confVideo.fetchLangs ->
+    confVideo.setLangCodes(getConfLangCodes()...)
+    $('#conf-subs').empty()
+    Object.keys(confVideo.langs).sort().forEach (code) ->
+      $checkbox = $('<div>').addClass('checkbox')
+      $('<label>').append(
+        $('<input>')
+          .attr(
+            type: 'checkbox'
+            name: "lang-#{code}"
+            value: code
+          )
+          .prop('checked', confVideo.hasLangCode(code))
+          .change ->
+            $this = $(this)
+            confVideo[if $(this).prop('checked') then 'addLangCode' else 'removeLangCode']($this.val())
+            return
+        document.createTextNode(confVideo.langs[code].label)
+      ).appendTo($checkbox)
+      $checkbox.appendTo('#conf-subs')
+      return
+    return
+  return
+
+$('#modal-conf form').submit (evt) ->
+  evt.preventDefault()
+  evt.stopPropagation()
+  $('#modal-conf').modal('hide')
+  video = confVideo
+  confVideo = null
+  player.loadVideoById(video.id) unless player.getVideoData().video_id == video.id
+  return
+
+$('#modal-conf').on 'show.bs.modal', ->
+  langCodes = if confVideo then confVideo.langCodes else video.langCodes
+  confVideo = new Video
+  confVideo.setLangCodes(video.langCodes...)
+  setConfVideoUrl(player?.getVideoUrl())
+  return
+
+# player
+onPlayerReady = ({ target: player }) ->
+  $('#modal-conf').modal('show')
+  return unless location.hostname == 'localhost'
+  # debug code
+  delay = (fn) ->
+    setTimeout(fn, 500)
+  delay ->
+    setConfVideoUrl 'https://www.youtube.com/watch?v=sLv6FfHlxmI'
+    delay ->
+      setConfLangCodes 'en', 'ja'
+      setConfVideoUrl 'https://www.youtube.com/watch?v=-sGiE10zNQM'
+      delay ->
+        $('#modal-conf .btn-primary').click()
+  return
+
+onPlayerStateChange = ({ target: player }) ->
+  video.update(player.getVideoData().video_id)
+  video.fetchSubs()
+  return
+
+window.onYouTubeIframeAPIReady = ->
   window.player = new YT.Player(
-    'player'
-    height: '360'
-    width: '640'
+    'ytplayer'
+    height: '480'
+    width: '853'
     events:
       onReady: onPlayerReady
+      onStateChange: onPlayerStateChange
   )
   return

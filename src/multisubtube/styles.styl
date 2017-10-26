@@ -1,18 +1,42 @@
+html
+body
 #player-with-subs
-  width 640px
-  margin-left auto
-  margin-right auto
+  width 100%
+  height 100%
+
+body
+  background-color #000
+
+#player-with-subs
+  display flex
+  flex-flow column nowrap
 
 #player
+  flex 1
+  position relative
+
+#ytplayer
   vertical-align bottom
+  position absolute
+  top 0
+  right 0
+  width 100%
+  height 100%
 
 #subs
-  margin-bottom 20px
-  line-height 1.234
+  margin 0 0 .5em
   font-size 120%
-  background-color black
-  color white
+  line-height 1.234
   text-align center
+  color #fff
 
-#subs>div
-  padding 5px 0
+  > div
+    margin .5em 0
+
+#open-conf
+  position absolute
+  right 1em
+  bottom 1em
+  background-color transparent
+  border-style none
+  color #999
