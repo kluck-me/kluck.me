@@ -17,7 +17,7 @@
     "gulp-filter": "^5.0.1",
     "gulp-gh-pages": "^0.5.4",
     "gulp-htmlmin": "^3.0.0",
-    "gulp-imagemin": "^3.3.0",
+    "gulp-imagemin": "^3.4.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-plumber": "^1.1.0",
     "gulp-pug": "^3.3.0",
@@ -27,6 +27,6 @@
     "gulp-webserver": "^0.9.1",
     "imagemin-mozjpeg": "^6.0.0",
     "imagemin-pngquant": "^5.0.1",
-    "npm-check-updates": "^2.12.1"
+    "npm-check-updates": "^2.13.0"
   }
 }
