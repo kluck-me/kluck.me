@@ -1,4 +1,4 @@
-extends .layout
+extends _layout
 
 append meta
   title 無職数のカウントダウン
@@ -7,7 +7,7 @@ block styles
   style.
     #c, #r { display: none; }
     big big big { font-weight: bold; }
-  link(rel='stylesheet', href='i-want-to.css')
+  link(rel='stylesheet', href='i-want-to.styl')
 
 prepend countdown-contents
   | 無職数まで

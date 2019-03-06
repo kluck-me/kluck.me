@@ -47,3 +47,5 @@ class Novelint
       (if a[0] == null then 1 else if b[0] == null then -1 else 0)
 
     indexes: r, length: r.length / 2
+
+window.Novelint = Novelint

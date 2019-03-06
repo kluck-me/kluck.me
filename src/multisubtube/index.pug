@@ -1,15 +1,15 @@
-extends ../common/.bootstrap-layout
+extends ../common/_bootstrap-layout
 
 append meta
   title MultiSubTube
 
 append styles
-  link(rel='stylesheet', href='styles.css')
+  link(rel='stylesheet', href='styles.styl')
 
 append scripts
   script.
     var pp=console.log.bind(console);
-  script(src='scripts.js')
+  script(src='scripts.coffee')
   script(src='//www.youtube.com/iframe_api')
 
 block body

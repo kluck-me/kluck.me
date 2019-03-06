@@ -1,4 +1,4 @@
-extends ../common/.bootstrap-layout
+extends ../common/_bootstrap-layout
 
 append meta
   title jatyping
@@ -22,13 +22,13 @@ append contents
     p#jatyping
 
 append styles
-  link(rel='stylesheet' href='/common/jatyping.css')
+  link(rel='stylesheet' href='../common/jatyping.styl')
 
 append scripts
   script.
     window.pp=console.log.bind(console);
-  script(src='/common/autofit.js')
-  script(src='/common/jatyping.js')
+  script(src='../common/autofit.coffee')
+  script(src='../common/jatyping.coffee')
   script.
     // にほｇ 日本語の にゅりょく 入力が出来る typing.hs js です
     function main() {

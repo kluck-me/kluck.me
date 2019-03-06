@@ -1,4 +1,4 @@
-countdown = do ->
+window.countdown = do ->
   patterns = ['s', 'm', 'h', 'd', 'y']
   formatReg = /{(.*?)%([a-z])(.*?)}/g
   (str, time) ->

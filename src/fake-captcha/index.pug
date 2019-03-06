@@ -1,15 +1,15 @@
-extends ../common/.layout
+extends ../common/_layout
 
 append meta
   title Fake Captcha
 
 append styles
-  link(rel='stylesheet', href='styles.css')
+  link(rel='stylesheet', href='styles.styl')
 
 append scripts
   script.
     var pp=console.log.bind(console);
-  script(src='scripts.js')
+  script(src='scripts.coffee')
 
 append body
   #wrapper

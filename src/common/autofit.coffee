@@ -1,4 +1,4 @@
-autofit = (target) ->
+window.autofit = (target) ->
   $target = $(target)
   targetWidth = $target.width()
   return if targetWidth < 1

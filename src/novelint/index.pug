@@ -1,17 +1,17 @@
-extends ../common/.bootstrap-layout
+extends ../common/_bootstrap-layout
 
 append meta
   title Novelint
 
 append styles
-  link(rel='stylesheet', href='styles.css')
+  link(rel='stylesheet', href='styles.styl')
 
 append scripts
   script.
     var pp=console.log.bind(console);
   script(src='//cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.min.js')
-  script(src='novelint.js')
-  script(src='scripts.js')
+  script(src='novelint.coffee')
+  script(src='scripts.coffee')
 
 append contents
   #vue

@@ -15,7 +15,7 @@ class Solver
     this
   run: ->
     unless @worker
-      @worker = new Worker('solver.js')
+      @worker = new Worker('solver.coffee')
       @worker.addEventListener('message', fn, false) for fn in @callbacks
       @worker.postMessage(board: @board)
     this

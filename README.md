@@ -4,7 +4,7 @@
 
 ```bash
 $ npm run serve
-$ open http://localhost:8000/
+$ open http://localhost:1234/index.html
 ```
 
 ## Deploy

@@ -1,4 +1,4 @@
-extend ../common/.layout
+extends ../common/_layout
 
 block styles
   style.
@@ -6,9 +6,9 @@ block styles
     #r, big big big { font-weight: bold; }
 
 append scripts
-  script(src='/common/countdown.js')
-  script(src='/common/autofit.js')
-  script(src='scripts.js')
+  script(src='../common/countdown.coffee')
+  script(src='../common/autofit.coffee')
+  script(src='scripts.coffee')
 
 block body
   block countdown

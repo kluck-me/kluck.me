@@ -1,4 +1,4 @@
-extend ../common/.layout
+extends ../common/_layout
 
 append meta
   title 七○楓
@@ -8,8 +8,8 @@ block styles
     #r { font-weight: bold; }
 
 append scripts
-  script(src='/common/autofit.js')
-  script(src='scripts.js')
+  script(src='../common/autofit.coffee')
+  script(src='scripts.coffee')
 
 block body
   #r 七○楓

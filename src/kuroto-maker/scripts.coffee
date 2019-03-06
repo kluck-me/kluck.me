@@ -37,7 +37,7 @@ update_canvas = ->
   return
 
 img = new Image
-img.src = 'kuroto.jpg'
+img.src = require './kuroto.jpg'
 img.onload = ->
   update_canvas()
   $form.find('input[type="range"]').change(update_canvas)

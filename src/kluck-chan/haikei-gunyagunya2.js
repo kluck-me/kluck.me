@@ -373,4 +373,4 @@ perlin noiseの生成に https://github.com/josephg/noisejs を使っていま�
     role();
     setInterval(role, 100);
 
-}).call(this);
+}).call(window);
