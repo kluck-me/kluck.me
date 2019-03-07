@@ -44,12 +44,30 @@ do ($, document) ->
       return
     return
 
-  $(document)
-    .click (evt) ->
-      $body = $('body')
-      $target = $(evt.target)
-      if $body.hasClass('hide-content') || (!$target.closest('a').length && !$target.closest('section').length)
-        $body.toggleClass('hide-content')
-        false
+  $ ->
+    $body = $('body')
+
+    tid = null
+    show_content = ->
+      $body.removeClass('hide-content')
+      clearTimeout(tid)
+      return
+
+    window.onfocus = show_content
+    $body
+      .mouseover(show_content)
+      .mouseout ->
+        tid = setTimeout ->
+          $body.addClass('hide-content')
+          return
+        , 1000
+        return
+      .click (evt) ->
+        $target = $(evt.target)
+        if $body.hasClass('hide-content') || (!$target.closest('a').length && !$target.closest('section').length)
+          $body.toggleClass('hide-content')
+          false
+        return
+    return
 
   return
