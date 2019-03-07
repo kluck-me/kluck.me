@@ -4,7 +4,8 @@ append meta
   title glitch
 
 append contents
-  h1(data-glitch-text='glitch') glitch
+  - var h1_text='css glitch'
+  h1(data-glitch-text=h1_text)= h1_text
 
 append styles
   link(rel='stylesheet' href='glitch.styl')
