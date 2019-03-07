@@ -7,8 +7,6 @@ append contents
   p#countdown
 
 append scripts
-  script.
-    window.pp=console.log.bind(console);
   script(src='../common/countdown.coffee')
   script.
     $('#countdown').html(countdown('{%y年}{%d日}{%h時間}{%m分}{%s秒}', 289342751));

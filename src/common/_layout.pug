@@ -9,4 +9,6 @@ html(lang='ja')
   body
     block body
     block scripts
+      script.
+        var pp=typeof console!=='undefined'&&console.log&&console.log.bind&&console.log.bind(console);
       script(src='//code.jquery.com/jquery-3.2.1.min.js', integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=', crossorigin='anonymous')
