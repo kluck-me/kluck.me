@@ -2,7 +2,7 @@ body
   margin 0
   font 18px/1.234 'Shrikhand', cursive
   color #333
-  background #7e429c url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 2 2'><rect width='2' height='2' fill='#7e429c'/><path d='M0,0V2H1V0zM0,0H2V1H0z' fill='#975eb0' fill-rule='evenodd'/></svg>")
+  background #7e429c url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 2 2'><rect width='2' height='2' fill='%237e429c'/><path d='M0,0V2H1V0zM0,0H2V1H0z' fill='%23975eb0' fill-rule='evenodd'/></svg>")
   shadow-color = rgba(255,255,255,0.25)
   text-shadow -1px -1px shadow-color, 1px -1px shadow-color, -1px 1px shadow-color, 1px 1px shadow-color;
 
@@ -15,13 +15,9 @@ body
   overflow hidden
   float left
   width 100%
-  background url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='3' height='3'><rect width='3' height='3' fill='#ffffff' opacity='0.25'/><rect width='1' height='3' fill='#ffffff' opacity='0.25' x='2'/><rect width='3' height='1' fill='#ffffff' opacity='0.25' y='2'/></svg>")
+  background url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='3' height='3'><rect width='3' height='3' fill='%23ffffff' opacity='0.25'/><rect width='1' height='3' fill='%23ffffff' opacity='0.25' x='2'/><rect width='3' height='1' fill='%23ffffff' opacity='0.25' y='2'/></svg>")
   box-sizing border-box
   transition: opacity linear .25s
-
-header, section, footer
-  max-width 40em
-  margin 0 auto
 
 a
   padding .2em .1em 0
@@ -34,18 +30,25 @@ a
     background-color #7e429c
     text-shadow none
 
-header ul
-  padding-left 0
-  list-style none
+header
+section
+footer
+  max-width 40em
+  margin 0 auto
 
-  li
-    display inline
+header
+  ul
+    padding-left 0
+    list-style none
 
-    &:before
-      content ' - '
+    li
+      display inline
 
-    &:first-child:before
-      content none
+      &:before
+        content ' - '
+
+      &:first-child:before
+        content none
 
 section
   p
