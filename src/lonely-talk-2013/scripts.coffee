@@ -69,7 +69,7 @@ $window = $(window)
 tid = null
 
 img = new Image
-img.src = 'kluckfack.png'
+img.src = require './kluckfack.png'
 img.onload = ->
   bodyStyle.backgroundImage = "url(#{genCanvas(img).toDataURL('image/png')})"
   $window.scroll(->
