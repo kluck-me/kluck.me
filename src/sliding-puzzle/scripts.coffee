@@ -1,5 +1,3 @@
-pp = console.log.bind(console)
-
 class Solver
   constructor: ->
     @callbacks = []

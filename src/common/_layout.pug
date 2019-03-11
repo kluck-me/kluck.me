@@ -9,6 +9,7 @@ html(lang='ja')
   body
     block body
     block scripts
-      script.
-        var pp=typeof console!=='undefined'&&console.log&&console.log.bind&&console.log.bind(console);
+      if process.env.NODE_ENV === 'development'
+        script.
+          window.pp=typeof console!=='undefined'&&console.log&&console.log.bind&&console.log.bind(console);
       script(src='//code.jquery.com/jquery-3.3.1.min.js', integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=', crossorigin='anonymous')
