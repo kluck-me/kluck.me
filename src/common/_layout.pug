@@ -8,7 +8,7 @@ html(lang='ja')
 
   body
     block body
+    if process.env.NODE_ENV === 'development'
+      script.
+        window.pp=typeof console!=='undefined'&&console.log&&console.log.bind&&console.log.bind(console);
     block scripts
-      if process.env.NODE_ENV === 'development'
-        script.
-          window.pp=typeof console!=='undefined'&&console.log&&console.log.bind&&console.log.bind(console);
