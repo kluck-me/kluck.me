@@ -159,7 +159,7 @@ vue = new Vue(
       @showErrorToolTip()
       return
   beforeUpdate: ->
-    $('#text [data-toggle="tooltip"]').tooltip('destroy')
+    $('#text [data-toggle="tooltip"]').tooltip('dispose')
     return
   updated: ->
     $('#text [data-toggle="tooltip"]').tooltip()

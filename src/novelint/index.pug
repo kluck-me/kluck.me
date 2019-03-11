@@ -20,25 +20,24 @@ append contents
       .form-group.clearfix
         span.pull-left
           button.btn.btn-primary(v-on:click.stop.prevent='review') 検証
-          button.btn.btn-default(type='button', data-toggle='modal', data-target='#conf') 設定
+          button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#conf') 設定
         span.pull-right
-          button.btn.btn-default(v-on:click.stop.prevent='autofix')  自動修正
+          button.btn.btn-secondary(v-on:click.stop.prevent='autofix') 自動修正
     h2(v-if='errors') {{errors.length}}件見つかりました
     #text(v-if='errors', v-html='reviewedHtml')
     #lint-nav.btn-group
-      button.btn.btn-default(v-on:click.stop.prevent='prevError') &laquo; 前
-      button.btn.btn-default(v-on:click.stop.prevent='nextError') 次 &raquo;
+      button.btn.btn-light(v-on:click.stop.prevent='prevError') &laquo; 前
+      button.btn.btn-light(v-on:click.stop.prevent='nextError') 次 &raquo;
     #conf.modal.fade(tabindex='-1', role='dialog')
       .modal-dialog(role='document')
         .modal-content
           .modal-header
+            h4.modal-title 警告設定
             button.close(type='button', data-dismiss='modal')
               span(aria-hidden='true') &times;
-            h4.modal-title 警告設定
           .modal-body
-            .checkbox(v-for='lint in lints')
-              label
-                input(type='checkbox', v-model='lint[0]')
-                | {{lint[1]}}
+            .form-check(v-for='(lint, key) in lints')
+              input.form-check-input(type='checkbox', v-bind:id='"form-lint-check-"+key', v-model='lint[0]')
+              label.form-check-label(v-bind:for='"form-lint-check-"+key') {{lint[1]}}
           .modal-footer
-            button.btn.btn-default(type='button', data-dismiss='modal') 閉じる
+            button.btn.btn-secondary(type='button', data-dismiss='modal') 閉じる

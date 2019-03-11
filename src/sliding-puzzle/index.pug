@@ -23,24 +23,23 @@ append styles
     }
 
 append contents
-  h1
-    | スライドパズルソルバー
-    small 21世紀はパズルを機械に任せる時代パート2
+  h1 スライドパズルソルバー
+  p.lead.text-secondary 21世紀はパズルを機械に任せる時代パート2
   p スライドパズルを解いてくれるすごいやつ。パート1は<a href="/10/">10を作る</a>。
-  form.form-inline(style='margin-bottom:10px')
+  form.mb-1
     .form-group
       textarea.form-control(type='text', name='board', style='font-family:monospace', rows='5')
         | &nbsp;1&nbsp;&nbsp;7&nbsp;&nbsp;2&nbsp;&nbsp;4
         | &nbsp;6&nbsp;&nbsp;0&nbsp;14&nbsp;&nbsp;3
         | 13&nbsp;10&nbsp;11&nbsp;&nbsp;8
         | &nbsp;5&nbsp;&nbsp;9&nbsp;15&nbsp;12
-      p.help-block 空白は0、それ以外は左上から1から順の番号が振られているとして配置する
-    button.btn.btn-default(type='submit') さがす
+      small.form-text.text-muted 空白は0、それ以外は左上から1から順の番号が振られているとして配置する
+    button.btn.btn-secondary(type='submit') さがす
   #result(style='display:none')
     #puzzle
     p
       .btn-group.btn-group-sm
-        button.btn.btn-default(rel='next') つぎへ &raquo;
+        button.btn.btn-light(rel='next') つぎへ &raquo;
   #error(style='display:none')
     p
   p.text-right

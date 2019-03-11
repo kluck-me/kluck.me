@@ -148,21 +148,27 @@ $('#conf-url').on 'input', ->
     confVideo.setLangCodes(getConfLangCodes()...)
     $('#conf-subs').empty()
     Object.keys(confVideo.langs).sort().forEach (code) ->
-      $checkbox = $('<div>').addClass('checkbox')
-      $('<label>').append(
-        $('<input>')
-          .attr(
-            type: 'checkbox'
-            name: "lang-#{code}"
-            value: code
-          )
-          .prop('checked', confVideo.hasLangCode(code))
-          .change ->
-            $this = $(this)
-            confVideo[if $(this).prop('checked') then 'addLangCode' else 'removeLangCode']($this.val())
-            return
-        document.createTextNode(confVideo.langs[code].label)
-      ).appendTo($checkbox)
+      $checkbox = $('<div>').addClass('form-check')
+      name = "lang-#{code}"
+      $('<input>')
+        .addClass('form-check-input')
+        .attr(
+          type: 'checkbox'
+          id: name
+          name: name
+          value: code
+        )
+        .prop('checked', confVideo.hasLangCode(code))
+        .change ->
+          $this = $(this)
+          confVideo[if $(this).prop('checked') then 'addLangCode' else 'removeLangCode']($this.val())
+          return
+        .appendTo($checkbox)
+      $('<label>')
+        .addClass('form-check-label')
+        .attr('for', name)
+        .text(confVideo.langs[code].label)
+        .appendTo($checkbox)
       $checkbox.appendTo('#conf-subs')
       return
     return

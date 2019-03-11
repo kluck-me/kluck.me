@@ -5,18 +5,20 @@ append meta
 
 append contents
   h1 フレンズすこあ
-  p.text-muted けものはいても　のけものはいない　ただしスコアが低い、テメーはダメだ
+  p.lead.text-secondary けものはいても　のけものはいない　ただしスコアが低い、テメーはダメだ
   form.form-inline
     .input-group
-      .input-group-addon
-        i.fa.fa-twitter
+      .input-group-prepend
+        span.input-group-text
+          i.fa.fa-twitter
       input#screen-name.form-control(type='text')
-      .input-group-addon#friends-score
-        i.fa.fa-star-o
-        i.fa.fa-star-o
-        i.fa.fa-star-o
-        i.fa.fa-star-o
-        i.fa.fa-star-o
+      .input-group-append#friends-score
+        span.input-group-text
+          i.fa.fa-star-o
+          i.fa.fa-star-o
+          i.fa.fa-star-o
+          i.fa.fa-star-o
+          i.fa.fa-star-o
 
 append scripts
   script(src='scripts.coffee')

@@ -7,13 +7,12 @@ append styles
   link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c')
 
 append contents
-  h1
-    | モロ湾ジェネレーター
-    small これはアイコンです
+  h1 モロ湾ジェネレーター
+  p.lead.text-secondary これはアイコンです
 
 append rows
   .row
-    .col-sm-6
+    .col-sm-auto
       canvas(width='240', height='240', style='font-family:"M PLUS Rounded 1c"')
     .col-sm-6
       form
@@ -21,9 +20,9 @@ append rows
           input.form-control#first-text(type='text', value='モロ湾')
         .form-group
           input.form-control#second-text(type='text', value='Moro Gulf')
-        button.btn.btn-xs.btn-default 初期値に戻す
+        button.btn.btn-xs.btn-secondary 初期値に戻す
   .row
-    .col-sm-12
+    .col-12
       p.text-right
         a(href='https://twitter.com/Ikkaidoh_Yoh/status/1095863938070147074') 元ネタ
 

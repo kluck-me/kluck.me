@@ -2,7 +2,7 @@ $form = $('.col-sm-4 form')
 form = $form[0]
 anchor = $('.col-sm-4 a')[0]
 
-canvas = $('.col-sm-8 canvas')[0]
+canvas = $('.col-sm-auto canvas')[0]
 ctx = canvas.getContext('2d')
 
 fill_circle = (x, y, size) ->

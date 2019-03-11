@@ -19,15 +19,15 @@ block body
       //- div#sub-1 字幕
       //- div#sub-2 字幕
   button#open-conf(type='button', data-toggle='modal', data-target='#modal-conf')
-    i.glyphicon.glyphicon-cog
+    i.fa.fa-cog
 
   #modal-conf.modal.fade(tabindex='-1')
     .modal-dialog(role='document')
       form.modal-content
         .modal-header
+          h4.modal-title MultiSubTube Config
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') &times;
-          h4.modal-title MultiSubTube Config
         .modal-body
           .form-group
             label(for='conf-url') URL
@@ -35,10 +35,9 @@ block body
           .form-group
             label(for='conf-subs') Subs
             #conf-subs
-              //- .checkbox
-              //-   label
-              //-     input(type='checkbox', name='test', value='ja')
-              //-     | ja
+              //- .form-check
+              //-   input.form-check-input(type='checkbox', name='test', value='ja')
+              //-   label.form-check-label ja
         .modal-footer
-          button.btn.btn-default(type='button', data-dismiss='modal') Close
+          button.btn.btn-secondary(type='button', data-dismiss='modal') Close
           button.btn.btn-primary Play
