@@ -26,7 +26,7 @@ append contents
   h1 スライドパズルソルバー
   p.lead.text-secondary 21世紀はパズルを機械に任せる時代パート2
   p スライドパズルを解いてくれるすごいやつ。パート1は<a href="/10/">10を作る</a>。
-  form.mb-1
+  form.mb-2
     .form-group
       textarea.form-control(type='text', name='board', style='font-family:monospace', rows='5')
         | &nbsp;1&nbsp;&nbsp;7&nbsp;&nbsp;2&nbsp;&nbsp;4
@@ -37,11 +37,11 @@ append contents
     button.btn.btn-secondary(type='submit') さがす
   #result(style='display:none')
     #puzzle
-    p
+    .mt-1
       .btn-group.btn-group-sm
         button.btn.btn-light(rel='next') つぎへ &raquo;
   #error(style='display:none')
-    p
+    p.text-danger
   p.text-right
     a(href='https://twitter.com/azurlane_staff/status/938326681772630016', target='_blank') 元ネタ
 
