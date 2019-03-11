@@ -16,9 +16,7 @@ update = do ->
     else
       $('#c').show()
       $('#r').hide()
-    $('.f').each ->
-      autofit(this)
-      return
+    $('.f').autofit()
     return
 
 $(window).on 'load', ->

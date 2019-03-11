@@ -14,8 +14,8 @@ append contents
     | arranging type
 
 append scripts
-  script(src='../common/autofit.coffee')
+  script(src='../common/jquery-autofit.coffee')
   script.
     $(window).resize(function(){
-      $('#autofit').each(function(){autofit(this)});
+      $('#autofit').autofit();
     }).resize();
