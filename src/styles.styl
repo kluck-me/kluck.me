@@ -76,5 +76,13 @@ section
   height 100%
   background-position center center
   background-size cover
-  opacity 0
-  transition opacity ease .5s
+
+  &.anime-show
+    opacity 1
+    transition opacity ease 1s
+
+  &.anime-hide
+    z-index -2
+
+  &.anime-load
+    opacity 0
