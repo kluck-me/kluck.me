@@ -23,7 +23,8 @@ $('#btnPlay').click ->
 
 if location.search
   name = location.search.replace(/^\?/, '')
-  $.get "#{name}.pde", (source) ->
+  $.get "https://api.github.com/repos/kluck-me/kluck.me/contents/src/viz/#{name}.pde", (data) ->
+    source = window.atob(data.content)
     document.title += " : #{name}"
     $textarea.val(source)
     setTimeout ->
