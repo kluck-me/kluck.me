@@ -26,6 +26,11 @@ $.fn.glitchDncngrl = ->
   @css('display', 'none')
   return
 
-$(".#{prefix}").on 'load', ->
-  $(this).glitchDncngrl()
+$(".#{prefix}").each ->
+  if @naturalWidth
+    $(this).glitchDncngrl()
+  else
+    $(this).on 'load', ->
+      $(this).glitchDncngrl()
+      return
   return
