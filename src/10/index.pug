@@ -1,13 +1,11 @@
 extends ../common/_bootstrap-layout
+include ../common/_vue
 
 append meta
   title じどうで10つくったー
 
-append styles
-  style.
-    [v-cloak] {
-      display: none;
-    }
+append scripts
+  script(src='scripts.coffee')
 
 append contents
   h1 じどうで10つくったー
@@ -23,7 +21,3 @@ append contents
     pre(v-text='output')
   p.text-right
     a(href='https://shindanmaker.com/217387', target='_blank') 元ネタ
-
-append scripts
-  include ../common/_vue
-  script(src='scripts.coffee')
