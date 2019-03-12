@@ -1,14 +1,15 @@
 extends ../common/_bootstrap-layout
+include ../common/_vue
 
 append meta
   title スライドパズルソルバー
 
 append styles
   style.
-    #puzzle {
+    .puzzle {
       position: relative;
     }
-    #puzzle span {
+    .puzzle span {
       display: block;
       width: 2em;
       height: 2em;
@@ -17,7 +18,10 @@ append styles
       border: 1px solid #ccc;
       position: absolute;
     }
-    #puzzle span.next-move {
+    .puzzle span.empty {
+      background-color: #ccc;
+    }
+    .puzzle span.next {
       background-color: #fcc;
       z-index: 2;
     }
@@ -26,22 +30,23 @@ append contents
   h1 スライドパズルソルバー
   p.lead.text-secondary 21世紀はパズルを機械に任せる時代パート2
   p スライドパズルを解いてくれるすごいやつ。パート1は<a href="/10/">10を作る</a>。
-  form.mb-2
-    .form-group
-      textarea.form-control(type='text', name='board', style='font-family:monospace', rows='5')
-        | &nbsp;1&nbsp;&nbsp;7&nbsp;&nbsp;2&nbsp;&nbsp;4
-        | &nbsp;6&nbsp;&nbsp;0&nbsp;14&nbsp;&nbsp;3
-        | 13&nbsp;10&nbsp;11&nbsp;&nbsp;8
-        | &nbsp;5&nbsp;&nbsp;9&nbsp;15&nbsp;12
-      small.form-text.text-muted 空白は0、それ以外は左上から1から順の番号が振られているとして配置する
-    button.btn.btn-secondary(type='submit') さがす
-  #result(style='display:none')
-    #puzzle
-    .mt-1
-      .btn-group.btn-group-sm
-        button.btn.btn-light(rel='next') つぎへ &raquo;
-  #error(style='display:none')
-    p.text-danger
+  #vue(v-cloak)
+    form.mb-2(v-on:submit.prevent='submit')
+      .form-group
+        textarea.form-control(type='text', name='board', style='font-family:monospace', rows='5', v-model='input', v-bind:disabled='solver.worker')
+        small.form-text.text-muted 空白は0、それ以外は左上から1から順の番号が振られているとして配置する
+      button.btn.btn-secondary(type='submit', v-if='!solver.worker') さがす
+      button.btn.btn-secondary(type='submit', v-if='solver.worker') とめる
+    form(v-if='result')
+      .puzzle(v-bind:style="get_board_style(result.board)")
+        template(v-for='(line, y) in result.board')
+          template(v-for='(num, x) in line')
+            span(v-bind:style="get_panel_style(x, y)", v-bind:class="{empty:!num,next:result.next_step&&result.next_step.x1==x&&result.next_step.y1==y}" v-text='num||null')
+      .mt-1
+        .btn-group.btn-group-sm
+          button.btn.btn-light(rel='prev', v-on:click.stop.prevent='index-=1', v-bind:disabled='!results[index-1]') &laquo; まえへ
+          button.btn.btn-light(rel='next', v-on:click.stop.prevent='index+=1', v-bind:disabled='!results[index+1]') つぎへ &raquo;
+    p.text-danger(v-if='error', v-text='error')
   p.text-right
     a(href='https://twitter.com/azurlane_staff/status/938326681772630016', target='_blank') 元ネタ
 

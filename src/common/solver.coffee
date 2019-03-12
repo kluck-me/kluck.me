@@ -10,6 +10,8 @@ class Solver
       @worker.addEventListener 'message', (e) =>
         switch e.data.type
           when 'result'
+            fn(null, e.data.value)
+          when 'error'
             fn(e.data.value)
           when 'finish'
             @stop()

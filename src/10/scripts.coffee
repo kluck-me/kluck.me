@@ -28,7 +28,7 @@ vue = new Vue(
       else if @runnable
         cache = {}
         @exprs = []
-        @solver.run numbers: @numbers, answer: 10, (expr) =>
+        @solver.run numbers: @numbers, answer: 10, (err, expr) =>
           unless cache[expr]
             cache[expr] = calc_exprs_score(expr)
             @exprs.push(expr)
