@@ -1,4 +1,5 @@
 extends ../common/_bootstrap-layout
+include ../common/_vue
 
 append meta
   title モロ湾ジェネレーター
@@ -11,16 +12,21 @@ append contents
   p.lead.text-secondary これはアイコンです
 
 append rows
-  .row
+  #vue.row(v-cloak)
     .col-sm-auto
-      canvas(width='240', height='240', style='font-family:"M PLUS Rounded 1c"')
+      canvas(ref='canvas', width='240', height='240', style='font-family:"M PLUS Rounded 1c"')
     .col-sm-6
-      form
-        .form-group
-          input.form-control#first-text(type='text', value='モロ湾')
-        .form-group
-          input.form-control#second-text(type='text', value='Moro Gulf')
-        button.btn.btn-xs.btn-secondary 初期値に戻す
+      .form-group
+        button.btn.btn-sm.btn-secondary(v-on:click.stop.prevent='reset') 初期値に戻す
+      .form-group
+        input.form-control(type='text', v-model='first_text', v-on:input='update')
+      .form-group
+        input.form-control(type='text', v-model='second_text', v-on:input='update')
+      .form-group
+        a.btn.btn-sm.btn-success(ref='download', href='#', download)
+          i.fa.fa-download
+          = ' '
+          | 画像ダウンロード
   .row
     .col-12
       p.text-right
