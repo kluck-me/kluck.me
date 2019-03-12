@@ -1,4 +1,5 @@
 extends ../common/_bootstrap-layout
+include ../common/_vue
 
 append meta
   title 黒兎メーカー
@@ -8,26 +9,29 @@ append contents
   p.lead.text-secondary みんなで黒兎さんのアイコンを作ろう！！！
 
 append rows
-  .row
+  #vue.row(v-cloak)
     .col-sm-auto
-      canvas(width='223', height='223', style='max-width:100%')
+      canvas(ref='canvas', width='223', height='223', style='max-width:100%')
     .col-sm-4
-      form
-        button.btn.btn-sm.btn-secondary.mb-2 初期値に戻す
-        .form-group
-          label(for='left-eye-pos') 左目位置
-          input.form-control-range#left-eye-pos(name='left_eye_pos', type='range', min='0', max='5', step='0.01', value='1.07')
-        .form-group
-          label(for='left-eye-size') 左目大きさ
-          input.form-control-range#left-eye-size(name='left_eye_size', type='range', min='0', max='15', step='0.1', value='6')
-        .form-group
-          label(for='right-eye-pos') 右目位置
-          input.form-control-range#right-eye-pos(name='right_eye_pos', type='range', min='0', max='5', step='0.01', value='1.07')
-        .form-group
-          label(for='right-eye-size') 右目大きさ
-          input.form-control-range#right-eye-size(name='right_eye_size', type='range', min='0', max='15', step='0.1', value='6')
-      p
-        a(href='#') 画像ダウンロード（右クリック保存）
+      .form-group
+        button.btn.btn-sm.btn-secondary(v-on:click.stop.prevent='reset') 初期値に戻す
+      .form-group
+        label(for='left-eye-pos') 左目位置
+        input.form-control-range#left-eye-pos(name='left_eye_pos', type='range', min='0', max='5', step='0.01', v-model='left_eye_pos', v-on:change='update')
+      .form-group
+        label(for='left-eye-size') 左目大きさ
+        input.form-control-range#left-eye-size(name='left_eye_size', type='range', min='0', max='15', step='0.1', v-model='left_eye_size', v-on:change='update')
+      .form-group
+        label(for='right-eye-pos') 右目位置
+        input.form-control-range#right-eye-pos(name='right_eye_pos', type='range', min='0', max='5', step='0.01', v-model='right_eye_pos', v-on:change='update')
+      .form-group
+        label(for='right-eye-size') 右目大きさ
+        input.form-control-range#right-eye-size(name='right_eye_size', type='range', min='0', max='15', step='0.1', v-model='right_eye_size', v-on:change='update')
+      .form-group
+        a.btn.btn-sm.btn-success(ref='download', href='#', download)
+          i.fa.fa-download
+          = ' '
+          | 画像ダウンロード
 
 append scripts
   script(src='scripts.coffee')
