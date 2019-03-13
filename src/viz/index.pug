@@ -1,4 +1,5 @@
 extends ../common/_bootstrap-layout
+include ../common/_vue
 
 append meta
   title viz
@@ -7,25 +8,23 @@ append styles
   link(rel='stylesheet' href='styles.styl')
 
 block body
-  .container-fluid
+  #vue.container-fluid(v-cloak)
     .row
       .col-sm-6
-        form
-          .form-group
-            .btn-group.btn-group-sm
-              button.btn.btn-secondary#btnRun
-                i.fa.fa-refresh
-                = ' Run'
-              button.btn.btn-secondary#btnPlay(disabled)
-                span#btnPlayText
-                  i.fa.fa-play
-                  = ' Play'
-                span#btnPauseText(style='display:none')
-                  i.fa.fa-pause
-                  = ' Pause'
-          textarea.form-control
+        .form-group
+          .btn-group.btn-group-sm
+            button.btn.btn-secondary(v-on:click.stop.prevent='run', v-bind:disable='running')
+              i.fa.fa-refresh
+              = ' Run'
+            button.btn.btn-secondary(v-on:click.stop.prevent='pause', v-bind:disabled='!running', v-if='playing')
+              i.fa.fa-pause
+              = ' Pause'
+            button.btn.btn-secondary(v-on:click.stop.prevent='play', v-bind:disabled='!running', v-if='!playing')
+              i.fa.fa-play
+              = ' Play'
+        textarea.form-control(v-model='input')
       .col-sm-6
-        canvas(width='0' height='0')
+        canvas(ref='canvas', width='0', height='0')
 
 append scripts
   script(src='//cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js')
