@@ -1,4 +1,5 @@
 extends ../common/_bootstrap-layout
+include ../common/_vue
 
 append meta
   title マミー時計
@@ -8,7 +9,13 @@ append contents
   p.lead.text-secondary これが在米広島人の生活リズムだ！
 
 append rows
-  .row#clocks
+  #vue.row(v-cloak)
+    .col-sm-4(v-for='clock in clocks')
+      .page-header
+        h3
+          abbr {{clock.tz}}
+          small {{clock.tz_name}}
+      h1 {{clock.time.format('hh:mm:ss A')}}
   .row
     .col-12
       p.text-right
