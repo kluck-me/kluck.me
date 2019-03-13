@@ -70,7 +70,6 @@ do ($) ->
         $target = $(evt.target)
         if $body.hasClass('hide-content') || (!$target.closest('a').length && !$target.closest('section').length)
           $body.toggleClass('hide-content')
-          false
         return
     return
 
