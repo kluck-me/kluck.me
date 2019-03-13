@@ -170,6 +170,7 @@ if typeof self != 'undefined'
       catch e
         self.postMessage(type: 'error', value: e.message)
       return
+    self.postMessage(type: 'finish')
     return
   , false
 else

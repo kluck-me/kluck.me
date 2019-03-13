@@ -1,5 +1,6 @@
 class Solver
   constructor: (@getWorker) ->
+    @worker = null # for vue
   stop: ->
     @worker?.terminate()
     @worker = null

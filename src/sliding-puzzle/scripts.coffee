@@ -61,10 +61,10 @@ vue = new Vue(
         @index = 0
         @solver.run board: @board, (err, actions) =>
           if err
+            @results = null
             @error = err
           else
             @results = get_results(@board, actions)
-          @solver.stop()
           return
       return
 )
