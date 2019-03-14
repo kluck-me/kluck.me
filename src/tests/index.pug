@@ -1,4 +1,5 @@
 extends ../common/_bootstrap-layout
+include ../common/_vue
 
 append meta
   title tests
@@ -7,9 +8,13 @@ append contents
   h1 tests
 
 append rows
-  .row
+  .row#vue(v-cloak)
     .col-sm-12
-      ul#list
+      .text-center(v-if='loading')
+        span.spinner-border
+      ul(v-if='!loading')
+        li(v-for='content in contents')
+          a(v-bind:href='content.href', v-text='content.label')
 
 append scripts
   script(src='scripts.coffee')
