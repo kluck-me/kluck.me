@@ -1,4 +1,5 @@
 extends ../common/_bootstrap-layout
+include ../common/_vue
 
 append meta
   title MultiSubTube
@@ -11,33 +12,30 @@ append scripts
   script(src='//www.youtube.com/iframe_api')
 
 block body
-  #player-with-subs
+  #vue.player-with-subs(v-cloak)
     #player
       #ytplayer
     #subs
-      //- div#sub-0 字幕
-      //- div#sub-1 字幕
-      //- div#sub-2 字幕
-  button#open-conf(type='button', data-toggle='modal', data-target='#modal-conf')
-    i.fa.fa-cog
+      div(v-for='text in texts', v-html='text||"&nbsp;"')
+    button#open-conf(type='button', data-toggle='modal', data-target='#modal-conf')
+      i.fa.fa-cog
 
-  #modal-conf.modal.fade(tabindex='-1')
-    .modal-dialog(role='document')
-      form.modal-content
-        .modal-header
-          h4.modal-title MultiSubTube Config
-          button.close(type='button', data-dismiss='modal', aria-label='Close')
-            span(aria-hidden='true') &times;
-        .modal-body
-          .form-group
-            label(for='conf-url') URL
-            input.form-control#conf-url(name='url', type='text')
-          .form-group
-            label(for='conf-subs') Subs
-            #conf-subs
-              //- .form-check
-              //-   input.form-check-input(type='checkbox', name='test', value='ja')
-              //-   label.form-check-label ja
-        .modal-footer
-          button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-          button.btn.btn-primary Play
+    #modal-conf.modal.fade(tabindex='-1')
+      .modal-dialog(role='document')
+        form.modal-content(v-on:submit.stop.prevent='play')
+          .modal-header
+            h4.modal-title MultiSubTube Config
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            .form-group
+              label(for='conf-url') URL
+              input.form-control#conf-url(type='text', v-model='url')
+            .form-group(v-if='langs')
+              label Subs
+              .form-check(v-for='code in Object.keys(langs).sort()')
+                input.form-check-input(type='checkbox', v-bind:id='"conf-lang-"+code', v-model='selectedCodes[code]')
+                label.form-check-label(v-bind:for='"conf-lang-"+code', v-text='langs[code].label')
+          .modal-footer
+            button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary Play
