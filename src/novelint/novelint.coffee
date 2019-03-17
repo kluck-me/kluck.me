@@ -48,4 +48,4 @@ class Novelint
 
     indexes: r, length: r.length / 2
 
-window.Novelint = Novelint
+module.exports = Novelint

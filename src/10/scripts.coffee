@@ -1,3 +1,5 @@
+location.reload() if process.env.NODE_ENV == 'development' && window.vm
+
 Solver = require('../common/solver.coffee')
 
 calc_exprs_score = (expr) ->
@@ -6,7 +8,7 @@ calc_exprs_score = (expr) ->
   score += table[c] || 20 for c in expr.replace(/[\d()]+/g, '')
   score * 100 + expr.length
 
-vue = new Vue(
+window.vm = new Vue(
   el: '#vue'
   data:
     solver: new Solver(-> new Worker('./solver.coffee'))
@@ -35,8 +37,9 @@ vue = new Vue(
             @exprs.sort (a, b) -> cache[a] - cache[b]
           return
       return
+  mounted: ->
+    if location.hostname == 'localhost'
+      @input = '5,0,2,6'
+      @submit()
+    return
 )
-
-if location.hostname == 'localhost'
-  vue.$data.input = '5,0,2,6'
-  vue.submit()

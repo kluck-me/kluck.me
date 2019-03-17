@@ -7,10 +7,6 @@ append meta
 append styles
   link(rel='stylesheet', href='styles.styl')
 
-append scripts
-  script(src='scripts.coffee')
-  script(src='//www.youtube.com/iframe_api')
-
 block body
   #vue.player-with-subs(v-cloak)
     #player
@@ -39,3 +35,7 @@ block body
           .modal-footer
             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
             button.btn.btn-primary Play
+
+append scripts
+  script(src='scripts.coffee')
+  script(src='//www.youtube.com/iframe_api')

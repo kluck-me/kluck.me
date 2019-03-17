@@ -4,9 +4,6 @@ include ../common/_vue
 append meta
   title フレンズすこあ
 
-append scripts
-  script(src='scripts.coffee')
-
 append contents
   h1 フレンズすこあ
   p.lead.text-secondary けものはいても　のけものはいない　ただしスコアが低い、テメーはダメだ
@@ -20,3 +17,6 @@ append contents
         .input-group-append#friends-score
           span.input-group-text
             i.fa(v-bind:class='star(score - i + 1)', v-for='i in 5')
+
+append scripts
+  script(src='scripts.coffee')

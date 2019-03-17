@@ -1,6 +1,9 @@
-instance = null
+location.reload() if process.env.NODE_ENV == 'development' && window.vm
 
-vue = new Vue(
+instance = null
+default_title = document.title
+
+window.vm = new Vue(
   el: '#vue'
   data:
     input: ''
@@ -21,13 +24,15 @@ vue = new Vue(
       @playing = true
       instance.loop()
       return
-)
-
-if location.search
-  name = location.search.replace(/^\?/, '')
-  $.get "https://api.github.com/repos/kluck-me/kluck.me/contents/src/viz/#{name}.pde", (data) ->
-    source = window.atob(data.content)
-    document.title += " : #{name}"
-    vue.$data.input = source
-    vue.run()
+    load: (name) ->
+      $.get("https://api.github.com/repos/kluck-me/kluck.me/contents/src/viz/#{name}.pde").then (data) =>
+        source = window.atob(data.content)
+        document.title = "#{default_title} : #{name}"
+        @input = source
+        @run()
+        return
+      return
+  mounted: ->
+    @load(location.search.replace(/^\?/, '')) if location.search
     return
+)

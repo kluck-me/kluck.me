@@ -1,3 +1,5 @@
+location.reload() if process.env.NODE_ENV == 'development' && window.vm
+
 binarySearch = (arr, elm, compare) ->
   m = 0
   n = arr.length - 1
@@ -66,7 +68,7 @@ getSubs = (langs, codes) ->
     return
   subs
 
-vue = new Vue(
+window.vm = new Vue(
   el: '#vue'
   data:
     videoId: null
@@ -113,7 +115,7 @@ vue = new Vue(
 
 # player
 updateCurrentTime = ->
-  vue.updateSubs(player?.getCurrentTime?())
+  window.vm.updateSubs(player?.getCurrentTime?())
   requestAnimationFrame(updateCurrentTime)
   return
 
@@ -126,16 +128,16 @@ onPlayerReady = ({ target: player }) ->
   if location.hostname == 'localhost'
     delay = (fn) -> setTimeout(fn, 500)
     delay ->
-      vue.$data.url = 'https://www.youtube.com/watch?v=WqUBWz3YR7s'
+      window.vm.$data.url = 'https://www.youtube.com/watch?v=WqUBWz3YR7s'
       delay ->
-        vue.$data.selectedCodes = 'en': true, 'zh-TW': true
-        vue.$data.url = 'https://www.youtube.com/watch?v=4cQ4ZQn-KRA'
+        window.vm.$data.selectedCodes = 'en': true, 'zh-TW': true
+        window.vm.$data.url = 'https://www.youtube.com/watch?v=4cQ4ZQn-KRA'
         delay ->
           $('#modal-conf .btn-primary').click()
   return
 
 onPlayerStateChange = ({ target: player }) ->
-  vue.fetchSubs(player.getVideoData().video_id)
+  window.vm.fetchSubs(player.getVideoData().video_id)
   return
 
 window.onYouTubeIframeAPIReady = ->

@@ -1,3 +1,7 @@
+location.reload() if process.env.NODE_ENV == 'development' && window.vm
+
+Novelint = require('./novelint.coffee')
+
 novelint = new Novelint
 novelint.addLint(
   'indent'
@@ -55,7 +59,7 @@ novelint.addLint(
   /([０-９Ａ-Ｚａ-ｚ]+)/mg
 )
 
-vue = new Vue(
+window.vm = new Vue(
   el: '#vue'
   data:
     text: ''
@@ -164,15 +168,16 @@ vue = new Vue(
   updated: ->
     $('#text [data-toggle="tooltip"]').tooltip()
     return
-)
-
-if location.hostname == 'localhost'
-  vue.$data.text = '''
+  mounted: ->
+    if location.hostname == 'localhost'
+      @text = '''
 字下げと句読点が必要
 　空白が必要！末尾には不要。　
 　「字下げと句読点の除去。」
 　　過剰、　空白！　　です（除去せよ！　）。
 　感嘆符は偶数個！？！　句点は一個\u2026\u2026\u2026。。
 　English。
-  '''
-  vue.review()
+      '''
+      @review()
+    return
+)

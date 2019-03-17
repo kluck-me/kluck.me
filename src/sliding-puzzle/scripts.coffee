@@ -1,3 +1,5 @@
+location.reload() if process.env.NODE_ENV == 'development' && window.vm
+
 Solver = require('../common/solver.coffee')
 
 get_results = (board, actions) ->
@@ -33,7 +35,7 @@ get_results = (board, actions) ->
 
   results
 
-vue = new Vue(
+window.vm = new Vue(
   el: '#vue'
   data:
     solver: new Solver(-> new Worker('./solver.coffee'))
@@ -67,7 +69,8 @@ vue = new Vue(
             @results = get_results(@board, actions)
           return
       return
+  mounted: ->
+    if location.hostname == 'localhost'
+      @submit()
+    return
 )
-
-if location.hostname == 'localhost'
-  vue.submit()

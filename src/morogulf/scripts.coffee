@@ -1,8 +1,10 @@
+location.reload() if process.env.NODE_ENV == 'development' && window.vm
+
 inital_data =
   first_text: 'モロ湾'
   second_text: 'Moro Gulf'
 
-vue = new Vue(
+window.vm = new Vue(
   el: '#vue'
   data: Object.assign({}, inital_data)
   methods:

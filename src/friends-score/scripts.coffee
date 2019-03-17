@@ -1,3 +1,7 @@
+location.reload() if process.env.NODE_ENV == 'development' && window.vm
+
+crc32 = require('./crc32.coffee')
+
 hashed_scoring_users = do ->
   code = require('./code.coffee')
   h = {}
@@ -7,9 +11,7 @@ hashed_scoring_users = do ->
     return
   h
 
-crc32 = require('./crc32.coffee')
-
-vue = new Vue(
+window.vm = new Vue(
   el: '#vue'
   data:
     input: ''
@@ -26,4 +28,8 @@ vue = new Vue(
         'fa-star-half-o'
       else
         'fa-star-o'
+  mounted: ->
+    if location.hostname == 'localhost'
+      @input = 'kluck_me'
+    return
 )

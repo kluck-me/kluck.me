@@ -4,9 +4,6 @@ include ../common/_vue
 append meta
   title じどうで10つくったー
 
-append scripts
-  script(src='scripts.coffee')
-
 append contents
   h1 じどうで10つくったー
   p.lead.text-secondary 21世紀はパズルを機械に任せる時代
@@ -21,3 +18,6 @@ append contents
     pre(v-text='output')
   p.text-right
     a(href='https://shindanmaker.com/217387', target='_blank') 元ネタ
+
+append scripts
+  script(src='scripts.coffee')

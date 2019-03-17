@@ -1,3 +1,5 @@
+location.reload() if process.env.NODE_ENV == 'development' && window.vm
+
 fill_circle = (ctx, x, y, size) ->
   ctx.beginPath()
   ctx.arc(x, y, size, 0, Math.PI * 2, false)
@@ -13,16 +15,16 @@ fill_spiral_circle = (ctx, x0, y0, stv, ssize) ->
   fill_circle(ctx, x0 + r * Math.cos(t), y0 + r * Math.sin(t), parseFloat(ssize))
   return
 
+inital_data =
+  left_eye_pos: '1.07'
+  left_eye_size: '6'
+  right_eye_pos: '1.07'
+  right_eye_size: '6'
+
 img = new Image
 img.src = require('./kuroto.jpg')
 img.onload = ->
-  inital_data =
-    left_eye_pos: '1.07'
-    left_eye_size: '6'
-    right_eye_pos: '1.07'
-    right_eye_size: '6'
-
-  vue = new Vue(
+  window.vm = new Vue(
     el: '#vue'
     data: Object.assign({}, inital_data)
     methods:
@@ -48,5 +50,4 @@ img.onload = ->
       @update()
       return
   )
-
   return
