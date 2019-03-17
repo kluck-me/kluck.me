@@ -7,6 +7,9 @@ append meta
 append styles
   link(rel='stylesheet', href='styles.styl')
 
+append scripts
+  script(src='scripts.coffee')
+
 append contents
   #vue(v-cloak)
     h1 Novelint
@@ -37,6 +40,3 @@ append contents
               label.form-check-label(v-bind:for='"form-lint-check-"+key') {{lint[1]}}
           .modal-footer
             button.btn.btn-secondary(type='button', data-dismiss='modal') 閉じる
-
-append scripts
-  script(src='scripts.coffee')

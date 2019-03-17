@@ -7,6 +7,10 @@ append meta
 append styles
   link(rel='stylesheet' href='styles.styl')
 
+append scripts
+  script(src='//cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js')
+  script(src='scripts.coffee')
+
 block body
   #vue.container-fluid(v-cloak)
     .row
@@ -25,7 +29,3 @@ block body
         textarea.form-control(v-model='input')
       .col-sm-6
         canvas(ref='canvas', width='0', height='0')
-
-append scripts
-  script(src='//cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js')
-  script(src='scripts.coffee')

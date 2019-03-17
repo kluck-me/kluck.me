@@ -8,9 +8,6 @@ append styles
   link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Shrikhand')
   link(rel='stylesheet', href='styles.styl')
 
-append scripts
-  script(src='scripts.coffee')
-
 append body
   .wrapper
     header
@@ -91,3 +88,6 @@ append body
           document.write('&copy; 2013-' + (new Date).getFullYear())
         = ' '
         a(href='https://kluck.me/') Kluck
+
+append scripts
+  script(src='scripts.coffee')

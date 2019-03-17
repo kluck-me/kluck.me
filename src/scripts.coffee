@@ -20,7 +20,8 @@ do ($) ->
   anime_show = (index) ->
     $("#anime#{index}").attr('class', 'anime anime-show')
     index = (index + 1) % 3
-    $("#anime#{index}").attr('class', 'anime anime-load').css('background-image', "url(\"#{anime_urls[Math.random() * anime_urls.length | 0]}\")")
+    $("#anime#{index}").attr('class', 'anime anime-load')
+      .css('background-image', "url(\"#{anime_urls[Math.random() * anime_urls.length | 0]}\")")
     index = (index + 1) % 3
     $("#anime#{index}").attr('class', 'anime anime-hide')
     return

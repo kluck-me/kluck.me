@@ -4,6 +4,11 @@ include ../common/_vue
 append meta
   title マミー時計
 
+append scripts
+  script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js')
+  script(src='//momentjs.com/downloads/moment-timezone-with-data.min.js')
+  script(src='scripts.coffee')
+
 append contents
   h1 マミー時計
   p.lead.text-secondary これが在米広島人の生活リズムだ！
@@ -20,8 +25,3 @@ append rows
     .col-12
       p.text-right
         a(href='https://twitter.com/kluck_me/status/477325771237646338') 元ネタ
-
-append scripts
-  script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js')
-  script(src='//momentjs.com/downloads/moment-timezone-with-data.min.js')
-  script(src='scripts.coffee')

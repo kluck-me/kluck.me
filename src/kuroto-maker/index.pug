@@ -4,6 +4,9 @@ include ../common/_vue
 append meta
   title 黒兎メーカー
 
+append scripts
+  script(src='scripts.coffee')
+
 append contents
   h1 黒兎メーカー
   p.lead.text-secondary みんなで黒兎さんのアイコンを作ろう！！！
@@ -32,6 +35,3 @@ append rows
           i.fa.fa-download
           = ' '
           | 画像ダウンロード
-
-append scripts
-  script(src='scripts.coffee')

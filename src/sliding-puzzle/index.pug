@@ -26,6 +26,9 @@ append styles
       z-index: 2;
     }
 
+append scripts
+  script(src='scripts.coffee')
+
 append contents
   h1 スライドパズルソルバー
   p.lead.text-secondary 21世紀はパズルを機械に任せる時代パート2
@@ -49,6 +52,3 @@ append contents
     p.text-danger(v-if='error', v-text='error')
   p.text-right
     a(href='https://twitter.com/azurlane_staff/status/938326681772630016', target='_blank') 元ネタ
-
-append scripts
-  script(src='scripts.coffee')
