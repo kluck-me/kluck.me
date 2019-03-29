@@ -13,12 +13,12 @@ append scripts
 append contents
   #vue(v-cloak)
     h1 Novelint
-    #lint
+    form(v-on:submit.stop.prevent='review')
       .form-group
-        textarea.form-control(name='text', placeholder='検証したい文章を入力してください', v-model='text')
+        textarea.form-control(placeholder='検証したい文章を入力してください', v-model='text')
       .form-group.clearfix
         span.pull-left
-          button.btn.btn-primary(v-on:click.stop.prevent='review') 検証
+          button.btn.btn-primary 検証
           button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#conf') 設定
         span.pull-right
           button.btn.btn-secondary(v-on:click.stop.prevent='autofix') 自動修正
