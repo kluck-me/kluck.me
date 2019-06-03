@@ -7,10 +7,10 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "devDependencies": {
-    "coffeescript": "^2.3.2",
-    "gh-pages": "^2.0.1",
-    "parcel-bundler": "^1.12.2",
-    "pug": "^2.0.3",
-    "stylus": "^0.54.5"
+    "coffeescript": "2.4.1",
+    "gh-pages": "2.1.1",
+    "parcel-bundler": "1.12.3",
+    "pug": "2.0.4",
+    "stylus": "0.54.7"
   }
 }
