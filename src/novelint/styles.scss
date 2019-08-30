@@ -1,0 +1,37 @@
+html,
+body {
+  height: 100%;
+}
+
+mark {
+  border-color: transparent;
+}
+
+.col {
+  width: 50%;
+
+  & .form-control {
+    resize: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+
+  & div.form-control {
+    overflow: auto;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+
+    & mark {
+      padding: 0;
+      color: inherit;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 2px;
+
+      & a {
+        color: inherit;
+      }
+    }
+  }
+}
