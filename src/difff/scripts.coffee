@@ -41,6 +41,7 @@ Bought a bit of better butter.
     ]
     row_htmls: []
     stats: []
+    global_stat: null
   methods:
     diff: ->
       inputs = (tolf(input) for input in @inputs)
@@ -56,7 +57,22 @@ Bought a bit of better butter.
       change_names = ['removed', 'added']
       row_htmls = []
       out_htmls = ['', '']
+      global_stat =
+        same_char_count: 0
+        total_char_count: 0
+        same_line_count: 0
+        total_line_count: 0
+      change_char_counts = [0, 0]
       for c in changes
+        l = c.value.replace(/\s+/g, '').length
+        if c.removed
+          change_char_counts[0] += l
+        else if c.added
+          change_char_counts[1] += l
+        else
+          global_stat.same_char_count += l
+          global_stat.total_char_count += l + Math.max(...change_char_counts)
+          change_char_counts = [0, 0]
         for change_name, i in change_names
           unless c[change_names[1 - i]]
             out_htmls[i] += if c[change_name] then mark(c.value) else h(c.value)
@@ -68,8 +84,12 @@ Bought a bit of better butter.
             if col_match
               col_htmls[i] = col_match[0]
               out_htmls[i] = out_htmls[i].slice(col_match[0].length)
+          global_stat.same_line_count += 1 if col_htmls[0] == col_htmls[1]
+          global_stat.total_line_count += 1
           row_htmls.push(col_htmls)
+      global_stat.total_char_count += Math.max(...change_char_counts)
       @stats = stats
+      @global_stat = global_stat
       @row_htmls = row_htmls
       return
   mounted: ->
