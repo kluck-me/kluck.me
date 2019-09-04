@@ -56,4 +56,9 @@ export const rules = [
     optionLabels: ['単語無効', '全適用'],
     defaultValue: 0,
   },
+  {
+    name: 'similarLookingChar',
+    label: '似ている文字',
+    defaultValue: 0,
+  },
 ];

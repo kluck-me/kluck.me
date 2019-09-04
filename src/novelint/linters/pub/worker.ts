@@ -80,6 +80,20 @@ const linters: Linters = {
     ),
     createRegexpLint(/([\!-\/\:-\@\[-\`\{-\~]+)/g)
   ),
+  similarLookingChar: mergeLints(
+    // cf. https://dic.nicovideo.jp/a/%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A%E3%81%AB%E8%A6%8B%E3%81%88%E3%81%AA%E3%81%8F%E3%82%82%E3%81%AA%E3%81%84%E6%BC%A2%E5%AD%97%E3%81%AE%E4%B8%80%E8%A6%A7
+    createRegexpLint(
+      /((?<=[一-龥])[アイウエオカサセタチツテトニヌネノハヒヘマミムメモヨリルレロワンー](?![ァ-ンー])|(?<![ァ-ンー])[アイウエオカサセタチツテトニヌネノハヒヘマミムメモヨリルレロワンー](?=[ヵヶ一-龥])|ー(?=[つ]))/g
+    ),
+    createRegexpLint(
+      /((?<=[ァ-ンー])[了亻宀工才力艹廾乜夕千⺍亍卜二又礻丿八匕乁龴三厶乂㐅乇彐刂儿乚口囗冖冫](?![ヵヶ一-龥])|(?<![一-龥])[了亻宀工才力艹廾乜夕千⺍亍卜二又礻丿八匕乁龴三厶乂㐅乇彐刂儿乚口囗冖冫](?=[ァ-ンー]))/g
+    ),
+    createRegexpLint(
+      /((?<=[ぁ-んァ-ン])[一](?![ヵヶ一-龥])|(?<![一-龥])[一](?=[ぁ-んァ-ン]))/g,
+      (m) => !/^[・つ]$/.test(m.input.slice(m.index + 1, m.index + 2))
+    ),
+    createRegexpLint(/([\u0387\u2022\u2219\u22C5\uFF65\u2015\uFF0D])/g) // 中黒・ハイフン
+  ),
 };
 
 const toShitedString = (s: string, n: number): string =>
