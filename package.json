@@ -7,18 +7,18 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "devDependencies": {
-    "coffeescript": "2.4.1",
-    "gh-pages": "2.1.1",
-    "parcel-bundler": "1.12.3",
+    "coffeescript": "2.5.1",
+    "gh-pages": "2.2.0",
+    "parcel-bundler": "1.12.4",
     "pug": "2.0.4",
-    "sass": "^1.22.10",
+    "sass": "1.26.3",
     "stylus": "0.54.7",
-    "typescript": "^3.6.2"
+    "typescript": "3.8.3"
   },
   "dependencies": {
-    "promise-worker": "^2.0.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "reactstrap": "^8.0.1"
+    "promise-worker": "2.0.1",
+    "react": "16.13.0",
+    "react-dom": "16.13.0",
+    "reactstrap": "8.4.1"
   }
 }
