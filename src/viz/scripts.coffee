@@ -1,5 +1,3 @@
-location.reload() if process.env.NODE_ENV == 'development' && window.vm
-
 instance = null
 default_title = document.title
 

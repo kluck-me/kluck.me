@@ -1,5 +1,3 @@
-location.reload() if process.env.NODE_ENV == 'development' && window.vm
-
 fill_circle = (ctx, x, y, size) ->
   ctx.beginPath()
   ctx.arc(x, y, size, 0, Math.PI * 2, false)

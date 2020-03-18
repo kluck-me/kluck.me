@@ -1,5 +1,3 @@
-location.reload() if process.env.NODE_ENV == 'development' && window.vm
-
 window.vm = new Vue(
   el: '#vue'
   data:

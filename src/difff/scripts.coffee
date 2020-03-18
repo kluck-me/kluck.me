@@ -1,5 +1,3 @@
-location.reload() if process.env.NODE_ENV == 'development' && window.vm
-
 tolf = (s) -> s.replace(/\r\n?/g, "\n")
 h = (s) -> ('' + s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 mark = (lines) -> lines.split("\n").map((line) -> "<mark class=\"alert-primary\">#{h(line)}</mark>").join("\n")

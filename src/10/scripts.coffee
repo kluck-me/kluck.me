@@ -1,5 +1,3 @@
-location.reload() if process.env.NODE_ENV == 'development' && window.vm
-
 Solver = require('../common/solver.coffee')
 
 calc_exprs_score = (expr) ->

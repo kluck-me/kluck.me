@@ -1,5 +1,3 @@
-location.reload() if process.env.NODE_ENV == 'development' && window.vm
-
 crc32 = require('./crc32.coffee')
 
 hashed_scoring_users = do ->

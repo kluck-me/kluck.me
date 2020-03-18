@@ -1,5 +1,3 @@
-location.reload() if process.env.NODE_ENV == 'development' && window.vm
-
 inital_data =
   first_text: 'モロ湾'
   second_text: 'Moro Gulf'

@@ -6,3 +6,6 @@ append styles
 
 append scripts
   script(src='//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js')
+  if process.env.NODE_ENV === 'development'
+    script.
+      window.vm&&location.reload();

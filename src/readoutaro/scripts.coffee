@@ -1,5 +1,3 @@
-location.reload() if process.env.NODE_ENV == 'development' && window.vm
-
 alert('Not support speech API') unless 'speechSynthesis' of window
 
 window.vm = new Vue(

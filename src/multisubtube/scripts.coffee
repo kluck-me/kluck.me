@@ -1,5 +1,3 @@
-location.reload() if process.env.NODE_ENV == 'development' && window.vm
-
 binarySearch = (arr, elm, compare) ->
   m = 0
   n = arr.length - 1
