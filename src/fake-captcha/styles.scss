@@ -1,0 +1,56 @@
+body {
+  font-size: 13px;
+}
+
+#wrapper {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 3px solid #ccc;
+  min-width: 25em;
+  width: 60%;
+}
+
+th {
+  white-space: nowrap;
+  text-align: left;
+  background-color: #def;
+}
+
+b {
+  color: red;
+}
+
+th,
+td {
+  padding: 0.75em 1em;
+  border: solid #ccc;
+  border-width: 1px 0;
+}
+
+td[colspan] {
+  text-align: center;
+}
+
+input {
+  padding: 0.75em;
+  width: 80%;
+}
+
+button {
+  color: #333;
+  font-size: 120%;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #0df;
+  margin: 0.25em 0;
+  padding: 0.5em 0;
+  border: 1px solid #0ae;
+  border-radius: 4px;
+  width: 12em;
+  background-color: #0bf;
+  background-image: linear-gradient(to bottom, #0cf 0%, #0cf 50%, #0bf 50%, #0be 100%);
+}
