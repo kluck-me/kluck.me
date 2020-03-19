@@ -10,6 +10,7 @@
     "coffeescript": "2.5.1",
     "gh-pages": "2.2.0",
     "parcel-bundler": "1.12.4",
+    "prettier": "1.19.1",
     "pug": "2.0.4",
     "sass": "1.26.3",
     "stylus": "0.54.7",
