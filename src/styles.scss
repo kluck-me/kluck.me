@@ -1,3 +1,8 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font: 18px / 1.234 'Shrikhand', cursive;
@@ -11,11 +16,13 @@ body {
     opacity: 0;
   }
 }
+
 .wrapper {
   padding: 0 2em;
   overflow: hidden;
   float: left;
   width: 100%;
+  min-height: 100%;
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='3' height='3'><rect width='3' height='3' fill='%23ffffff' opacity='0.25'/><rect width='1' height='3' fill='%23ffffff' opacity='0.25' x='2'/><rect width='3' height='1' fill='%23ffffff' opacity='0.25' y='2'/></svg>");
   box-sizing: border-box;
   transition: opacity linear 0.25s;
