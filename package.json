@@ -7,6 +7,12 @@
     "deploy": "npm run build && gh-pages -d dist",
     "format": "prettier --write '**/*.{css,less,scss,graphql,gql,html,js,jsx,json,md,markdown,mdown,mkdn,mdx,ts,tsx,vue,yaml,yml}'"
   },
+  "dependencies": {
+    "promise-worker": "2.0.1",
+    "react": "16.13.0",
+    "react-dom": "16.13.0",
+    "reactstrap": "8.0.1"
+  },
   "devDependencies": {
     "autoprefixer": "9.7.4",
     "gh-pages": "2.2.0",
@@ -15,11 +21,5 @@
     "pug": "2.0.4",
     "sass": "1.26.3",
     "typescript": "3.8.3"
-  },
-  "dependencies": {
-    "promise-worker": "2.0.1",
-    "react": "16.13.0",
-    "react-dom": "16.13.0",
-    "reactstrap": "8.4.1"
   }
 }

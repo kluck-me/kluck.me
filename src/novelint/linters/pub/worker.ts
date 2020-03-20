@@ -155,7 +155,10 @@ const formatters: Formatters = {
           : m.replace(/[Ａ-Ｚａ-ｚ]+/g, toHanCallback)
       )
   ),
-  asciiMark: cases((s) => s, (s) => s.replace(/[\!-\/\:-\@\[-\`\{-\~]+/g, toZenCallback)),
+  asciiMark: cases(
+    (s) => s,
+    (s) => s.replace(/[\!-\/\:-\@\[-\`\{-\~]+/g, toZenCallback)
+  ),
 };
 
 export const lint = createSyncLint(linters, rules);
