@@ -4,7 +4,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-(function($) {
+(function ($) {
   const anime_urls = [];
   const anime_pushed_urls = {};
   const anime_interval = 3000;
@@ -17,14 +17,14 @@
       })
     );
 
-  const anime_push = function(url) {
+  const anime_push = function (url) {
     if (/\.gif$/.test(url) && !anime_pushed_urls[url]) {
       anime_pushed_urls[url] = true;
       anime_urls.push(url);
     }
   };
 
-  const anime_show = function(index) {
+  const anime_show = function (index) {
     $(`#anime${index}`).attr('class', 'anime anime-show');
     index = (index + 1) % 3;
     $(`#anime${index}`)
@@ -35,7 +35,7 @@
   };
 
   $.when(...Array.from(anime_ajax_by_tags(['gif', 'gifs', 'anime', 'anime-gif']) || [])).done(
-    function() {
+    function () {
       for (let arg of arguments) {
         for (let response of arg[0].response) {
           if (response.photos) {
@@ -46,7 +46,7 @@
         }
       }
 
-      $(function() {
+      $(function () {
         $('body').append(
           '<div class="anime anime-hide" id="anime0">',
           '<div class="anime anime-hide" id="anime1">',
@@ -55,7 +55,7 @@
         anime_show(1);
         anime_show(2);
         let index = 0;
-        setInterval(function() {
+        setInterval(function () {
           anime_show(index);
           index = (index + 1) % 3;
         }, anime_interval);
@@ -63,11 +63,11 @@
     }
   );
 
-  $(function() {
+  $(function () {
     const $body = $('body');
 
     let tid = null;
-    const show_content = function() {
+    const show_content = function () {
       $body.removeClass('hide-content');
       clearTimeout(tid);
     };
@@ -75,12 +75,12 @@
     window.onfocus = show_content;
     $body
       .mouseover(show_content)
-      .mouseout(function() {
-        tid = setTimeout(function() {
+      .mouseout(function () {
+        tid = setTimeout(function () {
           $body.addClass('hide-content');
         }, 1000);
       })
-      .click(function(evt) {
+      .click(function (evt) {
         const $target = $(evt.target);
         if (
           $body.hasClass('hide-content') ||

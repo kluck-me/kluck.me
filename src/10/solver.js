@@ -4,11 +4,11 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const pp = function(...args) {
+const pp = function (...args) {
   self.postMessage({ type: 'debug', value: args });
 };
 
-const time = function(fn) {
+const time = function (fn) {
   const t = Date.now();
   fn();
   return Date.now() - t;
@@ -189,7 +189,7 @@ class Node {
   }
 }
 
-const expandUnary = function(x, fn) {
+const expandUnary = function (x, fn) {
   if (x.sqrtable()) {
     fn(x.sqrt());
   }
@@ -198,19 +198,19 @@ const expandUnary = function(x, fn) {
   }
 };
 
-var generateUnary = function(level, x, fn) {
+var generateUnary = function (level, x, fn) {
   fn(x);
   fn(x.minus());
   if (level > 0) {
-    expandUnary(x, function(y) {
+    expandUnary(x, function (y) {
       generateUnary(level - 1, y, fn);
     });
   }
 };
 
-const generateBinary = function(level, as, bs, fn) {
-  generateExpr(level, as, function(a) {
-    generateExpr(level, bs, function(b) {
+const generateBinary = function (level, as, bs, fn) {
+  generateExpr(level, as, function (a) {
+    generateExpr(level, bs, function (b) {
       if (!a.calcable(b)) {
         return;
       }
@@ -227,7 +227,7 @@ const generateBinary = function(level, as, bs, fn) {
   });
 };
 
-var generateExpr = function(level, xs, fn) {
+var generateExpr = function (level, xs, fn) {
   switch (xs.length) {
     case 0:
       throw new Error();
@@ -237,7 +237,7 @@ var generateExpr = function(level, xs, fn) {
       break;
     default:
       for (let i = 1, end = xs.length; i < end; i++) {
-        generateBinary(level, xs.slice(0, i), xs.slice(i, +xs.length + 1 || undefined), function(
+        generateBinary(level, xs.slice(0, i), xs.slice(i, +xs.length + 1 || undefined), function (
           x
         ) {
           generateUnary(level, x, fn);
@@ -246,12 +246,12 @@ var generateExpr = function(level, xs, fn) {
   }
 };
 
-const finder = function(answer, numbers, level, fn) {
+const finder = function (answer, numbers, level, fn) {
   let found = false;
   generateExpr(
     level,
     numbers.map((n) => new Node('number', n)),
-    function(x) {
+    function (x) {
       if (answer === x.value) {
         found = true;
         fn(x);
@@ -263,10 +263,10 @@ const finder = function(answer, numbers, level, fn) {
 
 self.addEventListener(
   'message',
-  function(e) {
+  function (e) {
     pp(
-      time(function() {
-        const fn = function(x) {
+      time(function () {
+        const fn = function (x) {
           self.postMessage({ type: 'result', value: x.toString() });
         };
         for (let i = 0; i <= 3; i++) {

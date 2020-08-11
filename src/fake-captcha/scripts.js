@@ -7,7 +7,7 @@
  */
 const rand = (min, max) => Math.floor(Math.random() * (max + 1 - min)) + min;
 
-const createTextImageData = function(str, w, h) {
+const createTextImageData = function (str, w, h) {
   const canvas = document.createElement('canvas');
   canvas.width = w;
   canvas.height = h;
@@ -22,7 +22,7 @@ const createTextImageData = function(str, w, h) {
   return ctx.getImageData(0, 0, w, h);
 };
 
-const updateCaptcha = function(canvas, text, fgcolor, bgcolor) {
+const updateCaptcha = function (canvas, text, fgcolor, bgcolor) {
   const ctx = canvas.getContext('2d');
   const w = canvas.width;
   const h = canvas.height;
@@ -84,7 +84,7 @@ const updateCaptcha = function(canvas, text, fgcolor, bgcolor) {
   ctx.putImageData(dst, 0, 0);
 };
 
-const reload = function() {
+const reload = function () {
   const text = $('#text').val();
   updateCaptcha(
     $('#captcha')[0],

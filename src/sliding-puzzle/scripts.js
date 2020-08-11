@@ -5,7 +5,7 @@
  */
 const Solver = require('../common/solver.js');
 
-const get_results = function(board, actions) {
+const get_results = function (board, actions) {
   const moves = {
     u: { x: 0, y: -1 },
     r: { x: 1, y: 0 },

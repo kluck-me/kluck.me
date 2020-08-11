@@ -4,11 +4,11 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-let pp = function(...args) {
+let pp = function (...args) {
   self.postMessage({ type: 'debug', value: args });
 };
 
-const time = function(fn) {
+const time = function (fn) {
   const t = Date.now();
   fn();
   return Date.now() - t;
@@ -185,7 +185,7 @@ class Puzzle {
 }
 Puzzle.initClass();
 
-const finder = function(board) {
+const finder = function (board) {
   const done = {};
   const q = new PriorityQueue();
   let p = new Puzzle();
@@ -227,9 +227,9 @@ const finder = function(board) {
 if (typeof self !== 'undefined') {
   self.addEventListener(
     'message',
-    function(e) {
+    function (e) {
       pp(
-        time(function() {
+        time(function () {
           try {
             self.postMessage({ type: 'result', value: finder(e.data.board) });
           } catch (error) {
@@ -245,7 +245,7 @@ if (typeof self !== 'undefined') {
 } else {
   pp = console.log.bind(console);
   pp(
-    time(function() {
+    time(function () {
       pp(
         finder([
           [1, 7, 2, 4],

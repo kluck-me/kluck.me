@@ -4,11 +4,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const tolf = (s) => s.replace(/\r\n?/g, '\n');
-const h = (s) =>
-  ('' + s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+const h = (s) => ('' + s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const mark = (lines) =>
   lines
     .split('\n')

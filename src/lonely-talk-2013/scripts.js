@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const rgb2hsv = function(rgb) {
+const rgb2hsv = function (rgb) {
   const r = rgb[0];
   const g = rgb[1];
   const b = rgb[2];
@@ -26,7 +26,7 @@ const rgb2hsv = function(rgb) {
   return [h, s, maxc];
 };
 
-const hsv2rgb = function(hsv) {
+const hsv2rgb = function (hsv) {
   let b, g, r;
   let h = hsv[0];
   let s = hsv[1];
@@ -80,7 +80,7 @@ const hsv2rgb = function(hsv) {
   return [Math.round(r), Math.round(g), Math.round(b)];
 };
 
-const genCanvas = function(img) {
+const genCanvas = function (img) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const w = (canvas.width = img.width);
@@ -110,12 +110,12 @@ let tid = null;
 
 const img = new Image();
 img.src = require('./kluckfack.png');
-img.onload = function() {
+img.onload = function () {
   bodyStyle.backgroundImage = `url(${genCanvas(img).toDataURL('image/png')})`;
   $window
-    .scroll(function() {
+    .scroll(function () {
       clearTimeout(tid);
-      return (tid = setTimeout(function() {
+      return (tid = setTimeout(function () {
         const hsv = rgb2hsv(baseColor);
         hsv[0] += ($window.scrollTop() / $(document).height()) * 360;
         bodyStyle.backgroundColor = `rgb(${hsv2rgb(hsv).join(',')})`;

@@ -5,10 +5,10 @@
  */
 const crc32 = require('./crc32.js');
 
-const hashed_scoring_users = (function() {
+const hashed_scoring_users = (function () {
   const code = require('./code.js');
   const h = {};
-  code.split('x').forEach(function(hashes, score) {
+  code.split('x').forEach(function (hashes, score) {
     score = (score + 1) / 2.0;
     for (let hash of hashes.match(/.{8}/g) || []) {
       h[hash] = score;

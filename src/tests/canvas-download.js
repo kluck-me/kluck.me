@@ -4,13 +4,13 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const load_image = (data) =>
-  new Promise(function(resolve, reject) {
+  new Promise(function (resolve, reject) {
     const img = (data.img = new Image());
     img.crossOrigin = 'anonymous';
-    img.onload = function() {
+    img.onload = function () {
       resolve(data);
     };
-    img.onerror = function() {
+    img.onerror = function () {
       reject(data);
     };
     img.src = data.url;
@@ -33,7 +33,7 @@ Promise.all(
       w: 300,
     },
   ].map(load_image)
-).then(function(dataset) {
+).then(function (dataset) {
   const ctx = $('canvas')[0].getContext('2d');
   for (let i = dataset.length - 1; i >= 0; i--) {
     const d = dataset[i];
@@ -41,8 +41,8 @@ Promise.all(
   }
 });
 
-$('button').click(function() {
-  $('canvas')[0].toBlob(function(blob) {
+$('button').click(function () {
+  $('canvas')[0].toBlob(function (blob) {
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
     link.download = 'canvas-download.png';

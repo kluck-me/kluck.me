@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const calc = function(debt, rate, start, finish) {
+const calc = function (debt, rate, start, finish) {
   if (start > finish) {
     return null;
   }
@@ -22,7 +22,7 @@ const calc = function(debt, rate, start, finish) {
   return debt + interest;
 };
 
-const update = function(today, debt_jpy, rate) {
+const update = function (today, debt_jpy, rate) {
   const jpy = calc(debt_jpy, rate, new Date(2016, 4, 1), today);
 
   if (!jpy) {
@@ -38,7 +38,7 @@ const update = function(today, debt_jpy, rate) {
     q: 'select * from yahoo.finance.xchange where pair in ("JPYTWD")',
     env: 'store://datatables.org/alltableswithkeys',
     format: 'json',
-  }).then(function(data) {
+  }).then(function (data) {
     const trate = parseFloat(data.query.results.rate.Rate);
     $('#twd').text(`（${((jpy * trate * 100) | 0) / 100}台湾ドル）`);
   });

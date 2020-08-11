@@ -5,7 +5,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const binarySearch = function(arr, elm, compare) {
+const binarySearch = function (arr, elm, compare) {
   let m = 0;
   let n = arr.length - 1;
   while (m <= n) {
@@ -23,7 +23,7 @@ const binarySearch = function(arr, elm, compare) {
 };
 
 const fetchLangs = (videoId) =>
-  new Promise(function(resolve, reject) {
+  new Promise(function (resolve, reject) {
     if (!videoId) {
       reject();
       return;
@@ -35,9 +35,9 @@ const fetchLangs = (videoId) =>
         v: videoId,
       },
       dataType: 'xml',
-    }).then(function(doc) {
+    }).then(function (doc) {
       const langs = {};
-      $('transcript_list>track', doc).each(function() {
+      $('transcript_list>track', doc).each(function () {
         const $track = $(this);
         const code = $track.attr('lang_code');
         langs[code] = {
@@ -53,9 +53,9 @@ const fetchLangs = (videoId) =>
     }, reject);
   });
 
-const getSubs = function(langs, codes) {
+const getSubs = function (langs, codes) {
   const subs = {};
-  codes.forEach(function(code) {
+  codes.forEach(function (code) {
     const lang = langs[code];
     if (!lang) {
       return;
@@ -65,8 +65,8 @@ const getSubs = function(langs, codes) {
       url: '//video.google.com/timedtext',
       data: lang.params,
       dataType: 'xml',
-    }).done(function(doc) {
-      $('transcript>text', doc).each(function() {
+    }).done(function (doc) {
+      $('transcript>text', doc).each(function () {
         const $text = $(this);
         const start = parseFloat($text.attr('start'));
         const dur = parseFloat($text.attr('dur'));
@@ -132,7 +132,7 @@ window.vm = new Vue({
         if (this.subs) {
           const arr = this.subs[code];
           if (cur != null && arr) {
-            const j = binarySearch(arr, cur, function(t, v) {
+            const j = binarySearch(arr, cur, function (t, v) {
               if (t > v.end) {
                 return 1;
               } else if (t < v.start) {
@@ -152,22 +152,22 @@ window.vm = new Vue({
 });
 
 // player
-var updateCurrentTime = function() {
+var updateCurrentTime = function () {
   window.vm.updateSubs(__guardMethod__(player, 'getCurrentTime', (o) => o.getCurrentTime()));
   requestAnimationFrame(updateCurrentTime);
 };
 
 updateCurrentTime();
 
-const onPlayerReady = function({ target: player }) {
+const onPlayerReady = function ({ target: player }) {
   $('#modal-conf').modal('show');
 
   // debug code
   if (location.hostname === 'localhost') {
     const delay = (fn) => setTimeout(fn, 500);
-    delay(function() {
+    delay(function () {
       window.vm.$data.url = 'https://www.youtube.com/watch?v=WqUBWz3YR7s';
-      return delay(function() {
+      return delay(function () {
         window.vm.$data.selectedCodes = { en: true, 'zh-TW': true };
         window.vm.$data.url = 'https://www.youtube.com/watch?v=4cQ4ZQn-KRA';
         return delay(() => $('#modal-conf .btn-primary').click());
@@ -176,11 +176,11 @@ const onPlayerReady = function({ target: player }) {
   }
 };
 
-const onPlayerStateChange = function({ target: player }) {
+const onPlayerStateChange = function ({ target: player }) {
   window.vm.fetchSubs(player.getVideoData().video_id);
 };
 
-window.onYouTubeIframeAPIReady = function() {
+window.onYouTubeIframeAPIReady = function () {
   window.player = new YT.Player('ytplayer', {
     height: '480',
     width: '853',

@@ -20,7 +20,7 @@ window.vm = new Vue({
         { time: 6 <= (middle = jpt.hour()) && middle < 22 ? jpt : ust, tz: 'MLT' },
         { time: ust },
       ];
-      this.clocks.forEach(function(clock) {
+      this.clocks.forEach(function (clock) {
         if (!clock.tz) {
           clock.tz = clock.time.format('z');
         }

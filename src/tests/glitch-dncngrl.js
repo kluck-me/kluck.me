@@ -1,6 +1,6 @@
 const prefix = 'glitch-dncngrl';
 
-$.fn.glitchDncngrl = function() {
+$.fn.glitchDncngrl = function () {
   const display = this.css('display');
   $('<div>')
     .addClass(`${prefix}-clone`)
@@ -11,20 +11,14 @@ $.fn.glitchDncngrl = function() {
       height: `${this.height()}px`,
     })
     .append(
-      $('<div>')
-        .addClass(`${prefix}-red`)
-        .append(this.clone()),
-      $('<div>')
-        .addClass(`${prefix}-green`)
-        .append(this.clone()),
-      $('<div>')
-        .addClass(`${prefix}-blue`)
-        .append(this.clone())
+      $('<div>').addClass(`${prefix}-red`).append(this.clone()),
+      $('<div>').addClass(`${prefix}-green`).append(this.clone()),
+      $('<div>').addClass(`${prefix}-blue`).append(this.clone())
     )
-    .mouseenter(function() {
+    .mouseenter(function () {
       $(this).addClass(`${prefix}-pattern-${(Math.random() * 3 + 1) | 0}`);
     })
-    .mouseleave(function() {
+    .mouseleave(function () {
       $(this).removeClass(`${prefix}-pattern-1 ${prefix}-pattern-2 ${prefix}-pattern-3`);
     })
     .insertBefore(this);
@@ -32,11 +26,11 @@ $.fn.glitchDncngrl = function() {
   this.css('display', 'none');
 };
 
-$(`.${prefix}`).each(function() {
+$(`.${prefix}`).each(function () {
   if (this.naturalWidth) {
     $(this).glitchDncngrl();
   } else {
-    $(this).on('load', function() {
+    $(this).on('load', function () {
       $(this).glitchDncngrl();
     });
   }

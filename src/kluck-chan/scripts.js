@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-$(document).on('click', 'a', function() {
+$(document).on('click', 'a', function () {
   const $this = $(this);
   if ($this.hasClass('clicked')) {
     return;

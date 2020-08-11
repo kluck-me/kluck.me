@@ -3,8 +3,8 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-(function($) {
-  const typingTable = (function() {
+(function ($) {
+  const typingTable = (function () {
     const table = { ん: ['ｎ'] };
     const gyous = {
       ｋ: 'かきくけこ',
@@ -39,7 +39,7 @@
     return table;
   })();
 
-  const toTypings = function(text) {
+  const toTypings = function (text) {
     const ss = text.match(/.[ゃゅょ]|./g);
     const typings = [];
     let lastTyping = '';
@@ -61,25 +61,23 @@
   };
 
   const delay = (ms, fn, that) =>
-    function() {
+    function () {
       if (fn) {
-        setTimeout(function() {
+        setTimeout(function () {
           fn.call(that || this);
         }, ms || 0);
       }
     };
 
-  const $newNode = function(options, name) {
+  const $newNode = function (options, name) {
     const tagName = options[`${name}TagName`];
     const className = options[`${name}ClassName`];
     return $(`<${tagName}>`).addClass(className);
   };
 
-  const runInputAs = function(name, inputs, options, $base, updated, fn) {
-    const $node = $newNode(options, 'input')
-      .addClass(options[`${name}ClassName`])
-      .appendTo($base);
-    var run = function(i) {
+  const runInputAs = function (name, inputs, options, $base, updated, fn) {
+    const $node = $newNode(options, 'input').addClass(options[`${name}ClassName`]).appendTo($base);
+    var run = function (i) {
       if (!inputs[i]) {
         fn && fn();
         return;
@@ -104,11 +102,11 @@
         }
       }
 
-      var update = function(k) {
+      var update = function (k) {
         $node.text(typings[k]);
         updated && updated();
         if (typings[k + 1]) {
-          delay(options.typeSpeed, function() {
+          delay(options.typeSpeed, function () {
             update(k + 1);
           })();
         } else {
@@ -116,40 +114,35 @@
         }
       };
 
-      delay(options.typeStartSpeed, function() {
+      delay(options.typeStartSpeed, function () {
         update(0);
       })();
     };
     run(0);
   };
 
-  const runConvert = function(convsSet, options, $base, updated, fn) {
+  const runConvert = function (convsSet, options, $base, updated, fn) {
     $base.empty();
     for (let convs of convsSet) {
-      $newNode(options, 'input')
-        .text(convs[0])
-        .appendTo($base);
+      $newNode(options, 'input').text(convs[0]).appendTo($base);
     }
     const $convs = $base.find(`>.${options.inputClassName}`);
     $convs.addClass(options.typingClassName);
     $convs.eq(0).addClass(options.convertClassName);
     updated && updated();
-    var update = function(i, j) {
+    var update = function (i, j) {
       if (convsSet[i][j]) {
         $convs.removeClass(options.convertClassName);
-        $convs
-          .eq(i)
-          .addClass(options.convertClassName)
-          .text(convsSet[i][j]);
+        $convs.eq(i).addClass(options.convertClassName).text(convsSet[i][j]);
         updated && updated();
-        delay(options.convertSpeed, function() {
+        delay(options.convertSpeed, function () {
           update(i, j + 1);
         })();
         return;
       }
       for (let k = i + 1, end = convsSet.length; k < end; k++) {
         if (convsSet[k].length > 1) {
-          delay(options.convertJumpSpeed, function() {
+          delay(options.convertJumpSpeed, function () {
             update(i + 1, 0);
           })();
           return;
@@ -157,34 +150,34 @@
       }
       fn && fn();
     };
-    delay(options.convertJumpSpeed, function() {
+    delay(options.convertJumpSpeed, function () {
       update(0, 1);
     })();
   };
 
-  const runComplete = function(options, $base, updated) {
+  const runComplete = function (options, $base, updated) {
     $base
       .find(`>.${options.inputClassName}`)
       .removeClass(`${options.typingClassName} ${options.convertClassName}`);
     updated && updated();
   };
 
-  var appendInputs = function(index, options, $caret, updated, comp) {
+  var appendInputs = function (index, options, $caret, updated, comp) {
     if (!options.inputs[index]) {
       comp && comp();
       return;
     }
 
-    const runComp = function() {
+    const runComp = function () {
       runComplete(options, $base, updated);
-      delay(options.typeStartSpeed, function() {
+      delay(options.typeStartSpeed, function () {
         appendInputs(index + 1, options, $caret, updated, comp);
       })();
     };
     var $base = $newNode(options, 'base').insertBefore($caret);
 
     if (Array.isArray(options.inputs[index][0])) {
-      runInputAs('typing', options.inputs[index][0], options, $base, updated, function() {
+      runInputAs('typing', options.inputs[index][0], options, $base, updated, function () {
         if (options.inputs[index][1]) {
           runConvert(
             options.inputs[index][1],
@@ -202,11 +195,11 @@
     }
   };
 
-  const removeInputsBefore = function($caret, options, updated, comp) {
+  const removeInputsBefore = function ($caret, options, updated, comp) {
     const caret = $caret[0];
-    var removeFromLast = function(node, fn) {
+    var removeFromLast = function (node, fn) {
       if (node.nodeType !== 3) {
-        removeFromLast(node.lastChild, function() {
+        removeFromLast(node.lastChild, function () {
           if (!node.lastChild) {
             node.parentNode.removeChild(node);
           }
@@ -216,9 +209,9 @@
         return;
       }
 
-      var removeText = function(i) {
+      var removeText = function (i) {
         if (i >= 0) {
-          delay(options.removeSpeed, function() {
+          delay(options.removeSpeed, function () {
             node.nodeValue = node.nodeValue.slice(0, i);
             updated && updated();
             removeText(i - 1);
@@ -234,7 +227,7 @@
       removeText(node.nodeValue.length - 1);
     };
 
-    var removeAll = function() {
+    var removeAll = function () {
       if (caret.previousSibling) {
         removeFromLast(caret.previousSibling, removeAll);
       } else {
@@ -244,7 +237,7 @@
     removeAll();
   };
 
-  const parseArguments = function(args, ...types) {
+  const parseArguments = function (args, ...types) {
     const options = {};
     for (let arg of args) {
       if ($.isPlainObject(arg)) {
@@ -263,7 +256,7 @@
     return options;
   };
 
-  $.fn.jatyping = function() {
+  $.fn.jatyping = function () {
     const options = $.extend(
       {},
       $.fn.jatyping.defaults,
@@ -276,14 +269,14 @@
     );
     $.fn.jatyping.assertOptions(options);
 
-    return this.each(function() {
+    return this.each(function () {
       let comp, updated;
       const that = this;
       if (options.complete) {
         comp = delay(options.completeDelay, options.complete, that);
       }
       if (options.update) {
-        updated = function() {
+        updated = function () {
           options.update.call(that);
         };
       }
@@ -299,7 +292,7 @@
     });
   };
 
-  $.fn.jatyping.assertOptions = function(options) {
+  $.fn.jatyping.assertOptions = function (options) {
     for (let k in this.defaults) {
       const v = this.defaults[k];
       if (!v || /[^a-z0-9_-]/i.test(v)) {

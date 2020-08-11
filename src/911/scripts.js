@@ -7,7 +7,7 @@ const params = new URLSearchParams(window.location.search);
 const video_prefix = params.get('prefix') || 'NHK';
 const video_suffix = params.get('suffix') || 'Japan';
 
-const get_now = function() {
+const get_now = function () {
   const date = new Date();
   if (process.env.NODE_ENV === 'development') {
     date.setTime(date.getTime() + 2 * 24 * 60 * 60 * 1000);
@@ -19,7 +19,7 @@ const video_sec = process.env.NODE_ENV === 'development' ? 20 : 30 * 60;
 
 const zz = (s) => `${s}`.padStart(2, '0');
 
-const get_info = function(start_date) {
+const get_info = function (start_date) {
   // 20010911_120000 - 20010917_060000
   const video_mon = start_date.getUTCMonth() + 1;
   const video_day = start_date.getUTCDate();
@@ -51,7 +51,7 @@ const get_info = function(start_date) {
 
 const infos = [];
 
-const add_video = function(info) {
+const add_video = function (info) {
   const $video = $('<video>');
   info.video = $video[0];
   info.canplay = false;
@@ -61,13 +61,13 @@ const add_video = function(info) {
       src: info.url,
       controls: process.env.NODE_ENV === 'development',
     })
-    .on('canplay', function() {
+    .on('canplay', function () {
       info.canplay = true;
     })
     .appendTo('#videos');
 };
 
-const add_info = function(date) {
+const add_info = function (date) {
   const info = get_info(date);
   if (info) {
     add_video(info);
@@ -76,24 +76,24 @@ const add_info = function(date) {
   }
 };
 
-var play_first_info = function() {
+var play_first_info = function () {
   const info = infos.shift();
   if (!info) {
     return;
   }
   const next_start = add_info(info.end);
-  const next_play = function() {
+  const next_play = function () {
     $(info.video).css('z-index', -1);
     play_first_info();
     $(info.video).remove();
     info.video = null;
   };
-  const info_play = function() {
+  const info_play = function () {
     $(info.video).css('z-index', 2);
     info.video.play();
   };
   $(info.video)
-    .on('timeupdate', function() {
+    .on('timeupdate', function () {
       if (next_start < get_now()) {
         next_play();
       }
@@ -105,9 +105,9 @@ var play_first_info = function() {
   info_play();
 };
 
-$('#videos').one('click', function() {
+$('#videos').one('click', function () {
   $('#videos').empty();
-  var tid = setInterval(function() {
+  var tid = setInterval(function () {
     if (add_info(get_now())) {
       clearInterval(tid);
       play_first_info();

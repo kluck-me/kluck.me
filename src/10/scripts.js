@@ -5,7 +5,7 @@
  */
 const Solver = require('../common/solver.js');
 
-const calc_exprs_score = function(expr) {
+const calc_exprs_score = function (expr) {
   let score = 0;
   const table = { '+': 1, '-': 1, '*': 2, '/': 2, '^': 10, '√': 11, '!': 12 };
   for (let c of expr.replace(/[\d()]+/g, '')) {

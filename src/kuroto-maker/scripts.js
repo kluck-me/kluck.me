@@ -1,11 +1,11 @@
-const fill_circle = function(ctx, x, y, size) {
+const fill_circle = function (ctx, x, y, size) {
   ctx.beginPath();
   ctx.arc(x, y, size, 0, Math.PI * 2, false);
   ctx.closePath();
   ctx.fill();
 };
 
-const fill_spiral_circle = function(ctx, x0, y0, stv, ssize) {
+const fill_spiral_circle = function (ctx, x0, y0, stv, ssize) {
   const tv = parseFloat(stv);
   const a = 6 / Math.PI;
   const t = Math.PI * tv;
@@ -22,7 +22,7 @@ const inital_data = {
 
 const img = new Image();
 img.src = require('./kuroto.jpg');
-img.onload = function() {
+img.onload = function () {
   window.vm = new Vue({
     el: '#vue',
     data: Object.assign({}, inital_data),
