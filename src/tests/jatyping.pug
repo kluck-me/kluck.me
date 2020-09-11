@@ -4,22 +4,34 @@ append meta
   title jatyping
 
 append contents
-  div#jatyping-css-test(style='display:none')
+  div#jatyping-js-test
+    p#jatyping
+    p#jatyping-text
+      span(data-jatyping=`[
+        [
+          ["にほｇｎ", "にほんごの"],
+          [["にほん", "日本"], ["ご", "後", "五", "御", "語"], ["の"]]
+        ],
+        [
+          ["にゅりょ", "にゅうりょくができる"],
+          [["入力が"], ["できる", "出来る"]]
+        ]
+      ]`)  日本語の入力が出来る
+      b(data-jatyping=`[["typing.hs", "typing.js"]]`) typing.js
+      span(data-jatyping=`[[["です"]]]`) です
+
+  div#jatyping-css-test
     p
-      span.jatyping
-        span.jatyping-input 日本語
-      span.jatyping
-        span.jatyping-input.jatyping-typing にゅうりょく
+      span.jatyping-input 日本語
+      span.jatyping-input
+        span.jatyping-typing にゅうりょく
       span.jatyping-caret
 
     p
-      span.jatyping
-        span.jatyping-input.jatyping-typing 漢字
-        span.jatyping-input.jatyping-typing.jatyping-convert かな
-        span.jatyping-input.jatyping-typing 変換
-
-  div#jatyping-js-test
-    p#jatyping
+      span.jatyping-input
+        span.jatyping-typing 漢字
+        span.jatyping-typing.jatyping-convert かな
+        span.jatyping-typing 変換
 
 append styles
   link(rel='stylesheet' href='../common/jatyping.scss')
@@ -60,3 +72,5 @@ append scripts
       );
     }
     main();
+
+    $('#jatyping-text').jatyping();

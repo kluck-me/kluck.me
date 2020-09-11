@@ -1,15 +1,18 @@
 .jatyping-input {
-  &.jatyping-typing {
+  .jatyping-typing {
     border-bottom: 1px solid;
+
     &.jatyping-convert {
       border-bottom: 2px solid;
       background-color: cyan;
     }
   }
 }
+
 .jatyping-caret {
   opacity: 1;
   animation: jatyping-caret-blink 0.7s infinite;
+
   &::before {
     content: '|';
   }
