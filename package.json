@@ -5,7 +5,6 @@
     "prebuild": "rimraf dist",
     "build": "parcel build --no-source-maps 'src/**/!(_)*.{html,pug}'",
     "postbuild": "cp src/{.nojekyll,CNAME} dist",
-    "deploy": "npm run build && gh-pages -d dist",
     "dev": "parcel serve 'src/**/!(_)*.{html,pug}'",
     "fix": "run-s -c fix:*",
     "fix:prettier": "prettier --write .",
