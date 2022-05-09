@@ -49,12 +49,14 @@ class Node {
       case 'div':
         return this.left.minus()[this.type](this.right); // -(a*b) -> (-a)*b
       default:
+        // -((-a)^(2b+1)) -> a^(2b+1)
         if (this.type === 'pow' && this.left.value < 0 && this.right.value % 2 === 1) {
           return this.left.minus().pow(this.right);
-        } // -((-a)^(2b+1)) -> a^(2b+1)
+        }
+        // -0 -> 0
         if (this.value === 0) {
           return this.clone();
-        } // -0 -> 0
+        }
         return new Node('minus', -this.value, this.clone());
     }
   }
@@ -147,7 +149,6 @@ class Node {
     switch (this.type) {
       case 'number':
         return this.value.toString();
-        break;
       case 'minus':
         result = `-${this.left.toString('-')}`;
         break;
@@ -231,17 +232,19 @@ var generateExpr = function (level, xs, fn) {
   switch (xs.length) {
     case 0:
       throw new Error();
-      break;
     case 1:
       generateUnary(level, xs[0], fn);
       break;
     default:
       for (let i = 1, end = xs.length; i < end; i++) {
-        generateBinary(level, xs.slice(0, i), xs.slice(i, +xs.length + 1 || undefined), function (
-          x
-        ) {
-          generateUnary(level, x, fn);
-        });
+        generateBinary(
+          level,
+          xs.slice(0, i),
+          xs.slice(i, +xs.length + 1 || undefined),
+          function (x) {
+            generateUnary(level, x, fn);
+          }
+        );
       }
   }
 };

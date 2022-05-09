@@ -1,11 +1,16 @@
 {
-  "name": "kluck.me",
   "private": true,
+  "name": "kluck.me",
   "scripts": {
-    "serve": "parcel serve 'src/**/!(_)*.{html,pug}'",
     "build": "rm -rf dist && parcel build --no-source-maps 'src/**/!(_)*.{html,pug}' && cp src/{.nojekyll,CNAME} dist",
     "deploy": "npm run build && gh-pages -d dist",
-    "format": "prettier --write ."
+    "fix": "run-s -c fix:*",
+    "fix:prettier": "prettier --write .",
+    "fix:prettier-package-json": "prettier-package-json --write",
+    "lint": "run-s -c lint:*",
+    "lint:prettier": "prettier --check .",
+    "lint:prettier-package-json": "prettier-package-json -l",
+    "serve": "parcel serve 'src/**/!(_)*.{html,pug}'"
   },
   "dependencies": {
     "promise-worker": "2.0.1",
