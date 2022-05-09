@@ -1,4 +1,4 @@
-.cache
+.parcel-cache
 dist
 node_modules
 src/kluck-chan/haikei-gunyagunya2.js

@@ -17,7 +17,9 @@ const calc_exprs_score = function (expr) {
 window.vm = new Vue({
   el: '#vue',
   data: {
-    solver: new Solver(() => new Worker('./solver.js')),
+    solver: new Solver(
+      () => new Worker(new URL('./solver.js', import.meta.url), { type: 'module' })
+    ),
     input: '',
     exprs: [],
   },

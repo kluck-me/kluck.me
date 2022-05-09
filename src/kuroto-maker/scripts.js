@@ -21,7 +21,7 @@ const inital_data = {
 };
 
 const img = new Image();
-img.src = require('./kuroto.jpg');
+img.src = new URL('./kuroto.jpg', import.meta.url);
 img.onload = function () {
   window.vm = new Vue({
     el: '#vue',

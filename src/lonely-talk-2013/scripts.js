@@ -109,7 +109,7 @@ const $window = $(window);
 let tid = null;
 
 const img = new Image();
-img.src = require('./kluckfack.png');
+img.src = new URL('./kluckfack.png', import.meta.url);
 img.onload = function () {
   bodyStyle.backgroundImage = `url(${genCanvas(img).toDataURL('image/png')})`;
   $window

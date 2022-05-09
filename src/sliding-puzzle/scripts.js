@@ -61,7 +61,9 @@ const get_results = function (board, actions) {
 window.vm = new Vue({
   el: '#vue',
   data: {
-    solver: new Solver(() => new Worker('./solver.js')),
+    solver: new Solver(
+      () => new Worker(new URL('./solver.js', import.meta.url), { type: 'module' })
+    ),
     input: `\
  1  7  2  4
  6  0 14  3

@@ -7,7 +7,7 @@ import { LinterOptions, LinterResult } from '../../types';
 
 export const { name, label, rules } = config;
 
-const linterWorker = new PromiseWorker(new Worker('../linter-worker.ts'));
+const linterWorker = new PromiseWorker(new Worker(new URL('../linter-worker.ts', import.meta.url), {type: 'module'}));
 
 export const lint = createAsyncLintWithTokens(name, linterWorker);
 
