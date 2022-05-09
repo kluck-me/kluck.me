@@ -1,0 +1,1 @@
+$("html").addClass("js");var addOpener=function(d,e,a){$("<a>").attr("href","javascript:void 0").text(d).click((function(){$(this).fadeOut((function(){$(this).remove()})),e.slideDown(a)})).appendTo(e.prev("p"))};$((function(){addOpener("もっと読む",$(".wrap>.hide")),addOpener("さらに読む",$(".wrap>.hide>.hide"),(function(){$("span.hide").show(),$("body").addClass("allopen")}))}));

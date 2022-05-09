@@ -1,0 +1,1 @@
+window.countdown=function(){var n=["s","m","h","d","y"],c=/{(.*?)%([a-z])(.*?)}/g;return function(r,t){for(var o={},a=[60,60,24,365,0],u=0;u<a.length;u++){var e=a[u],f=n[u];e?(t-=o[f]=t%e,t/=e):o[f]=t}return r.replace(c,(function(n,c,r,t){return o[r]?"".concat(c).concat(o[r]).concat(t):""}))}}();

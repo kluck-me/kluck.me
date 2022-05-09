@@ -1,0 +1,1 @@
+$(document).on("click","a",(function(){var c=$(this);if(!c.hasClass("clicked")){var a=c.find("img")[0];return $("body").css({backgroundImage:"url(".concat(a.src,")"),backgroundSize:"".concat(a.width,"px ").concat(a.height,"px")}),c.addClass("clicked"),!1}}));
