@@ -1,17 +1,17 @@
 extends ../common/_bootstrap-layout
 
-append meta
+block append meta
   title canvas-download
 
-append contents
+block append contents
   h1 canvas-download
 
-append rows
+block append rows
   .row
     .col-sm-12
       p
         button.btn.btn-primary Download
       canvas(width=300, height=300)
 
-append scripts
+block append scripts
   script(src='canvas-download.js')

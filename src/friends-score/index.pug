@@ -1,13 +1,13 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title フレンズすこあ
 
-append scripts
+block append scripts
   script(type='module', src='scripts.js')
 
-append contents
+block append contents
   h1 フレンズすこあ
   p.lead.text-secondary けものはいても　のけものはいない　ただしスコアが低い、テメーはダメだ
   #vue(v-cloak)
@@ -17,6 +17,6 @@ append contents
           span.input-group-text
             i.fa.fa-twitter
         input#screen-name.form-control(type='text', v-model='input')
-        .input-group-append#friends-score
+        #friends-score.input-group-append
           span.input-group-text
             i.fa(v-bind:class='star(score - i + 1)', v-for='i in 5')

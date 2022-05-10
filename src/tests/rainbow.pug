@@ -1,11 +1,11 @@
 extends ../common/_bootstrap-layout
 
-append meta
+block append meta
   title rainbow
 
-append contents
+block append contents
   h1
     span rainbow
 
-append styles
-  link(rel='stylesheet' href='rainbow.scss')
+block append styles
+  link(rel='stylesheet', href='rainbow.scss')

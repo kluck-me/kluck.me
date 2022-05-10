@@ -1,17 +1,17 @@
 extends ../common/_layout
 include ../common/_jquery
 
-append meta
+block append meta
   title クラックちゃん
 
-append styles
+block append styles
   link(rel='stylesheet', href='styles.scss')
 
-append scripts
+block append scripts
   script(src='haikei-gunyagunya2.js')
   script(src='scripts.js')
 
-append body
+block append body
   ul
     li
       a(href='https://twitter.com/kluck_me/status/475469610276626432', target='_blank')

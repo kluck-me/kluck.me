@@ -1,17 +1,22 @@
 extends ../common/_layout
 include ../common/_jquery
 
-append meta
+block append meta
   title 超絶書庫終了について
 
-append styles
-  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css', integrity='sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=', crossorigin='anonymous')
+block append styles
+  link(
+    rel='stylesheet',
+    href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
+    integrity='sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=',
+    crossorigin='anonymous'
+  )
   link(rel='stylesheet', href='styles.scss')
 
-append scripts
+block append scripts
   script(src='scripts.js')
 
-append body
+block append body
   .wrap
     h1 超絶書庫終了について
 

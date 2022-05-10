@@ -1,13 +1,13 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title Sentence Splitter
 
-append scripts
+block append scripts
   script(src='scripts.js')
 
-append contents
+block append contents
   #vue(v-cloak)
     h1 Sentence Splitter
     form(v-on:submit.stop.prevent='submit')
@@ -15,15 +15,15 @@ append contents
         textarea.form-control(placeholder='分割したい文章を入力してください', v-model='text')
       .form-group
         label(for='#f-count') 文字数
-        input.form-control#f-count(v-model='limit_config')
+        input#f-count.form-control(v-model='limit_config')
       .form-group
         label(for='#f-regex') 分割正規表現
-        input.form-control#f-regex(v-model='regex_config')
+        input#f-regex.form-control(v-model='regex_config')
       .form-group
         button.btn.btn-primary 分割
     div(v-if='blocks.length')
-      h2 {{blocks.length}}個に分割しました。
+      h2 {{ blocks.length }}個に分割しました。
       form(v-on:submit.stop.prevent='copy', v-for='(block, i) in blocks')
         .form-group
-          button.btn.btn-secondary {{i + 1}}番目をコピー
+          button.btn.btn-secondary {{ i + 1 }}番目をコピー
           textarea.form-control(name='text', rows='1', v-model='blocks[i]')

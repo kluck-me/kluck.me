@@ -1,13 +1,14 @@
 extends ../common/_bootstrap-layout
 
-append meta
+block append meta
   title jatyping
 
-append contents
-  div#jatyping-js-test
+block append contents
+  #jatyping-js-test
     p#jatyping
     p#jatyping-text
-      span(data-jatyping=`[
+      span(
+        data-jatyping=`[
         [
           ["にほｇｎ", "にほんごの"],
           [["にほん", "日本"], ["ご", "後", "五", "御", "語"], ["の"]]
@@ -16,11 +17,12 @@ append contents
           ["にゅりょ", "にゅうりょくができる"],
           [["入力が"], ["できる", "出来る"]]
         ]
-      ]`)  日本語の入力が出来る
-      b(data-jatyping=`[["typing.hs", "typing.js"]]`) typing.js
-      span(data-jatyping=`[[["です"]]]`) です
+      ]`
+      ) 日本語の入力が出来る
+      b(data-jatyping='[["typing.hs", "typing.js"]]') typing.js
+      span(data-jatyping='[[["です"]]]') です
 
-  div#jatyping-css-test
+  #jatyping-css-test
     p
       span.jatyping-input 日本語
       span.jatyping-input
@@ -33,10 +35,10 @@ append contents
         span.jatyping-typing.jatyping-convert かな
         span.jatyping-typing 変換
 
-append styles
-  link(rel='stylesheet' href='../common/jatyping.scss')
+block append styles
+  link(rel='stylesheet', href='../common/jatyping.scss')
 
-append scripts
+block append scripts
   script(type='module', src='../common/jatyping.js')
   script.
     // にほｇ 日本語の にゅりょく 入力が出来る typing.hs js です
@@ -45,25 +47,14 @@ append scripts
         [
           [
             ['にほｇｎ', 'にほんごの'],
-            [
-              ['にほん', '日本'],
-              ['ご', '後', '五', '御', '語'],
-              ['の']
-            ]
+            [['にほん', '日本'], ['ご', '後', '五', '御', '語'], ['の']],
           ],
           [
             ['にゅりょ', 'にゅうりょくができる'],
-            [
-              ['入力が'],
-              ['できる', '出来る']
-            ]
+            [['入力が'], ['できる', '出来る']],
           ],
-          [
-            'typing.hs', 'typing.js'
-          ],
-          [
-            ['です']
-          ]
+          ['typing.hs', 'typing.js'],
+          [['です']],
         ],
         function () {
           $(this).jatyping(main);

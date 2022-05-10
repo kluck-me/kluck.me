@@ -1,17 +1,17 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title 音読太郎
 
-append scripts
+block append scripts
   script(src='scripts.js')
 
-append contents
+block append contents
   h1 音読太郎
   p.lead.text-secondary 読める！読めるぞ！
 
-append rows
+block append rows
   #vue(v-cloak)
     .row
       .col-12
@@ -27,7 +27,7 @@ append rows
         .form-group
           label(for='f-voice') 声
           select#f-voice.form-control(v-model='selectedVoiceURI')
-            option(v-for='voice in voices', v-bind:value='voice.voiceURI') {{voice.name}}
+            option(v-for='voice in voices', v-bind:value='voice.voiceURI') {{ voice.name }}
         .form-group
           label(for='f-volume') ボリューム
           input#f-volume.form-control-range(type='range', min=0, max=1, step=0.1, v-model='volume')

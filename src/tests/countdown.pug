@@ -1,12 +1,12 @@
 extends ../common/_bootstrap-layout
 
-append meta
+block append meta
   title countdown
 
-append contents
+block append contents
   p#countdown
 
-append scripts
+block append scripts
   script(src='../common/countdown.js')
   script.
     $('#countdown').html(countdown('{%y年}{%d日}{%h時間}{%m分}{%s秒}', 289342751));

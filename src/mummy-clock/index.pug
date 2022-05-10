@@ -1,26 +1,26 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title マミー時計
 
-append scripts
+block append scripts
   script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js')
   script(src='//momentjs.com/downloads/moment-timezone-with-data.min.js')
   script(src='scripts.js')
 
-append contents
+block append contents
   h1 マミー時計
   p.lead.text-secondary これが在米広島人の生活リズムだ！
 
-append rows
+block append rows
   #vue.row(v-cloak)
     .col-sm-4(v-for='clock in clocks')
       .page-header
         h3
-          abbr {{clock.tz}}
-          small {{clock.tz_name}}
-      h1 {{clock.time.format('hh:mm:ss A')}}
+          abbr {{ clock.tz }}
+          small {{ clock.tz_name }}
+      h1 {{ clock.time.format('hh:mm:ss A') }}
   .row
     .col-12
       p.text-right

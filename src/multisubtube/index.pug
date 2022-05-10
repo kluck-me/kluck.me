@@ -1,13 +1,13 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title MultiSubTube
 
-append styles
+block append styles
   link(rel='stylesheet', href='styles.scss')
 
-append scripts
+block append scripts
   script(src='scripts.js')
   script(src='//www.youtube.com/iframe_api')
 
@@ -16,7 +16,7 @@ block body
     #player
       #ytplayer
     #subs
-      div(v-for='text in texts', v-html='text||"&nbsp;"')
+      div(v-for='text in texts', v-html='text || "&nbsp;"')
     button#open-conf(type='button', data-toggle='modal', data-target='#modal-conf')
       i.fa.fa-cog
 
@@ -30,12 +30,16 @@ block body
           .modal-body
             .form-group
               label(for='conf-url') URL
-              input.form-control#conf-url(type='text', v-model='url')
+              input#conf-url.form-control(type='text', v-model='url')
             .form-group(v-if='langs')
               label Subs
               .form-check(v-for='code in Object.keys(langs).sort()')
-                input.form-check-input(type='checkbox', v-bind:id='"conf-lang-"+code', v-model='selectedCodes[code]')
-                label.form-check-label(v-bind:for='"conf-lang-"+code', v-text='langs[code].label')
+                input.form-check-input(
+                  type='checkbox',
+                  v-bind:id='"conf-lang-" + code',
+                  v-model='selectedCodes[code]'
+                )
+                label.form-check-label(v-bind:for='"conf-lang-" + code', v-text='langs[code].label')
           .modal-footer
             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
             button.btn.btn-primary Play

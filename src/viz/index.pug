@@ -1,13 +1,13 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title viz
 
-append styles
-  link(rel='stylesheet' href='styles.scss')
+block append styles
+  link(rel='stylesheet', href='styles.scss')
 
-append scripts
+block append scripts
   script(src='//cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js')
   script(src='scripts.js')
 
@@ -20,10 +20,18 @@ block body
             button.btn.btn-secondary(v-on:click.stop.prevent='run', v-bind:disable='running')
               i.fa.fa-refresh
               = ' Run'
-            button.btn.btn-secondary(v-on:click.stop.prevent='pause', v-bind:disabled='!running', v-if='playing')
+            button.btn.btn-secondary(
+              v-on:click.stop.prevent='pause',
+              v-bind:disabled='!running',
+              v-if='playing'
+            )
               i.fa.fa-pause
               = ' Pause'
-            button.btn.btn-secondary(v-on:click.stop.prevent='play', v-bind:disabled='!running', v-if='!playing')
+            button.btn.btn-secondary(
+              v-on:click.stop.prevent='play',
+              v-bind:disabled='!running',
+              v-if='!playing'
+            )
               i.fa.fa-play
               = ' Play'
         textarea.form-control(v-model='input')

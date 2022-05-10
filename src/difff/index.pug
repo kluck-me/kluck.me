@@ -1,18 +1,18 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title difff
 
-append scripts
+block append scripts
   script(src='https://cdn.jsdelivr.net/npm/diff@4.0.1/dist/diff.min.js')
   script(src='scripts.js')
 
-append contents
+block append contents
   h1 difff
   p.lead.text-secondary クライアントサイドだけで動きます
 
-append rows
+block append rows
   #vue(v-cloak)
     .row
       .col-6(v-for='(_input, i) in inputs')
@@ -22,18 +22,18 @@ append rows
         .form-group.my-3
           button.btn.btn-sm.btn-success(v-on:click.stop.prevent='diff') 比較する
     .row(v-for='col_htmls in row_htmls')
-      .col-6(v-html='col_html' v-for='col_html in col_htmls')
+      .col-6(v-html='col_html', v-for='col_html in col_htmls')
     .row(v-if='stats.length')
       .col-6.text-muted(v-for='stat in stats')
         .my-3
-          div 文字数: {{stat.char_count}}
-          div 空白数: {{stat.space_count}} 空白込み文字数: {{stat.char_count + stat.space_count}}
-          div 改行数: {{stat.line_count}} 改行込み文字数: {{stat.char_count + stat.space_count + stat.line_count}}
-          div 単語数: {{stat.word_count}}
+          div 文字数: {{ stat.char_count }}
+          div 空白数: {{ stat.space_count }} 空白込み文字数: {{ stat.char_count + stat.space_count }}
+          div 改行数: {{ stat.line_count }} 改行込み文字数: {{ stat.char_count + stat.space_count + stat.line_count }}
+          div 単語数: {{ stat.word_count }}
     .row(v-if='global_stat')
       .col-12.text-muted
-        div(v-if='global_stat.total_char_count') 文字一致率: {{(100 * global_stat.same_char_count / global_stat.total_char_count).toFixed(2)}}%
-        div(v-if='global_stat.total_line_count') 行一致率: {{(100 * global_stat.same_line_count / global_stat.total_line_count).toFixed(2)}}%
+        div(v-if='global_stat.total_char_count') 文字一致率: {{ ((100 * global_stat.same_char_count) / global_stat.total_char_count).toFixed(2) }}%
+        div(v-if='global_stat.total_line_count') 行一致率: {{ ((100 * global_stat.same_line_count) / global_stat.total_line_count).toFixed(2) }}%
   .row
     .col-12
       p.text-right

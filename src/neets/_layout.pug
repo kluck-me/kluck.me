@@ -3,10 +3,16 @@ include ../common/_jquery
 
 block styles
   style.
-    #c, #r { display: none; }
-    #r, big big big { font-weight: bold; }
+    #c,
+    #r {
+      display: none;
+    }
+    #r,
+    big big big {
+      font-weight: bold;
+    }
 
-append scripts
+block append scripts
   script(src='../common/countdown.js')
   script(src='../common/jquery-autofit.js')
   script(src='scripts.js')

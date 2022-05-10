@@ -1,23 +1,23 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title モロ湾ジェネレーター
 
-append styles
+block append styles
   link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c')
 
-append scripts
+block append scripts
   script(src='scripts.js')
 
-append contents
+block append contents
   h1 モロ湾ジェネレーター
   p.lead.text-secondary これはアイコンです
 
-append rows
+block append rows
   #vue.row(v-cloak)
     .col-sm-auto
-      canvas(ref='canvas', width='240', height='240', style='font-family:"M PLUS Rounded 1c"')
+      canvas(ref='canvas', width='240', height='240', style='font-family: "M PLUS Rounded 1c"')
     .col-sm-6
       .form-group
         button.btn.btn-sm.btn-secondary(v-on:click.stop.prevent='reset') 初期値に戻す

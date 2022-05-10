@@ -1,9 +1,9 @@
 extends ../common/_bootstrap-layout
 
-append meta
+block append meta
   title autofit
 
-append contents
+block append contents
   p#autofit
     | Typography
     br
@@ -13,9 +13,11 @@ append contents
     br
     | arranging type
 
-append scripts
+block append scripts
   script(src='../common/jquery-autofit.js')
   script.
-    $(window).resize(function(){
-      $('#autofit').autofit();
-    }).resize();
+    $(window)
+      .resize(function () {
+        $('#autofit').autofit();
+      })
+      .resize();

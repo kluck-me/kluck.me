@@ -10,5 +10,5 @@ html(lang='ja')
     block body
     if process.env.NODE_ENV === 'development'
       script.
-        window.pp=typeof console!=='undefined'&&console.log&&console.log.bind&&console.log.bind(console);
+        window.pp = typeof console !== 'undefined' && console.log && console.log.bind && console.log.bind(console);
     block scripts

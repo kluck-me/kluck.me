@@ -1,10 +1,10 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title スライドパズルソルバー
 
-append styles
+block append styles
   style.
     .puzzle {
       position: relative;
@@ -26,29 +26,48 @@ append styles
       z-index: 2;
     }
 
-append scripts
+block append scripts
   script(type='module', src='scripts.js')
 
-append contents
+block append contents
   h1 スライドパズルソルバー
   p.lead.text-secondary 21世紀はパズルを機械に任せる時代パート2
   p スライドパズルを解いてくれるすごいやつ。パート1は<a href="/10/">10を作る</a>。
   #vue(v-cloak)
     form.mb-2(v-on:submit.prevent='submit')
       .form-group
-        textarea.form-control(type='text', name='board', style='font-family:monospace', rows='5', v-model='input', v-bind:disabled='solver.worker')
+        textarea.form-control(
+          type='text',
+          name='board',
+          style='font-family: monospace',
+          rows='5',
+          v-model='input',
+          v-bind:disabled='solver.worker'
+        )
         small.form-text.text-muted 空白は0、それ以外は左上から1から順の番号が振られているとして配置する
       button.btn.btn-secondary(type='submit', v-if='!solver.worker') さがす
       button.btn.btn-secondary(type='submit', v-if='solver.worker') とめる
     form(v-if='result')
-      .puzzle(v-bind:style="get_board_style(result.board)")
+      .puzzle(v-bind:style='get_board_style(result.board)')
         template(v-for='(line, y) in result.board')
           template(v-for='(num, x) in line')
-            span(v-bind:style="get_panel_style(x, y)", v-bind:class="{empty:!num,next:result.next_step&&result.next_step.x1==x&&result.next_step.y1==y}" v-text='num||null')
+            span(
+              v-bind:style='get_panel_style(x, y)',
+              v-bind:class='{ empty: !num, next: result.next_step && result.next_step.x1 == x && result.next_step.y1 == y }',
+              v-text='num || null'
+            )
       .mt-1
         .btn-group.btn-group-sm
-          button.btn.btn-light(rel='prev', v-on:click.stop.prevent='index-=1', v-bind:disabled='!results[index-1]') &laquo; まえへ
-          button.btn.btn-light(rel='next', v-on:click.stop.prevent='index+=1', v-bind:disabled='!results[index+1]') つぎへ &raquo;
+          button.btn.btn-light(
+            rel='prev',
+            v-on:click.stop.prevent='index -= 1',
+            v-bind:disabled='!results[index - 1]'
+          ) &laquo; まえへ
+          button.btn.btn-light(
+            rel='next',
+            v-on:click.stop.prevent='index += 1',
+            v-bind:disabled='!results[index + 1]'
+          ) つぎへ &raquo;
     p.text-danger(v-if='error', v-text='error')
   p.text-right
     a(href='https://twitter.com/azurlane_staff/status/938326681772630016', target='_blank') 元ネタ

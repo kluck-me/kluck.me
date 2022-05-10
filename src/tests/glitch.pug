@@ -1,10 +1,10 @@
 extends ../common/_bootstrap-layout
 
-append meta
+block append meta
   title glitch
 
-append contents
-  - var h1_text='css glitch'
+block append contents
+  - var h1_text = 'css glitch';
   h1(data-glitch-text=h1_text)= h1_text
 
   h2.glitch-codrops-text CSS Glitch Effect
@@ -18,10 +18,10 @@ append contents
 
   img.glitch-dncngrl(src='https://placeimg.com/320/240/any')
 
-append styles
-  link(rel='stylesheet' href='glitch.scss')
-  link(rel='stylesheet' href='glitch-codrops.scss')
-  link(rel='stylesheet' href='glitch-dncngrl.scss')
+block append styles
+  link(rel='stylesheet', href='glitch.scss')
+  link(rel='stylesheet', href='glitch-codrops.scss')
+  link(rel='stylesheet', href='glitch-dncngrl.scss')
 
-append scripts
+block append scripts
   script(src='glitch-dncngrl.js')

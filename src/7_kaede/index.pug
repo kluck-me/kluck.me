@@ -1,16 +1,18 @@
 extends ../common/_layout
 include ../common/_jquery
 
-append meta
+block append meta
   title 七○楓
 
 block styles
   style.
-    #r { font-weight: bold; }
+    #r {
+      font-weight: bold;
+    }
 
-append scripts
+block append scripts
   script(src='../common/jquery-autofit.js')
   script(type='module', src='scripts.js')
 
 block body
-  #r(style='display:none') 七○楓
+  #r(style='display: none') 七○楓

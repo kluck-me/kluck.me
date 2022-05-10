@@ -1,16 +1,18 @@
 extends _layout
 
-append meta
+block append meta
   title 有末無職のカウントダウン
 
-prepend countdown-contents
-  a(href="https://twitter.com/search?q=%23%E9%80%83%E3%81%92%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E9%80%80%E7%A4%BE&src=typd") 逃げるように退職
+block prepend countdown-contents
+  a(
+    href='https://twitter.com/search?q=%23%E9%80%83%E3%81%92%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E9%80%80%E7%A4%BE&src=typd'
+  ) 逃げるように退職
   | まで
   br
 
-prepend result-contents
+block prepend result-contents
   | 祝無職
 
-prepend scripts
+block prepend scripts
   script.
     window.deadline = new Date(2014, 10, 14, 17, 30);

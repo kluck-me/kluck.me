@@ -1,15 +1,15 @@
 extends _layout
 
-append meta
+block append meta
   title 宴会原資獲得のカウントダウン
 
-prepend countdown-contents
+block prepend countdown-contents
   | <del>退職金</del><ins>宴会原資</ins>180万円獲得まで
   br
 
-prepend result-contents
+block prepend result-contents
   | 宴会やるので<a href="https://twitter.com/kluck_me">連絡ください</a>！
 
-prepend scripts
+block prepend scripts
   script.
     window.deadline = new Date(2017, 3, 1);

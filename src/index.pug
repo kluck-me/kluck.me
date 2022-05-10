@@ -1,14 +1,14 @@
 extends common/_layout
 include common/_jquery
 
-append meta
+block append meta
   title kluck.me
 
-append styles
+block append styles
   link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Shrikhand')
   link(rel='stylesheet', href='styles.scss')
 
-append body
+block append body
   .wrapper
     header
       h1
@@ -85,9 +85,9 @@ append body
     footer
       p
         script.
-          document.write('&copy; 2013-' + (new Date).getFullYear())
+          document.write('&copy; 2013-' + new Date().getFullYear());
         = ' '
         a(href='https://kluck.me/') Kluck
 
-append scripts
+block append scripts
   script(src='scripts.js')

@@ -1,16 +1,16 @@
 extends ../common/_layout
 include ../common/_jquery
 
-append meta
+block append meta
   title 臨時SEだからハブられたので　一人で新都社運営座談会
 
-append styles
+block append styles
   link(rel='stylesheet', href='styles.scss')
 
-append scripts
+block append scripts
   script(type='module', src='scripts.js')
 
-append body
+block append body
   .wrapper
     h1 臨時SEだからハブられたので　一人で新都社運営座談会
     .cb

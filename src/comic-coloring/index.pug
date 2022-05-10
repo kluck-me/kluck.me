@@ -1,26 +1,30 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title 漫画着色
 
-append scripts
+block append scripts
   script(type='module', src='scripts.js')
 
-append contents
+block append contents
   h1 漫画着色
   p.lead.text-secondary マンガミーヤみたいなやつ
 
-append rows
+block append rows
   #vue.row(v-cloak)
     .col-sm-12
       .form-group(v-if='examplePaths.length')
         select.custom-select(v-model='selectedPath', v-on:change='update')
           option(value='') Upload image file
-          option(v-bind:value='p', v-for='(p, i) in examplePaths') Example {{i+1}}
+          option(v-bind:value='p', v-for='(p, i) in examplePaths') Example {{ i + 1 }}
       .form-group(v-if='!selectedPath')
         .custom-file
-          input.custom-file-input#upload-image(type='file', v-on:change='uploadImage', accept='image/*')
-          label.custom-file-label(for='upload-image') {{uploadedName || 'Upload image file'}}
+          input#upload-image.custom-file-input(
+            type='file',
+            v-on:change='uploadImage',
+            accept='image/*'
+          )
+          label.custom-file-label(for='upload-image') {{ uploadedName || 'Upload image file' }}
     .col-sm-12
-      canvas(ref='canvas', style='max-width:100%')
+      canvas(ref='canvas', style='max-width: 100%')

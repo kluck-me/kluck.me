@@ -1,11 +1,11 @@
-append styles
+block append styles
   style.
     [v-cloak] {
       display: none;
     }
 
-append scripts
+block append scripts
   script(src='//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js')
   if process.env.NODE_ENV === 'development'
     script.
-      window.vm&&location.reload();
+      window.vm && location.reload();

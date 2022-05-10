@@ -1,17 +1,17 @@
 extends ../common/_bootstrap-layout
 include ../common/_vue
 
-append meta
+block append meta
   title tests
 
-append scripts
+block append scripts
   script(src='scripts.js')
 
-append contents
+block append contents
   h1 tests
 
-append rows
-  .row#vue(v-cloak)
+block append rows
+  #vue.row(v-cloak)
     .col-sm-12
       .text-center(v-if='loading')
         span.spinner-border
