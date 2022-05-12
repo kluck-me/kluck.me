@@ -39,7 +39,10 @@ block body
                   v-bind:id='"conf-lang-" + code',
                   v-model='selectedCodes[code]'
                 )
-                label.form-check-label(v-bind:for='"conf-lang-" + code', v-text='langs[code].label')
+                label.form-check-label(
+                  v-bind:for='"conf-lang-" + code',
+                  v-text='langs[code].label'
+                )
           .modal-footer
             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
             button.btn.btn-primary Play
