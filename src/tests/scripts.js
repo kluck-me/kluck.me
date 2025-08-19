@@ -29,7 +29,7 @@ window.vm = new Vue({
             return result;
           })();
           this.loading = false;
-        }
+        },
       );
     },
   },

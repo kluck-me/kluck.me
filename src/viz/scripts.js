@@ -37,7 +37,7 @@ window.vm = new Vue({
           document.title = `${default_title} : ${name}`;
           this.input = source;
           this.run();
-        }
+        },
       );
     },
   },

@@ -14,10 +14,10 @@ const rgb2hsv = function (rgb) {
     c === 0
       ? 0
       : maxc === r
-      ? (60 * (g - b)) / c + 0
-      : maxc === g
-      ? (60 * (b - r)) / c + 120
-      : (60 * (r - g)) / c + 240;
+        ? (60 * (g - b)) / c + 0
+        : maxc === g
+          ? (60 * (b - r)) / c + 120
+          : (60 * (r - g)) / c + 240;
   while (h < 0) {
     h += 360;
   }

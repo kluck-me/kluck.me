@@ -40,7 +40,7 @@ const get_info = function (start_date) {
   const end_date = new Date();
   end_date.setTime(start_date.getTime() + (end_sec - start_sec) * 1000);
   const name = `${video_prefix}_2001${zz(video_mon)}${zz(video_day)}_${zz(video_hour)}${zz(
-    video_min
+    video_min,
   )}00_${video_suffix}`;
   return {
     url: `https://archive.org/download/${name}/${name}.mp4?start=${start_sec}&end=${end_sec}&ignore=x.mp4`,

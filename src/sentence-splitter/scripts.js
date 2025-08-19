@@ -60,7 +60,7 @@ window.vm = new Vue({
     return;
     if (location.hostname === 'localhost') {
       this.text = `${'a'.repeat(10)}.${'a'.repeat(10)}.!${'a'.repeat(40)}.${'a'.repeat(
-        10
+        10,
       )}.!${'a'.repeat(10)}`;
       this.limit_config = '30';
       this.regex_config = '\\.(?!!)|!';

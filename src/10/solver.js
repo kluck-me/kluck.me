@@ -243,7 +243,7 @@ var generateExpr = function (level, xs, fn) {
           xs.slice(i, +xs.length + 1 || undefined),
           function (x) {
             generateUnary(level, x, fn);
-          }
+          },
         );
       }
   }
@@ -259,7 +259,7 @@ const finder = function (answer, numbers, level, fn) {
         found = true;
         fn(x);
       }
-    }
+    },
   );
   return found;
 };
@@ -277,9 +277,9 @@ self.addEventListener(
             break;
           }
         }
-      })
+      }),
     );
     self.postMessage({ type: 'finish' });
   },
-  false
+  false,
 );

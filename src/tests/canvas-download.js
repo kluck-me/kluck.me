@@ -30,7 +30,7 @@ Promise.all(
       y: 0,
       w: 300,
     },
-  ].map(load_image)
+  ].map(load_image),
 ).then(function (dataset) {
   const ctx = $('canvas')[0].getContext('2d');
   for (let i = dataset.length - 1; i >= 0; i--) {

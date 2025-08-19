@@ -5,12 +5,17 @@ body {
 
 body {
   margin: 0;
-  font: 18px / 1.234 'Shrikhand', cursive;
+  font:
+    18px / 1.234 'Shrikhand',
+    cursive;
   color: #333;
   background: #7e429c
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 2 2'><rect width='2' height='2' fill='%237e429c'/><path d='M0,0V2H1V0zM0,0H2V1H0z' fill='%23975eb0' fill-rule='evenodd'/></svg>");
   $shadow-color: rgba(255, 255, 255, 0.25);
-  text-shadow: -1px -1px $shadow-color, 1px -1px $shadow-color, -1px 1px $shadow-color,
+  text-shadow:
+    -1px -1px $shadow-color,
+    1px -1px $shadow-color,
+    -1px 1px $shadow-color,
     1px 1px $shadow-color;
   &.hide-content .wrapper {
     opacity: 0;

@@ -14,7 +14,7 @@
       $.getJSON('https://api.tumblr.com/v2/tagged?callback=?', {
         tag,
         api_key: '3jJQBJhS6MidfygWrYPVUqzop3dkdk3kYUc5RUoSxSLL7OUonx',
-      })
+      }),
     );
 
   const anime_push = function (url) {
@@ -50,7 +50,7 @@
         $('body').append(
           '<div class="anime anime-hide" id="anime0">',
           '<div class="anime anime-hide" id="anime1">',
-          '<div class="anime anime-hide" id="anime2">'
+          '<div class="anime anime-hide" id="anime2">',
         );
         anime_show(1);
         anime_show(2);
@@ -60,7 +60,7 @@
           index = (index + 1) % 3;
         }, anime_interval);
       });
-    }
+    },
   );
 
   $(function () {

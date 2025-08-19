@@ -236,11 +236,11 @@ if (typeof self !== 'undefined') {
             e = error;
             self.postMessage({ type: 'error', value: e.message });
           }
-        })
+        }),
       );
       self.postMessage({ type: 'finish' });
     },
-    false
+    false,
   );
 } else {
   pp = console.log.bind(console);
@@ -252,8 +252,8 @@ if (typeof self !== 'undefined') {
           [6, 0, 14, 3],
           [13, 10, 11, 8],
           [5, 9, 15, 12],
-        ])
+        ]),
       );
-    })
+    }),
   );
 }

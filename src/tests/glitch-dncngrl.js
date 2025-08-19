@@ -13,7 +13,7 @@ $.fn.glitchDncngrl = function () {
     .append(
       $('<div>').addClass(`${prefix}-red`).append(this.clone()),
       $('<div>').addClass(`${prefix}-green`).append(this.clone()),
-      $('<div>').addClass(`${prefix}-blue`).append(this.clone())
+      $('<div>').addClass(`${prefix}-blue`).append(this.clone()),
     )
     .mouseenter(function () {
       $(this).addClass(`${prefix}-pattern-${(Math.random() * 3 + 1) | 0}`);

@@ -62,7 +62,7 @@ window.vm = new Vue({
   el: '#vue',
   data: {
     solver: new Solver(
-      () => new Worker(new URL('./solver.js', import.meta.url), { type: 'module' })
+      () => new Worker(new URL('./solver.js', import.meta.url), { type: 'module' }),
     ),
     input: `\
  1  7  2  4
@@ -83,7 +83,7 @@ window.vm = new Vue({
           line
             .trim()
             .split(/\D+/)
-            .map((v) => parseInt(v, 10))
+            .map((v) => parseInt(v, 10)),
         );
     },
     result() {

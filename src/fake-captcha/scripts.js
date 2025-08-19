@@ -68,7 +68,7 @@ const updateCaptcha = function (canvas, text, fgcolor, bgcolor) {
           color00 * frsx1 * frsy1 +
             color10 * frsx0 * frsy1 +
             color01 * frsx1 * frsy0 +
-            color11 * frsx0 * frsy0
+            color11 * frsx0 * frsy0,
         );
         bgratio = color / 255;
       }
@@ -90,7 +90,7 @@ const reload = function () {
     $('#captcha')[0],
     text,
     [rand(0, 100), rand(0, 100), rand(0, 100)],
-    [rand(200, 255), rand(200, 255), rand(200, 255)]
+    [rand(200, 255), rand(200, 255), rand(200, 255)],
   );
   $('#length').text(text.length);
 };

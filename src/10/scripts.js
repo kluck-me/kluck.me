@@ -18,7 +18,7 @@ window.vm = new Vue({
   el: '#vue',
   data: {
     solver: new Solver(
-      () => new Worker(new URL('./solver.js', import.meta.url), { type: 'module' })
+      () => new Worker(new URL('./solver.js', import.meta.url), { type: 'module' }),
     ),
     input: '',
     exprs: [],
