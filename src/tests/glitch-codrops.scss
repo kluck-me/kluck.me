@@ -1,4 +1,6 @@
 @use 'sass:list';
+@use 'sass:math';
+@use 'sass:string';
 
 $gap-horizontal: 10px;
 $gap-vertical: 5px;
@@ -21,8 +23,8 @@ $blend-colors: transparent, transparent, transparent, #fb909a, #1c1cc9;
       @if $i == 0 {
         transform: translate3d(-1 * $gap-horizontal, 0, 0) scale3d(-1, -1, 1);
       }
-      $start: random(90) * 1%;
-      $finish: $start + random(10) * 1%;
+      $start: math.random(90) * 1%;
+      $finish: $start + math.random(10) * 1%;
       clip-path: polygon(0 $start, 100% $start, 100% $finish, 0 $finish);
     }
   }
@@ -60,7 +62,7 @@ $blend-colors: transparent, transparent, transparent, #fb909a, #1c1cc9;
     &:nth-child(#{$i}) {
       background-color: list.nth($blend-colors, $i);
       background-blend-mode: list.nth($blend-modes, $i);
-      animation-name: unquote('glitch-codrops-' + $i);
+      animation-name: string.unquote('glitch-codrops-' + $i);
     }
   }
 }
@@ -75,8 +77,8 @@ $blend-colors: transparent, transparent, transparent, #fb909a, #1c1cc9;
         opacity: 1;
         transform: translate3d($gap-horizontal, 0, 0);
       }
-      $start: random(90) * 1%;
-      $finish: $start + random(10) * 1%;
+      $start: math.random(90) * 1%;
+      $finish: $start + math.random(10) * 1%;
       clip-path: polygon(0 $start, 100% $start, 100% $finish, 0 $finish);
     }
   }
@@ -99,8 +101,8 @@ $blend-colors: transparent, transparent, transparent, #fb909a, #1c1cc9;
   }
   @for $i from 0 through 10 {
     #{1% + 2% * $i} {
-      $start: random(90) * 1%;
-      $finish: $start + random(10) * 1%;
+      $start: math.random(90) * 1%;
+      $finish: $start + math.random(10) * 1%;
       clip-path: polygon(0 $start, 100% $start, 100% $finish, 0 $finish);
     }
   }
@@ -123,10 +125,10 @@ $blend-colors: transparent, transparent, transparent, #fb909a, #1c1cc9;
     clip-path: polygon(0 1%, 100% 1%, 100% 3%, 0 3%);
   }
   @for $i from 0 through 40 {
-    @if random(4) != 0 {
+    @if math.random(4) != 0 {
       #{1% + 0.5% * $i} {
-        $start: random(90) * 1%;
-        $finish: $start + random(10) * 1%;
+        $start: math.random(90) * 1%;
+        $finish: $start + math.random(10) * 1%;
         clip-path: polygon(0 $start, 100% $start, 100% $finish, 0 $finish);
       }
     }

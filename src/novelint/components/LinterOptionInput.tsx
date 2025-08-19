@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { FormGroup, Label, Input, CustomInput } from 'reactstrap';
+import { FormGroup, Label, Input } from 'reactstrap';
 
 import { LinterOptions, LinterRule } from '../types';
 
@@ -43,7 +43,7 @@ const LinterOptionInput: React.FC<{
 
   return (
     <>
-      <CustomInput
+      <Input
         type="checkbox"
         id={id}
         label={rule.label}
@@ -53,7 +53,7 @@ const LinterOptionInput: React.FC<{
       {rule.optionLabels ? (
         <div>
           {rule.optionLabels.map((label, i) => (
-            <CustomInput
+            <Input
               key={i} // eslint-disable-line react/no-array-index-key
               type="radio"
               id={`${id}-${i}`}

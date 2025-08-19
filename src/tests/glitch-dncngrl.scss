@@ -1,3 +1,5 @@
+@use 'sass:string';
+
 @keyframes glitch-dncngrl-flash {
   5% {
     opacity: 1;
@@ -166,11 +168,11 @@
       .glitch-dncngrl-blue {
         animation-duration: $glitch-duration;
         animation-timing-function: linear;
-        animation-name: unquote('glitch-dncngrl-shift-' + $i);
+        animation-name: string.unquote('glitch-dncngrl-shift-' + $i);
         & > * {
           animation-duration: $glitch-duration;
           animation-timing-function: steps(5);
-          animation-name: unquote('glitch-dncngrl-blend-' + $i);
+          animation-name: string.unquote('glitch-dncngrl-blend-' + $i);
         }
       }
     }

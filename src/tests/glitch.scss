@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 body {
   background-color: black;
 }
@@ -32,7 +34,7 @@ $size: 100;
 @keyframes glitch-before-animation {
   @for $i from 0 through 20 {
     #{5% * $i} {
-      clip: rect(random($size) * 1px 9999px random($size) * 1px 0);
+      clip: rect(math.random($size) * 1px 9999px math.random($size) * 1px 0);
     }
   }
 }
@@ -40,7 +42,7 @@ $size: 100;
 @keyframes glitch-after-animation {
   @for $i from 0 through 20 {
     #{5% * $i} {
-      clip: rect(random($size) * 1px 9999px random($size) * 1px 0);
+      clip: rect(math.random($size) * 1px 9999px math.random($size) * 1px 0);
     }
   }
 }
