@@ -126,7 +126,7 @@ const App: React.FC<{}> = () => {
       <Navbar color="light" light expand>
         <NavbarBrand tag="span">Novelint</NavbarBrand>
         <Collapse isOpen navbar>
-          <Form inline>
+          <Form inline="true">
             <select className="custom-select mr-2" value={linterName} onChange={onLinterNameChange}>
               {Object.values(linters).map((linter) => (
                 <option key={linter.name} value={linter.name}>
@@ -160,7 +160,7 @@ const App: React.FC<{}> = () => {
               </>
             ) : null}
           </Form>
-          <Form inline className="ml-auto">
+          <Form inline="true" className="ml-auto">
             <Button outline color="secondary" onClick={toggleOptionsModal}>
               設定
             </Button>
@@ -188,7 +188,7 @@ const App: React.FC<{}> = () => {
       </Modal>
 
       <ScrollSync>
-        <Row noGutters className="flex-grow-1">
+        <Row className="flex-grow-1 g-0">
           <Col className="d-flex flex-column">
             <ScrollSyncPane>
               <textarea

@@ -57,8 +57,7 @@ window.vm = new Vue({
     },
   },
   mounted() {
-    return;
-    if (location.hostname === 'localhost') {
+    if (process.env.NODE_ENV === 'development') {
       this.text = `${'a'.repeat(10)}.${'a'.repeat(10)}.!${'a'.repeat(40)}.${'a'.repeat(
         10,
       )}.!${'a'.repeat(10)}`;
