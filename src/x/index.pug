@@ -1,0 +1,19 @@
+extends ../common/_bootstrap-layout
+include ../common/_vue
+
+block append meta
+  title x
+
+block append scripts
+  script(type='module', src='scripts.js')
+
+block append rows
+  #vue(v-cloak)
+    .row
+      .col-12
+        .form-group
+          label(for='f-q') query
+          input#f-q.form-control(v-model='q')
+        ul.mt-3(v-if='links.length')
+          li(v-for='link in links')
+            a(v-bind:href='link.url') {{ link.text }}
